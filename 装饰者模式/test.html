@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./test.js"></script>
+</head>
+
+<body>
+    <!-- <button id="button"></button>
+    <script>
+        var _getElementById = document.getElementById;
+
+        document.getElementById = function () {
+            alert(1); return _getElementById.apply(document, arguments);
+        }
+
+        var button = document.getElementById('button');
+    </script> -->
+
+    <!-- ---------------- -->
+
+    <button id="button"></button>
+    <script>
+        Function.prototype.before = function (beforefn) {
+            var __self = this;
+            return function () {
+                console.log(this)
+                console.log(__self)
+                beforefn.apply(this, arguments); //1
+                return __self.apply(this, arguments);
+            }
+        }
+
+        document.getElementById = document.getElementById.before(
+            function () {
+                console.log(this) //这里的this指向同原函数的this指向相同，因为当前函数在 1 处执行时，通过apply方法吧this指向设为了原函数的this，因此，当前函数和原函数的this相同
+            }
+        );
+
+        var button = document.getElementById('button');
+        console.log(button);   
+    </script>
+</body>
+
+</html>
