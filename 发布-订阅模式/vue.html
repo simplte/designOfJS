@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定简单实现</title>
+</head>
+<body>
+<input type="text" id="inp" oninput="inputFn(this.value)">
+<br>
+<input type="text" id="inp2" oninput="inputFn(this.value)">
+<div id='div'></div>
+<script>
+    var inp = document.getElementById('inp');
+    var inp2 = document.getElementById('inp2');
+    var div = document.getElementById('div');
+
+    
+    function inputFn(value) {
+        div.innerText = vm.value = value;
+    }
+
+    function watcher(params) {
+        console.log(1)
+        div.innerText = inp.value = params; // 派发watcher
+    }
+
+    function watcher2(params) {
+        console.log(2)
+
+        div.innerText = inp2.value = params; // 派发watcher
+    }
+
+    function proxy (target, sourceKey, key) {
+        Object.defineProperty(target, key, {
+            enumerable: true,
+            configurable: true,
+            get() {
+                return this[sourceKey][key];
+            },
+            set(val) {
+                this[sourceKey][key] = val;
+            }
+        });
+    }
+
+	let handler = {
+        enumerable: true,
+        configurable: true,
+        set: function (newValue) {
+            vm.data.value = newValue; 
+            vm.valueWatchers.map(fn => fn(newValue));
+        },
+        get: function () {
+            vm.valueWatchers = []; //防止重复添加, 
+            vm.valueWatchers.push(watcher); 
+            vm.valueWatchers.push(watcher2); 
+            return vm.data.value; 
+        }
+    }
+
+    var vm = {
+        data: {},
+        _data: {},
+        value: '', 
+        valueWatchers: [] 
+    }
+    
+    Object.defineProperty(vm._data, 'value', handler)
+
+    proxy(vm, '_data', 'value');
+
+    vm.value;  //显示调用绑定
+
+</script>
+</body>
+</html>
