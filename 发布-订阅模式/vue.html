@@ -20,13 +20,10 @@
     }
 
     function watcher(params) {
-        console.log(1)
         div.innerText = inp.value = params; // 派发watcher
     }
 
     function watcher2(params) {
-        console.log(2)
-
         div.innerText = inp2.value = params; // 派发watcher
     }
 
@@ -38,6 +35,7 @@
                 return this[sourceKey][key];
             },
             set(val) {
+                
                 this[sourceKey][key] = val;
             }
         });
@@ -49,6 +47,7 @@
         set: function (newValue) {
             vm.data.value = newValue; 
             vm.valueWatchers.map(fn => fn(newValue));
+            console.log(vm._data)
         },
         get: function () {
             vm.valueWatchers = []; //防止重复添加, 
@@ -64,13 +63,50 @@
         value: '', 
         valueWatchers: [] 
     }
-    
+    // 1：给vm对象中 _data对象的value属性添加get 和 set方法  
+    // get 取值时增加监听函数（改变dom渲染视图的方法）并返回vm对象中data对象的value值
+    // set 赋值给vm对象中的data对象的value值赋值 并且触发存放在valueWatchers数组中的方法 
     Object.defineProperty(vm._data, 'value', handler)
-
+    /* 
+        2：代理vm中的value  
+        get 取值时 返回的是_data对象中的value值  这时会触发 上一个代理中的get方法 将监听方法放入valueWatchers数组中 并返回 data对象中的value
+        set 赋值时 给_data对象中value值赋值  这时会触发上个代理中的set方法 给data对象中的value赋值 并且执行监听方法渲染视图
+    
+     */
     proxy(vm, '_data', 'value');
 
     vm.value;  //显示调用绑定
-
+    /* 
+        取值：vm.value --> vm._data.value --> vm.data.value  最终取得就是data对象中value值
+        赋值：vm.value --> vm._data.value --> vm.data.value  最终赋值的是data.value
+     */
+/* 
+    Object.defineProperty(obj, prop, descriptor)
+        obj
+        要定义属性的对象。
+        prop
+        要定义或修改的属性的名称或 Symbol 。
+        descriptor
+        要定义或修改的属性描述符。
+ */
+    var a = {a:1,b:2,c:123}
+     Object.defineProperty(a, "a", {
+        enumerable: true,
+        configurable: true,
+        get() {
+            return "123";
+        },
+        set(val) {
+            this.b = val;
+        }
+    });
+     Object.defineProperty(a, "c", {
+        enumerable: false,
+    });
+    console.log(Object.keys(a)) // 没有c
+        console.log(a.a)
+        a.a = 3333333;
+        console.log(a)
 </script>
 </body>
 </html>
