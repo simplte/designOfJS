@@ -1,0 +1,23 @@
+{
+  "name": "jsModel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplte/designOfJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simplte/designOfJS/issues"
+  },
+  "homepage": "https://github.com/simplte/designOfJS#readme",
+  "devDependencies": {
+    "jquery": "^3.5.1"
+  }
+}
