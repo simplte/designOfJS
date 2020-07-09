@@ -208,6 +208,7 @@
     /**
      * Create a cached version of a pure function.
      */
+    // 使用闭包 将不同回调方法处理的值封闭在内存中
     function cached (fn) {
       var cache = Object.create(null);
       return (function cachedFn (str) {
@@ -219,6 +220,12 @@
     /**
      * Camelize a hyphen-delimited string.
      */
+    /* 
+        "asdfasdf-asdf".replace(/-(\w)/g, function (_, c) { return c ? c.toUpperCase() : ''; })
+        "asdfasdfAsdf"
+        正则处理  将- 连接的字符串 转换成  小驼峰规则的字符串
+        当前正则匹配 -后第一个英文字符 将其设为大写
+    */
     var camelizeRE = /-(\w)/g;
     var camelize = cached(function (str) {
       return str.replace(camelizeRE, function (_, c) { return c ? c.toUpperCase() : ''; })
@@ -227,6 +234,9 @@
     /**
      * Capitalize a string.
      */
+    /* 
+        将字符串的第一个字母大写
+    */
     var capitalize = cached(function (str) {
       return str.charAt(0).toUpperCase() + str.slice(1)
     });
@@ -235,6 +245,11 @@
      * Hyphenate a camelCase string.
      */
     var hyphenateRE = /\B([A-Z])/g;
+    // 将 B大写的开头中间含有大写的字符串转为 小写 且前面使用- 连接
+    /* 
+        'BasdAAsdfasdf'.replace(/\B([A-Z])/g, '-$1').toLowerCase()
+        "basd-a-asdfasdf"
+    */
     var hyphenate = cached(function (str) {
       return str.replace(hyphenateRE, '-$1').toLowerCase()
     });
@@ -248,6 +263,7 @@
      */
   
     /* istanbul ignore next */
+    // bind方法的call和apply方法的实现 理解成bind方法的垫片
     function polyfillBind (fn, ctx) {
       function boundFn (a) {
         var l = arguments.length;
@@ -261,11 +277,11 @@
       boundFn._length = fn.length;
       return boundFn
     }
-  
+    // bind方法的原生实现
     function nativeBind (fn, ctx) {
       return fn.bind(ctx)
     }
-  
+    // 判断当前环境是否有原生bind方法 如果有  就给 bind变量赋值  如果没有就用垫片方式实现bind
     var bind = Function.prototype.bind
       ? nativeBind
       : polyfillBind;
@@ -273,6 +289,11 @@
     /**
      * Convert an Array-like object to a real Array.
      */
+    /* 
+        将类数组转为数组
+        同时实现了截取功能
+
+    */
     function toArray (list, start) {
       start = start || 0;
       var i = list.length - start;
@@ -286,6 +307,7 @@
     /**
      * Mix properties into target object.
      */
+    // 实现extend方法 对象合并 相同key值 后面的把前面的覆盖掉
     function extend (to, _from) {
       for (var key in _from) {
         to[key] = _from[key];
@@ -296,6 +318,11 @@
     /**
      * Merge an Array of Objects into a single Object.
      */
+    // 将一组对象合并为一个对象。
+   /*  
+    toObject([{a:1},{c:2}])
+        {a: 1, c: 2} 
+    */
     function toObject (arr) {
       var res = {};
       for (var i = 0; i < arr.length; i++) {
@@ -313,11 +340,13 @@
      * Stubbing args to make Flow happy without leaving useless transpiled code
      * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/).
      */
+    // 就是定义了一个空方法，还有很多地方用到 等用到的时候在进行备注
     function noop (a, b, c) {}
   
     /**
      * Always return false.
      */
+    // 一直返回false的方法
     var no = function (a, b, c) { return false; };
   
     /* eslint-enable no-unused-vars */
@@ -325,11 +354,18 @@
     /**
      * Return the same value.
      */
+    // 返回入参的方法
     var identity = function (_) { return _; };
   
     /**
      * Generate a string containing static keys from compiler modules.
      */
+    /* 
+        // 从编译器模块生成包含静态键的字符串
+        genStaticKeys([{staticKeys:1},{staticKeys:2}])
+        "1,2"
+        个人理解  读取类似于这样的对象数组 ，将每个对象中的staticKeys 拿出来并用, 号分隔
+    */
     function genStaticKeys (modules) {
       return modules.reduce(function (keys, m) {
         return keys.concat(m.staticKeys || [])
@@ -340,21 +376,28 @@
      * Check if two values are loosely equal - that is,
      * if they are plain objects, do they have the same shape?
      */
+    /* 
+        全等判断
+    */
     function looseEqual (a, b) {
       if (a === b) { return true }
       var isObjectA = isObject(a);
       var isObjectB = isObject(b);
+    //   判断是否是对象数组或者事件类型的值
       if (isObjectA && isObjectB) {
         try {
           var isArrayA = Array.isArray(a);
           var isArrayB = Array.isArray(b);
           if (isArrayA && isArrayB) {
+              // 递归判断 两个数组是否相等
             return a.length === b.length && a.every(function (e, i) {
               return looseEqual(e, b[i])
             })
           } else if (a instanceof Date && b instanceof Date) {
+            // 判断时间类型数据 时间是否相等
             return a.getTime() === b.getTime()
           } else if (!isArrayA && !isArrayB) {
+            //   判断两个对象是否相等
             var keysA = Object.keys(a);
             var keysB = Object.keys(b);
             return keysA.length === keysB.length && keysA.every(function (key) {
@@ -369,6 +412,7 @@
           return false
         }
       } else if (!isObjectA && !isObjectB) {
+        //   不是对象  数组 时间类型的值 判断是否是字符串
         return String(a) === String(b)
       } else {
         return false
@@ -380,6 +424,7 @@
      * found in the array (if value is a plain object, the array must
      * contain an object of the same shape), or -1 if it is not present.
      */
+    // 判断数组中的值是否包含 val  个人理解类似于indexOf 方法
     function looseIndexOf (arr, val) {
       for (var i = 0; i < arr.length; i++) {
         if (looseEqual(arr[i], val)) { return i }
@@ -390,6 +435,23 @@
     /**
      * Ensure a function is called only once.
      */
+    // 使用闭包构造出只执行一次的方法
+    /* 
+        function test(res) {
+            console.log(res);
+            a()
+        }
+        function a() {
+            alert(111)
+        }
+        var a = once(test);
+        a('bqc')
+        
+        VM1696:6 111111
+        VM1724:2 bqc
+    */
+
+
     function once (fn) {
       var called = false;
       return function () {
