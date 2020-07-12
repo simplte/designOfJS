@@ -461,15 +461,15 @@
         }
       }
     }
-  
+    
     var SSR_ATTR = 'data-server-rendered';
-  
+    // 全局函数
     var ASSET_TYPES = [
       'component',
       'directive',
       'filter'
     ];
-  
+    // 声明周期
     var LIFECYCLE_HOOKS = [
       'beforeCreate',
       'created',
@@ -488,7 +488,7 @@
     /*  */
   
   
-  
+    // vue的全局配置
     var config = ({
       /**
        * Option merge strategies (used in core/util/options)
@@ -498,41 +498,49 @@
   
       /**
        * Whether to suppress warnings.
+       * 是否关闭警告
        */
       silent: false,
   
       /**
        * Show production mode tip message on boot?
+       * 开发按摩时下控制台显示生产提示
        */
       productionTip: "development" !== 'production',
   
       /**
        * Whether to enable devtools
+       * 浏览器vue插件调试工具检查代码
        */
       devtools: "development" !== 'production',
   
       /**
        * Whether to record perf
+       * 性能追踪
        */
       performance: false,
   
       /**
        * Error handler for watcher errors
+       * ;指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 Vue 实例。
        */
       errorHandler: null,
   
       /**
        * Warn handler for watcher warns
+       * Vue 的运行时警告赋予一个自定义处理函数
        */
       warnHandler: null,
   
       /**
        * Ignore certain custom elements
+       * 忽略某些自定义元素
        */
       ignoredElements: [],
   
       /**
        * Custom user key aliases for v-on
+       * ;给v-on 自定义键位别名
        */
       // $flow-disable-line
       keyCodes: Object.create(null),
@@ -540,6 +548,7 @@
       /**
        * Check if a tag is reserved so that it cannot be registered as a
        * component. This is platform-dependent and may be overwritten.
+       * ;保留标签，如有，则这些标签不能注册成为组件
        */
       isReservedTag: no,
   
@@ -594,6 +603,7 @@
   
     /**
      * Check if a string starts with $ or _
+     * 判断字符串是否以_开头
      */
     function isReserved (str) {
       var c = (str + '').charCodeAt(0);
@@ -614,6 +624,14 @@
   
     /**
      * Parse simple path.
+     * unicodeRegExp.source  去掉了开头和结尾的/
+     * "a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD"
+     * 不太清除这个方法是干什么的
+     * 先匹配一个地址  如果匹配到bailRE的地址 return掉
+     * 没匹配到  通过.分隔 使用闭包将数组保存在内存中 返回一个方法
+     * 方法入参为一个对象  循环内存中的数组  如果入参中 对象为空直接return
+     *                  如果入参不为空  将obj中的 数组中值对应key的值赋值给obj
+     *                  其实不太明白具体是干什么用的
      */
     var bailRE = new RegExp(("[^" + (unicodeRegExp.source) + ".$_\\d]"));
     function parsePath (path) {
@@ -636,7 +654,9 @@
     var hasProto = '__proto__' in {};
   
     // Browser environment sniffing
+    // 浏览器环境判断
     var inBrowser = typeof window !== 'undefined';
+    // 判断微信环境 !! 强制转为布尔值
     var inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;
     var weexPlatform = inWeex && WXEnvironment.platform.toLowerCase();
     var UA = inBrowser && window.navigator.userAgent.toLowerCase();
@@ -650,9 +670,17 @@
     var isFF = UA && UA.match(/firefox\/(\d+)/);
   
     // Firefox has a "watch" function on Object.prototype...
+    // 火狐浏览器中的对象原型上有一个watch方法
     var nativeWatch = ({}).watch;
   
     var supportsPassive = false;
+    
+  // 这个代码块是用来检查浏览器是否支持passive属性的。
+  // passive能优化页面的滚动性能
+  // 在使用addEventListener添加事件时，
+  // 如下做，支持passive属性，则使用这一属性，
+  // 否则addEventListener的第三个参数按照旧版的DOM 标准，第三个参数为布尔值，默认为false。
+
     if (inBrowser) {
       try {
         var opts = {};
@@ -668,6 +696,7 @@
   
     // this needs to be lazy-evaled because vue may be required before
     // vue-server-renderer can set VUE_ENV
+    // 判断当前执行环境是不是服务器端  即node环境下执行的
     var _isServer;
     var isServerRendering = function () {
       if (_isServer === undefined) {
@@ -684,24 +713,33 @@
     };
   
     // detect devtools
+    // vue的工具方法
     var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
   
     /* istanbul ignore next */
+    // 判断一个方法是否是js内置方法的  方法
     function isNative (Ctor) {
       return typeof Ctor === 'function' && /native code/.test(Ctor.toString())
     }
-  
+    // 判断 es6 Symbol 和 Reflect 属性是否支持
     var hasSymbol =
       typeof Symbol !== 'undefined' && isNative(Symbol) &&
       typeof Reflect !== 'undefined' && isNative(Reflect.ownKeys);
   
     var _Set;
     /* istanbul ignore if */ // $flow-disable-line
+    // 判断 es6  Set 是否支持
     if (typeof Set !== 'undefined' && isNative(Set)) {
       // use native Set when available.
       _Set = Set;
     } else {
+      // 不支持就手动实现一个set
       // a non-standard Set polyfill that only works with primitive keys.
+
+      /* 
+        手动实现set 的方法
+        使用自执行函数
+      */
       _Set = /*@__PURE__*/(function () {
         function Set () {
           this.set = Object.create(null);
@@ -721,7 +759,7 @@
     }
   
     /*  */
-  
+    // 给warn一个空方法
     var warn = noop;
     var tip = noop;
     var generateComponentTrace = (noop); // work around flow check
@@ -729,11 +767,14 @@
   
     {
       var hasConsole = typeof console !== 'undefined';
+      // 这个正则就是把连接符转换成的大驼峰写法, 并且第一个字符大写  ^|[-_]　的意思是 字符串的开头, 或者 -_ 后面的一个字符
       var classifyRE = /(?:^|[-_])(\w)/g;
       var classify = function (str) { return str
         .replace(classifyRE, function (c) { return c.toUpperCase(); })
         .replace(/[-_]/g, ''); };
-  
+      /**
+       * 警告日志输出
+      */
       warn = function (msg, vm) {
         var trace = vm ? generateComponentTrace(vm) : '';
   
@@ -743,7 +784,9 @@
           console.error(("[Vue warn]: " + msg + trace));
         }
       };
-  
+      /**
+       * 提示日志输出
+      */
       tip = function (msg, vm) {
         if (hasConsole && (!config.silent)) {
           console.warn("[Vue tip]: " + msg + (
@@ -751,8 +794,9 @@
           ));
         }
       };
-  
+      // 格式化组件名
       formatComponentName = function (vm, includeFile) {
+        // 判断是否是根组件
         if (vm.$root === vm) {
           return '<Root>'
         }
