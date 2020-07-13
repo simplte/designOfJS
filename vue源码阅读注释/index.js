@@ -817,7 +817,7 @@
           (file && includeFile !== false ? (" at " + file) : '')
         )
       };
-  
+      // n个字符串
       var repeat = function (str, n) {
         var res = '';
         while (n) {
@@ -827,7 +827,10 @@
         }
         return res
       };
-  
+      /* 
+        组件树规则
+        没太看明白
+      */
       generateComponentTrace = function (vm) {
         if (vm._isVue && vm.$parent) {
           var tree = [];
@@ -840,7 +843,7 @@
                 vm = vm.$parent;
                 continue
               } else if (currentRecursiveSequence > 0) {
-                tree[tree.length - 1] = [last, currentRecursiveSequence];
+                tree[tree.length - 1] = [3, currentRecursiveSequence];
                 currentRecursiveSequence = 0;
               }
             }
@@ -866,25 +869,35 @@
      * A dep is an observable that can have multiple
      * directives subscribing to it.
      */
+    /**
+     * 注册订阅 订阅构造函数
+     * 订阅者数据收集
+     * this.subs 订阅者数组
+    */
     var Dep = function Dep () {
       this.id = uid++;
       this.subs = [];
     };
-  
+    // 添加订阅者
     Dep.prototype.addSub = function addSub (sub) {
       this.subs.push(sub);
     };
-  
+    // 删除一个订阅者
     Dep.prototype.removeSub = function removeSub (sub) {
       remove(this.subs, sub);
     };
-  
+    // 为Watcher 添加 为Watcher.newDeps.push(dep); 一个dep对象
+    /* 
+      设置某个Watcher的依赖
+      理解成改变watcher执行的作用域
+    */
     Dep.prototype.depend = function depend () {
+      //添加一个dep    target 是Watcher dep就是dep对象
       if (Dep.target) {
         Dep.target.addDep(this);
       }
     };
-  
+    // 触发订阅 也就是发布
     Dep.prototype.notify = function notify () {
       // stabilize the subscriber list first
       var subs = this.subs.slice();
@@ -892,8 +905,10 @@
         // subs aren't sorted in scheduler if not running async
         // we need to sort them now to make sure they fire in correct
         // order
+        // 根据id升序排序
         subs.sort(function (a, b) { return a.id - b.id; });
       }
+      // 循环执行订阅者中的update方法，进行订阅状态更新通知
       for (var i = 0, l = subs.length; i < l; i++) {
         subs[i].update();
       }
@@ -902,9 +917,14 @@
     // The current target watcher being evaluated.
     // This is globally unique because only one watcher
     // can be evaluated at a time.
+    /**
+     * 全局唯一的观察者
+    */
     Dep.target = null;
     var targetStack = [];
-  
+    /**
+     * dep
+     */
     function pushTarget (target) {
       targetStack.push(target);
       Dep.target = target;
@@ -915,8 +935,9 @@
       Dep.target = targetStack[targetStack.length - 1];
     }
   
-    /*  */
-  
+    /* 
+      虚拟dom 
+    */
     var VNode = function VNode (
       tag,
       data,
@@ -961,7 +982,8 @@
     };
   
     Object.defineProperties( VNode.prototype, prototypeAccessors );
-  
+    
+    // 创建空的虚拟dom
     var createEmptyVNode = function (text) {
       if ( text === void 0 ) text = '';
   
@@ -970,7 +992,7 @@
       node.isComment = true;
       return node
     };
-  
+    // 创建文本dom  即一个字符串
     function createTextVNode (val) {
       return new VNode(undefined, undefined, undefined, String(val))
     }
@@ -979,6 +1001,9 @@
     // used for static nodes and slot nodes because they may be reused across
     // multiple renders, cloning them avoids errors when DOM manipulations rely
     // on their elm reference.
+    // 优化浅拷贝
+    // 用于静态节点和插槽节点，因为它们可以在多个渲染中重用，
+    // 当DOM操作依赖于它们的elm引用时，克隆它们可以避免错误
     function cloneVNode (vnode) {
       var cloned = new VNode(
         vnode.tag,
@@ -1009,7 +1034,7 @@
      * not type checking this file because flow doesn't play well with
      * dynamically accessing methods on Array prototype
      */
-  
+    // 对数组的原型方法进行重写
     var arrayProto = Array.prototype;
     var arrayMethods = Object.create(arrayProto);
   
