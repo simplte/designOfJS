@@ -612,11 +612,12 @@
   
     /**
      * Define a property.
+     * 在一个对象上定义一个属性的构造函数
      */
     function def (obj, key, val, enumerable) {
       Object.defineProperty(obj, key, {
         value: val,
-        enumerable: !!enumerable,
+        enumerable: !!enumerable, // 强制转换成布尔值
         writable: true,
         configurable: true
       });
@@ -1035,6 +1036,14 @@
      * dynamically accessing methods on Array prototype
      */
     // 对数组的原型方法进行重写
+    /* 
+    tips：
+      数组和对象不同的是  数组不能通过  getter/setter 来监听变化
+      因此需要通过拦截器来实现监听变化
+    */
+    //  拦截器 arrayProto 
+    //  每当使用数组上的原型方法时 
+    //  实际执行的是拦截器上面的方法  也就是使用拦截器上的 数组的原型方法
     var arrayProto = Array.prototype;
     var arrayMethods = Object.create(arrayProto);
   
@@ -1053,12 +1062,28 @@
      */
     methodsToPatch.forEach(function (method) {
       // cache original method
+      // 缓存原始方法  即 Array 上的方法
       var original = arrayProto[method];
+
+      /* 
+      tips：
+        下面代码等同于于
+        Object.defineProperty(arrayMethods, method, {
+          enumerable: false,
+          configurable: true,
+          writable: true,
+          value: function mutator () {
+            ....
+          }
+      })
+      */
       def(arrayMethods, method, function mutator () {
+        // 将类数组对象 arguments 转换成真数组中
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
-  
+        // 调用Array原型上的方法 拿到执行结果
         var result = original.apply(this, args);
+        // 数组新插入的元素需要重新进行observe才能响应式
         var ob = this.__ob__;
         var inserted;
         switch (method) {
@@ -1070,20 +1095,35 @@
             inserted = args.slice(2);
             break
         }
+        // 没看懂这一步是用来干什么的
         if (inserted) { ob.observeArray(inserted); }
         // notify change
+      // 通知所有注册的观察者进行响应式处理
         ob.dep.notify();
         return result
       });
     });
   
-    /*  */
+    /* 
+     Object.getOwnPropertyNames 
+     一个对象，其自身的可枚举和不可枚举属性的名称被返回。
+      Object.getOwnPropertyNames(arrayMethods); 返回 []
+
+      MDN上的例子
+      var arr = ["a", "b", "c"];
+      console.log(Object.getOwnPropertyNames(arr).sort()); // ["0", "1", "2", "length"]
+      // 类数组对象
+      var obj = { 0: "a", 1: "b", 2: "c"};
+      console.log(Object.getOwnPropertyNames(obj).sort()); // ["0", "1", "2"]
+
+    */
   
     var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
   
     /**
      * In some cases we may want to disable observation inside a component's
      * update computation.
+     * 在某些情况下，我们可能希望禁用组件更新中的观察
      */
     var shouldObserve = true;
   
