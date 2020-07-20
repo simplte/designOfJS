@@ -1136,20 +1136,34 @@
      * object. Once attached, the observer converts the target
      * object's property keys into getter/setters that
      * collect dependencies and dispatch updates.
+     * 附加到每个被观察对象的观察者类。
+     * 一旦附加，观察者将目标对象的属性键转换为getter/setter，
+     * 以收集依赖项并分派更新。
      */
+
+     /**
+      * 定义观察者
+      * 
+      */
     var Observer = function Observer (value) {
       this.value = value;
       this.dep = new Dep();
       this.vmCount = 0;
+      // 把自身实例添加到数据对象 value 的 __ob__ 属性上，自身的__ob__的值就是自身实例
       def(value, '__ob__', this);
+      // 是否是数组
       if (Array.isArray(value)) {
+        // 是否可以使用__proto__ 属性 
         if (hasProto) {
           protoAugment(value, arrayMethods);
         } else {
           copyAugment(value, arrayMethods, arrayKeys);
         }
+        // 对数组会调用 observeArray 方法，即递归调用observe
+        // 观察数组中对象
         this.observeArray(value);
       } else {
+        // 遍历每一个对象属性转换成包装后的存取器
         this.walk(value);
       }
     };
@@ -1158,6 +1172,7 @@
      * Walk through all properties and convert them into
      * getter/setters. This method should only be called when
      * value type is Object.
+     * 给对象的每一个属性 添加getter和setter属性
      */
     Observer.prototype.walk = function walk (obj) {
       var keys = Object.keys(obj);
@@ -1190,6 +1205,7 @@
     /**
      * Augment a target Object or Array by defining
      * hidden properties.
+     * 通过定义隐藏属性来扩充目标对象或数组
      */
     /* istanbul ignore next */
     function copyAugment (target, src, keys) {
