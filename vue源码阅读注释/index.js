@@ -1151,17 +1151,20 @@
       this.vmCount = 0;
       // 把自身实例添加到数据对象 value 的 __ob__ 属性上，自身的__ob__的值就是自身实例
       def(value, '__ob__', this);
-      // 是否是数组
+      // 是否是数组 循环遍历数组 如果数组中有对象，则进行监听
       if (Array.isArray(value)) {
         // 是否可以使用__proto__ 属性 
         if (hasProto) {
+          // 把数组的__proto__ 赋值为 Object.create(数组原型) 
           protoAugment(value, arrayMethods);
         } else {
+          // 给数组的添加属性  感觉没用到 arrayKeys 这个是空数组
           copyAugment(value, arrayMethods, arrayKeys);
         }
-        // 对数组会调用 observeArray 方法，即递归调用observe
+        // 递归实现对数组中对象进行监听 ，即递归调用observer
         // 观察数组中对象
         this.observeArray(value);
+      // 如果是对象则 给对象的每个属性添加getter 和setter
       } else {
         // 遍历每一个对象属性转换成包装后的存取器
         this.walk(value);
@@ -1183,6 +1186,7 @@
   
     /**
      * Observe a list of Array items.
+     * 监听数组中的每一个对象
      */
     Observer.prototype.observeArray = function observeArray (items) {
       for (var i = 0, l = items.length; i < l; i++) {
@@ -1205,7 +1209,7 @@
     /**
      * Augment a target Object or Array by defining
      * hidden properties.
-     * 通过定义隐藏属性来扩充目标对象或数组
+     * 通过定义隐藏属性来扩充目标对象或数组 给对象和数组添加属性
      */
     /* istanbul ignore next */
     function copyAugment (target, src, keys) {
@@ -1219,14 +1223,27 @@
      * Attempt to create an observer instance for a value,
      * returns the new observer if successfully observed,
      * or the existing observer if the value already has one.
+     * 尝试为一个值创建一个观察者实例，如果观察成功，返回新的观察者，
+     * 如果值已经有一个观察者，则返回现有的观察者。
+     *  observe(items[i]);
      */
     function observe (value, asRootData) {
+      // 判断入参是否是对象 或者 是否是虚拟dom实例 如果是 不监听
       if (!isObject(value) || value instanceof VNode) {
         return
       }
       var ob;
+      // 判断对象是否有 __ob__ 属性  并且对象的 __ob__ 的值 是 observer 的实例 说明当前对象已经在监听队列里面了
       if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+        // 将observer的实例赋值给ob  
         ob = value.__ob__;
+
+        // 判断是否禁用组件更新中的观察
+                    // 且环境不是服务器环境
+                    // 且是数组或者对象
+                    // 且对象是可扩展的
+                    // 且vm实例中的 flag 不是true
+                    // 此时才监听当前对象
       } else if (
         shouldObserve &&
         !isServerRendering() &&
@@ -1234,6 +1251,7 @@
         Object.isExtensible(value) &&
         !value._isVue
       ) {
+        // 递归调用 observer给对象的中的属性添加getter 和setter
         ob = new Observer(value);
       }
       if (asRootData && ob) {
@@ -1253,25 +1271,35 @@
       shallow
     ) {
       var dep = new Dep();
-  
+      // 获取当前对象属性的 属性描述符对象
       var property = Object.getOwnPropertyDescriptor(obj, key);
+      // 当前对象属性的可配置属性configurable 为false时 退出  为false时  不饿能使用delete 删除该属性
       if (property && property.configurable === false) {
         return
       }
   
       // cater for pre-defined getter/setters
+      /**
+       * 取到该属性描述符对象中的 get和set
+       */
       var getter = property && property.get;
       var setter = property && property.set;
+      /*
+        如果 没有get  只有set  并且 参数长度为2
+        将对象的中该属性的值复制给 参数val
+       */
       if ((!getter || setter) && arguments.length === 2) {
         val = obj[key];
       }
-  
+      // 取到当前属性值的观察者
       var childOb = !shallow && observe(val);
       Object.defineProperty(obj, key, {
-        enumerable: true,
-        configurable: true,
+        enumerable: true, // 可枚举型  可以使用 for in 方法
+        configurable: true, // 可配置性  对象可以使用 delete 删除该属性
         get: function reactiveGetter () {
+          // 如果当前对象有getter方法 则调用后返回值 否则直接将对象的值返回
           var value = getter ? getter.call(obj) : val;
+          // 是否有当前渲染的watcher
           if (Dep.target) {
             dep.depend();
             if (childOb) {
