@@ -71,3 +71,46 @@ Array.prototype.push.call(a, 'first');
 
 console.log(a.length); // 输出：1
 console.log(a[0]); // first 
+
+// 节流 函数编写
+// 规定时间内只执行一次  关键点是 flag
+function throttle(delay, fn) {
+    let flag = true;
+    let timer = null;
+    return  function(...arguments) {
+        let that = this;
+        if(!flag) return;
+        flag = false;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            fn.apply(that, arguments);
+            flag = true;
+        },delay)
+    }
+}
+
+// debounce
+// 多次触发时 计时器清零
+function debounce(delay, fn) {
+    let timer = null;
+    return function(...args) {
+        let that = this;
+        clearTimeout(timer);
+        let timer = setTimeout(function(){
+            fn.apply(that, args);
+        }, delay);
+    }
+}
+
+// 柯理化函数
+let currying = (fn, ...args) =>
+            console.log(args)
+            fn.length > args.length ?
+            (...arguments) => currying(fn, ...args, ...arguments) :
+            fn(...args)
+
+// let addSum = (a, b, c) => a+b+c
+// let add = currying(addSum)
+// console.log(add(1)(2)(3))
+// console.log(add(1, 2)(3))
+// console.log(add(1,2,3))
