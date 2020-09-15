@@ -1291,7 +1291,7 @@
       if ((!getter || setter) && arguments.length === 2) {
         val = obj[key];
       }
-      // 取到当前属性值的观察者
+      // 取到当前属性值的观察者  即拿到当前值被添加的__ob__属性值
       var childOb = !shallow && observe(val);
       Object.defineProperty(obj, key, {
         enumerable: true, // 可枚举型  可以使用 for in 方法
@@ -1299,8 +1299,10 @@
         get: function reactiveGetter () {
           // 如果当前对象有getter方法 则调用后返回值 否则直接将对象的值返回
           var value = getter ? getter.call(obj) : val;
-          // 是否有当前渲染的watcher
+          // 是否有当前渲染的watcher 
+          // 获取值时添加watcher  
           if (Dep.target) {
+            // 为对象的属性添加 dep.depend(),达到监听对象（引用的值）属性的目的
             dep.depend();
             if (childOb) {
               childOb.dep.depend();
@@ -1311,23 +1313,29 @@
           }
           return value
         },
+        // 更新值时执行 dep中的notify 触发water中的update方法 通知water数据更新了
         set: function reactiveSetter (newVal) {
           var value = getter ? getter.call(obj) : val;
           /* eslint-disable no-self-compare */
+          // 对值没变 以及新值或者老值是null的处理
           if (newVal === value || (newVal !== newVal && value !== value)) {
             return
           }
           /* eslint-enable no-self-compare */
+          // 如果有方法就执行，看了一下基本都是提示性的方法
           if (customSetter) {
             customSetter();
           }
           // #7981: for accessor properties without setter
+          // 当前对象的属性 只有getter且没有setter就不执行
           if (getter && !setter) { return }
+          // 赋值
           if (setter) {
             setter.call(obj, newVal);
-          } else {
+          } else { // 这种属于没有setter和getter 个人理解当前属性没有通过defineProprietary 设置过getter和setter
             val = newVal;
           }
+
           childOb = !shallow && observe(newVal);
           dep.notify();
         }
@@ -1338,23 +1346,29 @@
      * Set a property on an object. Adds the new property and
      * triggers change notification if the property doesn't
      * already exist.
+     * 设置对象的属性。添加新属性并在属性不存在时触发更改通知。
      */
     function set (target, key, val) {
+      // null和undefined 以及原始数据类型不能设置
       if (isUndef(target) || isPrimitive(target)
       ) {
         warn(("Cannot set reactive property on undefined, null, or primitive value: " + ((target))));
       }
+      // 是数组并且key是有效数字
       if (Array.isArray(target) && isValidArrayIndex(key)) {
         target.length = Math.max(target.length, key);
+        // 修改当前key的值为val
         target.splice(key, 1, val);
         return val
       }
+      // target是对象 key是对象中的值 并不是对象原型上的值(constructor等)时 赋值
       if (key in target && !(key in Object.prototype)) {
         target[key] = val;
         return val
       }
       var ob = (target).__ob__;
       if (target._isVue || (ob && ob.vmCount)) {
+        // 避免在运行时向Vue实例或其根$data添加反应性属性-请在data选项中预先声明。
         warn(
           'Avoid adding reactive properties to a Vue instance or its root $data ' +
           'at runtime - declare it upfront in the data option.'
