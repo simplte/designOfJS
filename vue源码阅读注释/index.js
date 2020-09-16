@@ -1386,12 +1386,15 @@
   
     /**
      * Delete a property and trigger change if necessary.
+     * 删除一个属性，如果必要触发通知
      */
     function del (target, key) {
+      // undefined和null以及原始数据值不处理
       if (isUndef(target) || isPrimitive(target)
       ) {
         warn(("Cannot delete reactive property on undefined, null, or primitive value: " + ((target))));
       }
+      // 数组并且key是有效数字 处理
       if (Array.isArray(target) && isValidArrayIndex(key)) {
         target.splice(key, 1);
         return
@@ -1404,19 +1407,25 @@
         );
         return
       }
+      // 如果对象没有当前key值退出
       if (!hasOwn(target, key)) {
         return
       }
+      // 删除key
       delete target[key];
+      // 如果没有监听则return
       if (!ob) {
         return
       }
+      // 触发监听 这也是为什么数组或者对象 使用split splice能够触发双向数据绑定原因
       ob.dep.notify();
     }
   
     /**
      * Collect dependencies on array elements when the array is touched, since
      * we cannot intercept array element access like property getters.
+     * 
+     * 收集数组的依赖
      */
     function dependArray (value) {
       for (var e = (void 0), i = 0, l = value.length; i < l; i++) {
@@ -1434,6 +1443,7 @@
      * Option overwriting strategies are functions that handle
      * how to merge a parent option value and a child option
      * value into the final value.
+     *  配置选项合并策略
      */
     var strats = config.optionMergeStrategies;
   
