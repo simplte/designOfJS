@@ -1464,6 +1464,9 @@
   
     /**
      * Helper that recursively merges two data objects together.
+     * 递归地将两个数据对象合并在一起 把from中的属性值赋值给to 
+     * from中有的 to中没有的key  添加到to中
+     * 
      */
     function mergeData (to, from) {
       if (!from) { return to }
@@ -1472,16 +1475,16 @@
       var keys = hasSymbol
         ? Reflect.ownKeys(from)
         : Object.keys(from);
-  
+      // 循环from中的key数组
       for (var i = 0; i < keys.length; i++) {
         key = keys[i];
         // in case the object is already observed...
-        if (key === '__ob__') { continue }
-        toVal = to[key];
-        fromVal = from[key];
-        if (!hasOwn(to, key)) {
-          set(to, key, fromVal);
-        } else if (
+        if (key === '__ob__') { continue } // 跳出当前循环
+        toVal = to[key];  // 取出to中key属性对应的值
+        fromVal = from[key]; // 取出from中key属性对应的值
+        if (!hasOwn(to, key)) { // 判断 to对象中是否有
+          set(to, key, fromVal);  // to对象中没有key属性就加上 
+        } else if ( // to对象和from对象中 key属性对应的值不同  并且 toval和fromval都是对象 进行递归处理
           toVal !== fromVal &&
           isPlainObject(toVal) &&
           isPlainObject(fromVal)
@@ -1513,13 +1516,14 @@
         // merged result of both functions... no need to
         // check if parentVal is a function here because
         // it has to be a function to pass previous merges.
+        // 合并父子中的data数据
         return function mergedDataFn () {
           return mergeData(
             typeof childVal === 'function' ? childVal.call(this, this) : childVal,
             typeof parentVal === 'function' ? parentVal.call(this, this) : parentVal
           )
         }
-      } else {
+      } else {  //vm 同样合并
         return function mergedInstanceDataFn () {
           // instance merge
           var instanceData = typeof childVal === 'function'
@@ -1536,7 +1540,7 @@
         }
       }
     }
-  
+    // 给start对象添加data属性 同样也是合并方法
     strats.data = function (
       parentVal,
       childVal,
@@ -1561,6 +1565,7 @@
   
     /**
      * Hooks and props are merged as arrays.
+     * 钩子函数合并
      */
     function mergeHook (
       parentVal,
@@ -1679,6 +1684,8 @@
   
     /**
      * Default strategy.
+     * 
+     * 判断 childVal是否有值 没值返回 parentVal
      */
     var defaultStrat = function (parentVal, childVal) {
       return childVal === undefined
