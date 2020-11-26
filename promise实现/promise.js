@@ -1,8 +1,47 @@
 const PENDING = 'PENDING';
 const RESOLVED = 'RESOLVED';
 const REJECTED = 'REJECTED';
+// 
+const resolvePromise = (promise2, x, resolve, reject) => {
+	let  called = false;
+	// 判断x的值和promise2是不是同一个
+	if(promise2 === x) {
+		return reject(new TypeError('不能将then中方法执行结果的变量值再return出去'))
+	}
+	if(typeof x=== 'object' && typeof x !== null || typeof x ==='function') {
+		try {
+			let then = x.then;
+			// 如果有then方法  就认为x他是一个promise
+			if(typeof then === "function") {
+				// 能保证不用再次取then的值 
+				// 根据promiseA+规范 使用x作为then执行的this 同事将 y=>{} 和 r=>{} 作为参数传入，分别对应 成功 和失败需要执行的函数
+				then.call(x,y => {
+					if(called) return;
+					called = true; // 防止调用多次成功和失败
+					// 嵌套一层promise的情况
+					// resolve(y)
 
-const resolvePromise = (promise2, x, resolve, reject) => {};
+					// 嵌套多层promise时使用递归,知道解析出来的结果是普通值
+					resolvePromise(promise2, y, resolve, reject)
+				},r=> {
+					if(called) return;
+					called = true;
+					reject(r)
+				}) 
+			} else {
+				// 如果then不是一个方法 就说明x是一个普通的对象 直接让promise2成功就ok了
+				resolve(x)
+			}
+		} catch (error) {
+			if(called) return;
+			called = true;
+			reject(error)
+		}
+	}else {
+		// x是一个普通值 让promise2执行成功
+		resolve(x)
+	}
+};
 class Promise {
 	constructor(executor) {
 		// 实例上有的
@@ -36,6 +75,12 @@ class Promise {
 	// 原型上的
 	// 有两个参数
 	then(onfulfilled, onrejected) {
+		// onfulfilled onrejected 是可选参数
+		onfulfilled = typeof onfulfilled === 'function' ? onfulfilled : data => data;
+		onrejected = typeof onrejected === 'function' ? onrejected : err => {
+			throw err;
+		};
+
 		// 递归处理 then中返回promise的情况
 		let promise2 = new Promise((resolve, reject) => {
 			// executor会立即执行
@@ -91,6 +136,7 @@ class Promise {
 				});
 			}
 		});
+		return promise2
 	}
 }
 
