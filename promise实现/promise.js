@@ -151,3 +151,6 @@ Promise.defer = Promise.deferred = function() {
 }
 
 module.exports = Promise;
+
+// cmd中执行
+// promises-aplus-tests promise.js
