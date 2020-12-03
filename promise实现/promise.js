@@ -3,12 +3,12 @@ const RESOLVED = 'RESOLVED';
 const REJECTED = 'REJECTED';
 // 
 const resolvePromise = (promise2, x, resolve, reject) => {
-	let  called = false;
 	// 判断x的值和promise2是不是同一个
 	if(promise2 === x) {
 		return reject(new TypeError('不能将then中方法执行结果的变量值再return出去'))
 	}
-	if(typeof x=== 'object' && typeof x !== null || typeof x ==='function') {
+	if((typeof x=== 'object' &&  x !== null) || typeof x ==='function') {
+		let called;
 		try {
 			let then = x.then;
 			// 如果有then方法  就认为x他是一个promise
@@ -53,7 +53,7 @@ class Promise {
 		this.onRejectCbs = [];
 		// 私有的
 		let resolve = (val) => {
-			if (this.status == PENDING) {
+			if (this.status === PENDING) {
 				this.value = val;
 				this.status = RESOLVED;
 				this.onResolveCbs.forEach((fn) => fn());
@@ -138,6 +138,16 @@ class Promise {
 		});
 		return promise2
 	}
+}
+
+// -------------
+Promise.defer = Promise.deferred = function() {
+	let dfd = {};
+	dfd.promise = new Promise((resolve, reject) => {
+		dfd.resolve = resolve;
+		dfd.reject = reject
+	})
+	return dfd;
 }
 
 module.exports = Promise;
