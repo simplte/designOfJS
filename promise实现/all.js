@@ -1,21 +1,22 @@
-const fs = require('fs')
+const fs = require('fs');
+const { resolve } = require('path');
 const Promise = require('./promise');
 function read(url) {
-    let dfd = Promise.defer();
+	let dfd = Promise.defer();
 
-    // return new Promise((resolve, reject) =>{
-        fs.readFile(url, 'utf8', function(err, data) {
-           if(err) dfd.reject(err);
-           dfd.resolve(data)
-        });
-    // })
-    return dfd.promise;
+	// return new Promise((resolve, reject) =>{
+	fs.readFile(url, 'utf8', function(err, data) {
+		if (err) dfd.reject(err);
+		dfd.resolve(data);
+	});
+	// })
+	return dfd.promise;
 }
 // 实现promise.all方法
 
 function isPromise(_val) {
-    if(typeof _val === 'object' && _val !== null  || typeof _val == 'function') {
-        if(_val.then === 'function') return true;
+    if((typeof _val === 'object' && _val !== null)  || typeof _val == 'function') {
+        if(typeof _val.then === 'function') return true;
         return false;
     }else {
         return false
@@ -33,11 +34,10 @@ Promise.all = function(vals) {
         }
         for(let i = 0 ;i < vals.length; i++ ){
             let curval = vals[i];
-            console.log(isPromise(curval))
             if(isPromise(curval)) {
                 curval.then(res => {
                     addResVal(i,res)
-                }, reject())
+                }, reject)
             }else {
                 addResVal(i, curval)
             }
@@ -45,6 +45,7 @@ Promise.all = function(vals) {
     })
 }
 
-Promise.all([1,2,3,4,read('./fs/a.txt'), read('./fs/b.txt'),7,8]).then(res => {
-    console.log(res)
-})
+Promise.all([ 1, 2, 3, 4, read('./fs/a.txt'), read('./fs/b.txt'), 7, 8 ]).then((res) => {
+	console.log(res);
+});
+
