@@ -37,13 +37,14 @@ function checkFunAgain() {
 const checkArr  = [checkFun, checkFunAgain]
 
 function* beginCheck(_checkArr) {
+    console.log(11111)
     for(let i = 0; i<_checkArr.length;i++) {
+        console.log(i)
         let x = yield _checkArr[i]();
     }
 }
 // 执行generator方法  将GeneratorObj放入 Object [Generator] {}  个人理解也就是一个个的暂停器，需要next去触发下面的执行
 let GeneratorObj = beginCheck(checkArr);
-console.log(GeneratorObj)
 // run方法就相当于一个触发开关的方法  将之前的执行beginCheck方法存入到beginCheckFun 对象中的开发触发
 let run = async (generators)=> {
     var isFinished = false;
@@ -57,7 +58,7 @@ let run = async (generators)=> {
         // 赋值给isFinished 来更新状态
         isFinished = done
     }while(!isFinished){
-        console.log(checkRes,'0000054')
+        console.log(isFinished)
         return checkRes
     }
 }
@@ -68,7 +69,7 @@ runResult.then(res=> {
     console.log(res)
 })
 
-
+return;
 // 检验一下上述描述中是否是async包裹的方法变成了一个promise
 // 检验结果：确实是async将普通方法变成了一个放回promise的方法
 let testPromise = async (res) => {
