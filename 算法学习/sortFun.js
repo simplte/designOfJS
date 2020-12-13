@@ -63,3 +63,39 @@ function mergeSort(arr) {
 
     return mergeFun(mergeLeftArr,mergeRightArr)
 }
+
+// 插入排序
+
+function charufunc(arr) {
+    let len = arr.length;
+    for(let i =0;i <len; i++) {
+        let cur = arr[i];
+        let preIdx = i - 1;
+        while(preIdx >0 && cur < arr[preIdx]) {
+            arr[preIdx + 1] = arr[preIdx];
+            preIdx--;
+        }
+        arr[preIdx + 1] = cur;
+    }
+    return arr;
+}
+console.log(charufunc([1,2,7,1,14,,0]))
+
+// 选择排序
+function selSort(_arr) {
+    let len = _arr.length;
+    let sp  = 0;
+    for(let i =0; i<len; i++){
+        sp =i;
+        for(let j = i +1 ;j< len;j++) {
+            if(_arr[j] < _arr[sp]) {
+                sp = j
+            }
+            if(sp != i) {
+                [_arr[i],_arr[sp]] = [_arr[sp],_arr[i]]
+            }
+        }
+    }
+    return _arr;
+}
+console.log(selSort([1,2,3,1,2,14,1,24,2]))
