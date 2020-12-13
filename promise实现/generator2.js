@@ -57,3 +57,13 @@ promises(fss);
 fss.readFile('./fs/a.txt','utf-8').then(res => {
     console.log(res)
 })
+
+let pro = new Promise((resolve,reject) => {
+    reject(111)
+})
+
+pro.catch(err => {
+    return err
+}).then(res => {
+    console.log(res)
+})
