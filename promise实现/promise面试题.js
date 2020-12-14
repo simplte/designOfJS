@@ -161,14 +161,80 @@ async function async1() {
   });
   console.log('script end')
 
-  test start
-  执行testSometing
-  promise start...
-  test end...
-  testSometing
-  执行testAsync
-  
-  promise
-  hello async
+  // script start"
+  // async1 start
+  // async2
+  // promise1
+  // script end
+  // async1 end
+  // promise2
+  // setTimeout
 
-  testSometing hello async
+  // test start...
+  // 执行testAsync
+  // promise start...
+  // test end...
+  // testSometing
+  // 执行testAsync
+  // promise
+  // hello async
+  // hello async  testSometing
+
+
+// --------------------------------------------
+  // await后面的内容是一个异常或者错误的话
+  // 如果在async函数中抛出了错误，则终止错误结果，不会继续向下执行。
+  // 如果想要使得错误的地方不影响async函数后续的执行的话，可以使用try catch
+  
+  
+  // 下面例子 async2后面的代码就不会执行了
+  async function async1 () {
+    await async2();
+    console.log('async1');
+    return 'async1 success'
+  }
+  async function async2 () {
+    return new Promise((resolve, reject) => {
+      console.log('async2')
+      reject('error')
+    })
+  }
+  async1().then(res =>console.log(res))
+
+// 这个例子验证使用try catch 捕获异常  不影响代码执行
+
+async function async1 () {
+  try {
+    await Promise.reject('error!!!')
+  } catch(e) {
+    console.log(e)
+  }
+  console.log('async1');
+  return Promise.resolve('async1 success')
+}
+async1().then(res =>console.log(res))
+console.log('script start')
+
+// 或者使用catch捕获后面的异常
+async function async1 () {
+  // try {
+  //   await Promise.reject('error!!!')
+  // } catch(e) {
+  //   console.log(e)
+  // }
+  await Promise.reject('error!!!')
+    .catch(e =>console.log(e))
+  console.log('async1');
+  return Promise.resolve('async1 success')
+}
+async1().then(res =>console.log(res))
+console.log('script start')
+
+// 3
+// 7
+// 4
+// 1
+// 2
+
+// 5
+// reslove
