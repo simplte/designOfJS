@@ -230,11 +230,109 @@ async function async1 () {
 async1().then(res =>console.log(res))
 console.log('script start')
 
+// script start
+// async1
+// promise1
+// script end
 // 3
-// 7
-// 4
-// 1
-// 2
+// timer2
+// timer1
 
-// 5
-// reslove
+// resovle1
+// finally  resovle1
+// timer1
+// resolve
+
+// 如何让异步操作顺序执行
+const arr = [1, 2, 3]
+arr.reduce((p, x) => {
+  return p.then(() => {
+    console.log('deng')
+    return new Promise(r => {
+      console.log('deng1')
+      setTimeout(() => r(console.log(x)), 1000)
+    })
+  })
+}, Promise.resolve())
+
+// 让异步请求顺序执行,并返回相应顺序的结果
+
+const time = (timer) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, timer)
+  })
+}
+const ajax1 = () => time(2000).then(() => {
+  console.log(1);
+  return 1
+})
+const ajax2 = () => time(1000).then(() => {
+  console.log(2);
+  return 2
+})
+const ajax3 = () => time(1000).then(() => {
+  console.log(3);
+  return 3
+})
+
+function mergePromise (ajaxArray) {
+  const data = [];
+  let promise = Promise.resolve();
+  ajaxArray.forEach(ajax => {
+  	// 第一次的then为了用来调用ajax
+    // 第二次的then是为了获取ajax的结果
+    console.log(promise)
+    promise = promise.then(ajax).then(res => {
+      data.push(res);
+      console.log(data)
+      return data; // 把每次的结果返回 最后使用 mergePromise().then(res => {res  就是最后data的值})
+    })
+  })
+  // 最后得到的promise它的值就是data
+  return promise;
+}
+
+mergePromise([ajax1, ajax2, ajax3]).then(data => {
+  console.log("done");
+  console.log(data); // data 为 [1, 2, 3]
+});
+// 因为 .then()  会返回一个Promise 所以  promise一直是 Promise { <pending> }
+let promise = Promise.resolve();
+promise = promise.then(res => {
+  return 1;
+})
+promise.then(res => {
+  console.log(res)
+})
+console.log(promise)
+
+// async 和 await 方法中 如果想在async方法中 return 一个数据
+// 调用被 async 装饰的方法时 想要拿到return的数据 需要通过.then(res => { }) 拿到返回的数据
+// 或者通过 在另一个async 方法中 await 上一个 async 方法  拿到上一个async方法的值
+function testPro() {
+  return new Promise((resolve, reject) => {
+    setTimeout(()=> {
+      resolve(11)
+    },100)
+  })
+}
+async function test(istrue) {
+  let data = [];
+  if(istrue) {
+    data =  await testPro()
+    console.log(data)
+  }
+    return data
+}
+// 通过a async方法拿到值
+async function getVal() {
+  let res = await test(false);
+  console.log(res)
+}
+getVal()
+// 通过.then 方法拿到 async() 
+// test(false).then(res => {
+//   console.log(res,'eee')
+// })
