@@ -1695,13 +1695,18 @@
   
     /**
      * Validate component names
+     * 检查组件名称
      */
     function checkComponents (options) {
       for (var key in options.components) {
         validateComponentName(key);
       }
     }
-  
+    /**
+     * 
+     * 1：是否是合法字符名称
+     * 2：检查组件名称是否是vue保留字符
+     */
     function validateComponentName (name) {
       if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + (unicodeRegExp.source) + "]*$")).test(name)) {
         warn(
@@ -1720,6 +1725,7 @@
     /**
      * Ensure all props option syntax are normalized into the
      * Object-based format.
+     * 将props属性转成小驼峰
      */
     function normalizeProps (options, vm) {
       var props = options.props;
@@ -1757,6 +1763,9 @@
   
     /**
      * Normalize all injections into Object-based format
+     * 数组/d对象转成对应{
+     *  a: {from : value}
+     * }
      */
     function normalizeInject (options, vm) {
       var inject = options.inject;
@@ -1784,6 +1793,13 @@
   
     /**
      * Normalize raw function directives into object format.
+     * 处理指令
+     * 将指令转换为当前对象的key 值为：
+     * 如果指令的值为function
+     * {
+     *  bind: function,
+     *  update: function
+     * }
      */
     function normalizeDirectives (options) {
       var dirs = options.directives;
