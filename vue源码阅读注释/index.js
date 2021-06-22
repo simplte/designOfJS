@@ -1565,7 +1565,12 @@
   
     /**
      * Hooks and props are merged as arrays.
-     * 钩子函数合并
+     * 钩子函数合并，
+     * 1：p上和c上 都有该钩子函数  直接合并钩子函数
+     * 2：p上有c上没有 使用p上的钩子函数
+     * 3：p上没有c上有  
+     *      1：c上的钩子函数是否是数组 是数组直接合并
+     *      2：            不是数组 变成数组进行合并
      */
     function mergeHook (
       parentVal,
@@ -1603,6 +1608,8 @@
      * When a vm is present (instance creation), we need to do
      * a three-way merge between constructor options, instance
      * options and parent options.
+     * components/directives/filters的合并策略
+     * 相同名字的话会取child上面的值
      */
     function mergeAssets (
       parentVal,
@@ -1661,6 +1668,9 @@
   
     /**
      * Other object hashes.
+     * 因为props，methods，computed  这些hook都是对象，使用统一的合并策略
+     * （1）如果parent options上没有该属性，则直接返回child options上的该属性
+      （2）如果parent options和child options都有，则合并parent options和child options并生成一个新的对象。(如果parent和child上有同名属性，合并后的以child options上的为准
      */
     strats.props =
     strats.methods =
@@ -1880,6 +1890,7 @@
      * Resolve an asset.
      * This function is used because child instances need access
      * to assets defined in its ancestor chain.
+     * 全局注册组件时用到的方法
      */
     function resolveAsset (
       options,
@@ -1987,6 +1998,14 @@
   
     /**
      * Assert whether a prop is valid.
+     *case 1: 验证 required 属性
+    case 1.1: prop 定义时是 required，但是调用组件时没有传递该值（警告）
+    case 1.2: prop 定义时是非 required 的，且 value === null || value === undefined（符合要求，返回）
+    case 2: 验证 type 属性-- value 的类型必须是 type 数组里的其中之一
+    case 3: 验证自定义验证函数
+     *`
+     *
+     *
      */
     function assertProp (
       prop,
@@ -2038,7 +2057,12 @@
     }
   
     var simpleCheckRE = /^(String|Number|Boolean|Function|Symbol)$/;
-  
+  /* 
+  `assertType`函数，验证`prop`的值符合指定的`type`类型，分为三类：
+  - 第一类：通过`typeof`判断的类型，如`String`、`Number`、`Boolean`、`Function`、`Symbol`
+  - 第二类：通过`Object.prototype.toString`判断`Object`/`Array`
+  - 第三类：通过`instanceof`判断自定义的引用类型
+  */
     function assertType (value, type) {
       var valid;
       var expectedType = getType(type);
@@ -2245,6 +2269,7 @@
     // completely stops working after triggering a few times... so, if native
     // Promise is available, we will use it:
     /* istanbul ignore next, $flow-disable-line */
+    // 在vue2.5之前的版本中，nextTick基本上基于 micro task 来实现的，但是在某些情况下 micro task 具有太高的优先级，并且可能在连续顺序事件之间（例如＃4521，＃6690）或者甚至在同一事件的事件冒泡过程中之间触发（＃6566）。但是如果全部都改成 macro task，对一些有重绘和动画的场景也会有性能影响，如 issue #6813。vue2.5之后版本提供的解决办法是默认使用 micro task，但在需要时（例如在v-on附加的事件处理程序中）强制使用 macro task。
     if (typeof Promise !== 'undefined' && isNative(Promise)) {
       var p = Promise.resolve();
       timerFunc = function () {
