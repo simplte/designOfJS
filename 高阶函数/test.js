@@ -151,6 +151,7 @@ var currying = function (fn) {
             return fn.apply(this, args);
         } else {
             [].push.apply(args, arguments);
+            console.log(arguments.callee)
             return arguments.callee;
         }
     }
@@ -173,9 +174,9 @@ var cost = (function () {
 var cost1 = currying(cost);
 cost1(100)
 cost1(200)
-// cost1(300)
-// console.log(cost1());
-// console.log(cost1());
+cost1(300)
+console.log(cost1());
+console.log(cost1());
 // ----------------------------------------------------------------------
 
 // uncurrying函数
