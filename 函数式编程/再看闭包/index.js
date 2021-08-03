@@ -15,3 +15,22 @@ let creatObj = {
     }
 }
 console.log(creatObj.getInfo('bqc', 11))
+
+function bibaoTest(name) {
+    let xixi = [name];
+    return function(age) {
+        xixi[0] = age;
+        return xixi;
+    }
+} 
+let test = bibaoTest(1)
+let test2 = bibaoTest(1)
+console.log(test(123),test(345),test(456))
+// ... 扩展运算符和Object.assign() 一样也是浅拷贝
+let a = {a:{b:123}}
+let b ={...a}
+b.a.b=333;
+console.log(a,b)
+// 对象和闭包是同构的，这意味着它们可以在一定程度上互换使用，以表示程序中的状态和行为。
+
+// 表示为闭包有一定的好处，比如粒度更改控制和自动隐私。表示为对象还有其他好处，比如更容易克隆状态
