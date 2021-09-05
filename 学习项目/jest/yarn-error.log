@@ -1,0 +1,40 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add --dev babel-jest @babel/core @babel/preset-env
+
+PATH: 
+  C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;D:\Git\bin;D:\Git\mingw64\libexec\git-core;D:\Git\mingw64\bin;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files\Java\jdk1.8.0_221\jre\bin;D:\flutterfile\flutter\bin;G:\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;G:\Microsoft VS Code\bin;E:\;C:\Users\Administrator\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  16.4.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Administrator\AppData\Local\Yarn\Cache\v6\npm-color-convert-1.9.3-bb71850690e1f136567de629d2d5471deda4c1e8-integrity\node_modules\color-convert\CHANGELOG.md' -> 'G:\node重新学习\vite\jest\node_modules\@babel\highlight\node_modules\color-convert\CHANGELOG.md'
+
+npm manifest: 
+  {
+    "name": "jest",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "jest": "^27.1.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
