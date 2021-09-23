@@ -104,3 +104,111 @@ Sub.__proto__ === Function.prototype;
 //              esm: export = xxx  import from   
 // 2: commonjs 模块的依赖发生在代码运行阶段
 // 3：esm  在编译时就引入了代码模块
+// 4: commonjs模块引用后是一个值得拷贝
+// 5：esm是一个值得额动态映射
+
+
+// 6. 全局声明的let const 会在Scopes下的Script里面  而var是在Global里面
+// const 和 let会生成块级作用域，可以理解为
+let a = 10;
+const b  = 20;
+// 相当于
+(function () {
+    var  a = 10;
+    var b = 20;
+})()
+
+// 7. iffe中的函数不能够重新赋值，所以b不能被赋值为20 
+var b = 10;
+(function b(){
+    b = 20;
+    console.log(b); 
+})();
+// 打印的值时function b
+
+// 8.箭头函数和普通函数的区别
+/**
+ * 1: 箭头函数写法更加简洁
+ * 2：箭头函数不能作为狗做函数
+ *      因为箭头函数没有自己的this，不能使用call apply
+ *          没有prototype属性
+ * 3：箭头函数没有arguments对象，可以用rest参数代替
+ * 4：箭头函数的this在定义时就确定了， 并不是调用时所在的对象
+ */
+let a = 1;
+const  test = ()=> {
+    console.log(a)
+}
+function test1() {
+    console.log(this.a);
+}
+let b = {
+    a:22,
+    testFn: test,
+    test1Fn: test1,
+}
+b.testFn()
+b.test1Fn()
+
+// 9.获取抽象语法书ast的工具  recast
+// npm i recast -S
+const recast = require("recast");
+const code1 =  `a.b.c.d`;
+const code2 = `a['b']['c']['d']`
+// 解析
+const ast1 = recast.parse(code1)
+const ast2 = recast.parse(code2)
+console.log(ast1, ast2)
+// 执行就可获取抽象语法树
+// {
+//     program: Script {
+//       type: 'Program',
+//       body: [ [ExpressionStatement] ],
+//       sourceType: 'script',
+//       loc: {
+//         start: [Object],
+//         end: [Object],
+//         lines: [Lines],
+//         indent: 0,
+//         tokens: [Array]
+//       },
+//       errors: []
+//     },
+//     name: null,
+//     loc: {
+//       start: { line: 1, column: 0, token: 0 },
+//       end: { line: 1, column: 7, token: 7 },
+//       lines: Lines {
+//         infos: [Array],
+//         mappings: [],
+//         cachedSourceMap: null,
+//         cachedTabWidth: undefined,
+//         length: 1,
+//         name: null
+//       },
+//       indent: 0,
+//       tokens: [
+//         [Object], [Object],
+//         [Object], [Object],
+//         [Object], [Object],
+//         [Object]
+//       ]
+//     },
+//     type: 'File',
+//     comments: null,
+//     tokens: [
+//       { type: 'Identifier', value: 'a', loc: [Object] },
+//       { type: 'Punctuator', value: '.', loc: [Object] },
+//       { type: 'Identifier', value: 'b', loc: [Object] },
+//       { type: 'Punctuator', value: '.', loc: [Object] },
+//       { type: 'Identifier', value: 'c', loc: [Object] },
+//       { type: 'Punctuator', value: '.', loc: [Object] },
+//       { type: 'Identifier', value: 'd', loc: [Object] }
+//     ]
+//   } 
+
+// 10. for 比 foreach 性能好的原因
+// 1:百万级数据一样for的性能优势才能显现出来
+// 2:forEach 有诸多的参数和上下文需要在执行的时候考虑所以会拖慢性能
+
+// 11. 任何一个 Symbol 类型的值都是不相等的，所以不会被覆盖。 

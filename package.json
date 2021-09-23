@@ -19,6 +19,7 @@
   "homepage": "https://github.com/simplte/designOfJS#readme",
   "devDependencies": {
     "jquery": "^3.5.1",
-    "promises-aplus-tests": "^2.1.2"
+    "promises-aplus-tests": "^2.1.2",
+    "recast": "^0.20.5"
   }
 }
