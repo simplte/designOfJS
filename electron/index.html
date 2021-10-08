@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>electron test</title>
+</head>
+
+<body>
+    electron demo111
+    <button id="btn">添加新的窗口</button>
+    <script>
+        const { log } = console
+        // 导入 remote 中的  BrowserWindow
+        const { BrowserWindow } = require('@electron/remote')
+
+        const btn = document.getElementById('btn')
+        btn.onclick = () => {
+            let newWin = new BrowserWindow({
+                width: 800,
+                height: 600,
+            })
+            // newWin.loadURL('www.baidu.com')
+            win.loadFile('index2.html')
+
+            newWin.on('close', () => {
+                newWin = null
+            })
+        }
+    </script>
+</body>
+
+</html>
