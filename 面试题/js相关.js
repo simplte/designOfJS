@@ -1,6 +1,8 @@
 // 1: 防抖
 // 触发高频时间后n内函数只会执行一次，如果n秒内再次触发，则会重新计算时间
 // 适用场景：登录，发短信，监听键盘，每次触发执行的参数都会有变化时
+// 前面多次触发都不生效只有最后一次触发生效
+// 搜索输入框输入
 function debounce(func, delay = 500, ...args) {
     let timer = null;
     return function () {
@@ -21,6 +23,8 @@ inp.addEventListener('input', debounce(inp, 400));
 // 2.节流
 // 高频时间触发，在n秒内只会执行一次，所以节流会稀释函数的执行频率
 // 适用场景，对于参数变化的关注度低，重点在于搁多少秒执行，比如监听页面滚动
+// 规定间隔多长时间执行一次
+// 联想搜索，页面滚动
 function throttle(fn, delay = 500, ...args) {
     let isStart = false;
     return function () {
@@ -36,6 +40,10 @@ function sayHi(e) {
     console.log(e.target.innerWidth, e.target.innerHeight);
 }
 window.addEventListener('resize', throttle(sayHi));
+// 个人理解节流和防抖的区别：
+// 节流是规定间隔时间多长时间执行一次，且每次间隔时间结束都会触发执行对应函数
+// 防抖是在规定时间内触发后之前的触发都不会执行，只会执行最后一次触发
+
 
 // 3. Set Map WeakSet WeakMap 的区别
 /**
