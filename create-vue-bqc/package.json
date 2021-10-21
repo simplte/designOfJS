@@ -1,0 +1,19 @@
+{
+  "name": "create-vue-bqc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "kolorist": "^1.5.0",
+    "minimist": "^1.2.5",
+    "prettier": "^2.4.1",
+    "prompts": "^2.4.2"
+  }
+}
