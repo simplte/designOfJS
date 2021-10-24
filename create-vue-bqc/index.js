@@ -5,7 +5,7 @@ const __dirname = path.resolve()
 import minimist from 'minimist'
 import prompts from 'prompts'
 import { red, green, blue } from 'kolorist'
-const templateRoot = path.resolve(__dirname, 'template')
+
 
 import renderTemplate from './utils/renderTemplate.js'
 
@@ -67,10 +67,11 @@ async function init() {
     needsVuex = argv.vuex,
     needsTests = argv.tests
   } = result
-
-  // 获取当前node进行执行得文件夹路径+将要创建得文件夹路径
+  console.log(green(targetDir))
+  console.log(green(typeof targetDir))
+  // 获取当前node进程执行得文件夹路径+将要创建得文件夹路径
   const root = path.join(cwd, targetDir)
-
+  
   // 文件夹创建： 如果需要重写 直接将文件夹清空
   if (shouldOverwrite) {
     emptyDir(root)
@@ -82,12 +83,14 @@ async function init() {
   // package.json文件创建并内容写入
   const pkg = { name: packageName, version: '0.0.0' }
   fs.writeFileSync(path.resolve(root, 'package.json'), JSON.stringify(pkg, null, 2))
+  const templateRoot = path.resolve(__dirname, 'template')
+  const render = function render(templateName) {
+    const templateDir = path.resolve(templateRoot, templateName)
+    renderTemplate(templateDir, root);
+  }
+  render('base')
+  
 }
 
-const render = function render(templateName) {
-  const templateDir = path.resolve(templateRoot, templateName)
-  // renderTemplate(templateDir);
-}
-render('base')
 
 init()
