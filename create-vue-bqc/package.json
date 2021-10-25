@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js --ts --vue-router"
+    "dev": "node index.js",
+    "test": "node ./utils/renderTemplate.js"
   },
   "type": "module",
   "keywords": [],
