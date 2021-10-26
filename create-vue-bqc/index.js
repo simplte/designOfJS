@@ -6,7 +6,6 @@ import minimist from 'minimist'
 import prompts from 'prompts'
 import { red, green, blue } from 'kolorist'
 
-
 import renderTemplate from './utils/renderTemplate.js'
 
 function canSafelyOverwrite(dir) {
@@ -25,7 +24,6 @@ function toValidPackageName(projectName) {
     .replace(/^[._]/, '')
     .replace(/[^a-z0-9-~]+/g, '-')
 }
-
 
 async function init() {
   // 返回当前nodejs 进程执行时所在的文件目录
@@ -196,11 +194,47 @@ async function init() {
   const templateRoot = path.resolve(__dirname, 'template')
   const render = function render(templateName) {
     const templateDir = path.resolve(templateRoot, templateName)
-    renderTemplate(templateDir, root);
+    renderTemplate(templateDir, root)
   }
   render('base')
-  
-}
 
+  // 创建需要的各种插件工具的package.json依赖和vite配置等
+  if (needsJsx) {
+    render('config/jsx')
+  }
+  if (needsRouter) {
+    render('config/router')
+  }
+  if (needsVuex) {
+    render('config/vuex')
+  }
+  if (needsTests) {
+    render('config/cypress')
+  }
+  if (needsTypeScript) {
+    render('config/typescript')
+  }
+
+  // 创建模板代码文件
+  // 1.ts+router / router / default /
+  const codeTemplate = (needsTypeScript ? 'typescript-' : '') + (needsRouter ? 'router' : 'default')
+  render(`code/${codeTemplate}`)
+
+  // 创建入口文件  main.js/ts 区分是否选了vuex或者router配置
+  if (needsVuex && needsRouter) {
+    render('entry/vuex-and-router')
+  } else if (needsVuex) {
+    render('entry/vuex')
+  } else if (needsRouter) {
+    render('entry/router')
+  } else {
+    render('entry/default')
+  }
+
+
+  // 创建ts项目的处理
+  
+
+}
 
 init()
