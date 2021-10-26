@@ -4,9 +4,11 @@ const __dirname = path.resolve()
 
 import minimist from 'minimist'
 import prompts from 'prompts'
-import { red, green, blue } from 'kolorist'
-
+import { red, green, bold } from 'kolorist'
+import { postOrderDirectoryTraverse, preOrderDirectoryTraverse } from './utils/directoryTraverse.js'
 import renderTemplate from './utils/renderTemplate.js'
+import getCommand from './utils/getCommand.js'
+import generateReadme from './utils/generateReadme.js'
 
 function canSafelyOverwrite(dir) {
   return !fs.existsSync(dir) || fs.readdirSync(dir).length === 0
@@ -23,6 +25,14 @@ function toValidPackageName(projectName) {
     .replace(/\s+/g, '-')
     .replace(/^[._]/, '')
     .replace(/[^a-z0-9-~]+/g, '-')
+}
+
+function emptyDir(dir) {
+  postOrderDirectoryTraverse(
+    dir,
+    (dir) => fs.rmdirSync(dir),
+    (file) => fs.unlinkSync(file)
+  )
 }
 
 async function init() {
@@ -231,10 +241,66 @@ async function init() {
     render('entry/default')
   }
 
-
   // 创建ts项目的处理
-  
+  // 1:将所有js文件改为ts文件
+  // 2：将jsconfig.json 改为tsconfig.json
+  // 3：将index.html 中的引用改成引用ts文件
+  if (needsTypeScript) {
+    preOrderDirectoryTraverse(
+      root,
+      () => {},
+      (filepath) => {
+        if (filepath.endsWith('.js')) {
+          fs.renameSync(filepath, filepath.replace(/\.js$/, '.ts'))
+        } else if (path.basename(filepath) == 'jsconfig.json') {
+          fs.renameSync(filepath, filepath.replace(/jsconfig\.json$/, 'tsconfig.json'))
+        }
+      }
+    )
+    const indexHtmlPath = path.resolve(root, 'index.html')
+    const indexHtmlContent = fs.readFileSync(indexHtmlPath, 'utf-8')
+    fs.writeFileSync(indexHtmlPath, indexHtmlContent.replace('src/main.js', 'src/main.ts'))
+  }
 
+  // 不需要测试就删掉cypress文件夹
+  if (!needsTests) {
+    preOrderDirectoryTraverse(
+      root,
+      (dirpath) => {
+        const dirname = path.basename(dirpath)
+        if (dirname === 'cypress' || dirname === '__tests__') {
+          emptyDir(dirpath)
+          fs.rmdirSync(dirpath)
+        }
+      },
+      () => {}
+    )
+  }
+  //  判断环境支持哪些工具  npm yarn等工具
+  const packageManager = /pnpm/.test(process.env.npm_execpath)
+    ? 'pnpm'
+    : /yarn/.test(process.env.npm_execpath)
+    ? 'yarn'
+    : 'npm'
+
+    // 写入readme到创建的文件中
+  fs.writeFileSync(
+    path.resolve(root, 'README.md'),
+    generateReadme({
+      projectName: result.projectName || defaultProjectName,
+      packageManager,
+      needsTypeScript,
+      needsTests
+    })
+  )
+
+  console.log(`\nDone. Now run:\n`)
+  if (root !== cwd) {
+    console.log(`  ${bold(green(`cd ${path.relative(cwd, root)}`))}`)
+  }
+  console.log(`  ${bold(green(getCommand(packageManager, 'install')))}`)
+  console.log(`  ${bold(green(getCommand(packageManager, 'dev')))}`)
+  console.log()
 }
 
 init()
