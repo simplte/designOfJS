@@ -38,7 +38,7 @@ function emptyDir(dir) {
 async function init() {
   // 返回当前nodejs 进程执行时所在的文件目录
   const cwd = process.cwd()
-
+  console.log(cwd)
   // possible options:
   // --default
   // --typescript / --ts
@@ -55,6 +55,7 @@ async function init() {
    * node index.js --ts
    * { _: [], ts: true, typescript: true }
    */
+  console.log(process.argv)
   const argv = minimist(process.argv.slice(2), {
     alias: {
       typescript: ['ts'],
@@ -70,6 +71,7 @@ async function init() {
     'boolean'
 
   // 获取node命令中第一个参数作为目标文件夹
+  console.log(argv)
   let targetDir = argv._[0]
   const defaultProjectName = !targetDir ? 'vue-project' : targetDir
   console.log(targetDir)
