@@ -18,6 +18,7 @@
     "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "vue": "^3.2.14",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"

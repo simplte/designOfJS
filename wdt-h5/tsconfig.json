@@ -15,7 +15,11 @@
       "@/*": ["src/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
   },
   "include": ["vite.config.*", "env.d.ts", "src/**/*", "src/**/*.vue"]
 }
