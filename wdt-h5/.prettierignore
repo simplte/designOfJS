@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+
+.DS_Store
+.eslintignore
+.gitignore
+.prettierignore
+
+LICENSE
+yarn.lock

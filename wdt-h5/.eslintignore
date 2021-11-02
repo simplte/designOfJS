@@ -1,0 +1,8 @@
+bash
+/dist/
+/node_modules/
+/public/
+/coverage/
+/package.json
+/package-lock.json
+**/*.d.ts
