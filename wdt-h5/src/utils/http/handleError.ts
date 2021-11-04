@@ -41,8 +41,7 @@ export function handleError(error) {
   }
 
   if (config?.showErrorMessage) {
-    ElMessage.closeAll();
-    ElMessage({
+    console.log({
       message: `${error.status}: ${error.message}`,
       type: error.type || 'error',
       duration: error.timeout,

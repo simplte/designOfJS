@@ -1,3 +1,4 @@
+import './utils/rem';
 import { createApp } from 'vue';
 import App from './App.vue';
 
