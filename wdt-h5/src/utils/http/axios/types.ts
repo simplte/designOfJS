@@ -26,11 +26,10 @@ export interface HttpError extends AxiosError {
   config: HttpRequestOptions;
 }
 
-
 // multipart/form-data: upload file
 export interface UploadFileParams {
   // Other parameters
-  data?: Recordable;
+  data?: any;
   // File parameter interface field name
   name?: string;
   // file name
@@ -39,7 +38,6 @@ export interface UploadFileParams {
   filename?: string;
   [key: string]: any;
 }
-
 
 export enum MethodEnum {
   GET = 'GET',
@@ -59,18 +57,19 @@ export enum ContentTypeEnum {
   X_Requested_With = 'XMLHttpRequest',
 }
 
-
 export type HttpRequestHooks = {
   /**
    * 请求之前时的请求拦截器
    */
-  onBeforeRequest?: (config: HttpRequestOptions) => HttpRequestOptions | Promise<HttpRequestOptions>;
+  onBeforeRequest?: (
+    config: HttpRequestOptions
+  ) => HttpRequestOptions | Promise<HttpRequestOptions>;
   /**
    * 请求成功时的响应拦截器
    */
-  onSuccessResponse?: (res: AxiosResponse<any>) => Promise<any>
+  onSuccessResponse?: (res: AxiosResponse<any>) => Promise<any>;
   /**
    * 请求失败时的响应拦截器
    */
   onErrorResponse?: (error: Error) => void;
-}
+};

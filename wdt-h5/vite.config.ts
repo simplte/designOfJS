@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@/': new URL('./src/', import.meta.url).pathname,
+      '@@/': new URL('./src/assets/images/', import.meta.url).pathname,
     },
   },
 });
