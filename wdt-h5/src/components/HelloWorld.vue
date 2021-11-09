@@ -20,6 +20,7 @@ defineProps<{
 <style scoped lang="scss">
 .greetings {
   width: 100%;
+
   .green {
     font-size: 10px;
   }
