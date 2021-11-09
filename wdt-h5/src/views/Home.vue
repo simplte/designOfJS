@@ -1,7 +1,29 @@
-<script lang="ts">
+<script setup lang="ts">
+interface VideoInfo {
+  vid: string;
+  cover: string;
+  video: string;
+  title: string;
+  share_img: string;
+  create_time: string;
+  status: string;
+  video_img: string;
+  video_jump: string;
+  subtitle: string;
+  recommend_title: string;
+  sort: string;
+  share_title: string;
+  share_friend_img: string;
+  type: string;
+  content: string;
+  moreList: any;
+  video_wnum: string;
+  video_lnum: string;
+}
+
 import videoListRes from './videoList.json';
-import { reactive, ref } from '@vue/reactivity';
-import { defineComponent, onMounted } from 'vue';
+import { ref } from '@vue/reactivity';
+import { onMounted } from 'vue';
 import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
@@ -10,55 +32,45 @@ import 'swiper/swiper-bundle.min.css';
 
 // swiper.less/sass/css 决定了基础的样式
 import 'swiper/swiper.scss';
-export default defineComponent({
-  name: 'HomePage',
-  setup() {
-    let allReadCount = ref<number>(0);
-    let readBuyList = reactive<any[]>([]);
-    onMounted(() => {
-      new Swiper('.swiper1', {
-        pagination: {
-          el: '.swiper-pagination',
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          hideOnClick: true,
-        },
-        autoplay: {
-          delay: 3000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-        },
-        on: {
-          navigationShow: function () {
-            console.log('按钮显示了');
-          },
-        },
-      });
-      getVideoList();
-    });
 
-    const getVideoList = () => {
-      if (videoListRes && videoListRes.result == '0' && videoListRes.list.length > 0) {
-        // 总阅读量
-        allReadCount.value = Number(videoListRes.video_total || 0);
-        readBuyList = videoListRes.list;
-        console.log(readBuyList);
-      }
-    };
-    return {
-      allReadCount,
-      readBuyList,
-    };
-  },
+let allReadCount = ref<number>(0);
+let readBuyList = ref<VideoInfo[]>([]);
+onMounted(() => {
+  new Swiper('.swiper1', {
+    pagination: {
+      el: '.swiper-pagination',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+      hideOnClick: true,
+    },
+    autoplay: {
+      delay: 3000,
+      stopOnLastSlide: false,
+      disableOnInteraction: false,
+    },
+    on: {
+      navigationShow: function () {
+        console.log('按钮显示了');
+      },
+    },
+  });
+  getVideoList();
 });
+
+const getVideoList = () => {
+  if (videoListRes && videoListRes.result == '0' && videoListRes.list.length > 0) {
+    // 总阅读量
+    allReadCount.value = Number(videoListRes.video_total || 0);
+    readBuyList.value = videoListRes.list;
+    console.log(readBuyList);
+  }
+};
 </script>
 
 <template>
   <div class="home">
-    <!-- swiper1 -->
-    <div class="title">基本效果-小圆点和左右切换</div>
     <div class="swiper-container swiper1">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
@@ -81,25 +93,24 @@ export default defineComponent({
     </div>
   </div>
   <div class="moiveList">
-    {{ readBuyList }}
     <div
       v-for="(item, index) in readBuyList"
       :key="index"
       class="moiveTab"
       :class="index == 0 ? 'firstTba' : ''"
     >
-      <img v-lazy="item.cover" class="coverImg" />
+      <img :src="item.cover" class="coverImg" />
       <div class="introsBox">
         <p class="moiveDate">{{ item.create_time }}</p>
         <p class="moiveIntros">{{ item.title }}</p>
         <p class="bannelBox">
           <span class="bannel">
             <span class="contrlbox">
-              <img class="look" src="@@/images/look2.png" />
+              <img class="look" src="@@/look2.png" />
               <span class="count">{{ item.video_wnum }}</span>
             </span>
             <span class="contrlbox">
-              <img class="zan" src="@@/images/like.png" />
+              <img class="zan" src="@@/like.png" />
               <span class="count">{{ Number(item.video_lnum) }}</span>
             </span>
           </span>
@@ -121,6 +132,7 @@ export default defineComponent({
 .swiper-slide {
   img {
     width: 100%;
+    height: 100px;
   }
 }
 .moiveList {

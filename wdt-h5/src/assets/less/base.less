@@ -1,0 +1,225 @@
+/**
+ * Base style file
+ */
+@import 'reset.less';
+
+// 全局变量
+@backGrayColor: rgb(237, 237, 237);
+@themeColor: #ff5346;
+@themeColor2: #23beae;
+@btnColor: linear-gradient(90deg, #ff7a45 0, #ff5346 98%);
+@btnColor2: linear-gradient(90deg, #43dea0 0, #23beae 98%);
+
+/**
+ * reset
+ */
+
+body {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  font-family: arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+img,
+legend {
+  border: none;
+}
+
+input {
+  font-size: 14px;
+  border: none;
+  -moz-appearance: none;
+  -webkit-appearance: none; /*解决ios上按钮的圆角问题*/
+  border-radius: 0; /*解决ios上输入框圆角问题*/
+  outline: none; /*去掉鼠标点击的默认黄色边框*/
+  background-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.user-no-select,
+.iconfont,
+a {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/**
+ * 一些通用样式
+ */
+.scrolltouch {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.boxshadow {
+  box-shadow: 0 3px 10px 0 rgb(199, 199, 199);
+}
+.boxshadow-light {
+  box-shadow: 0 1px 5px 0 rgb(199, 199, 199);
+}
+
+/**
+ * 一些插件样式重写
+ */
+// 轮播swiper分页点点的颜色
+.swiper-pagination-bullet {
+  background: #fff !important;
+}
+
+/**
+ * 兼容
+ */
+.transform(@a) {
+  -moz-transform: @a;
+  -webkit-transform: @a;
+  -ms-transform: @a;
+  transform: @a;
+}
+.transition( @a ) {
+  -moz-transition: @a;
+  -webkit-transition: @a;
+  -ms-transition: @a;
+  transition: @a;
+}
+.animation( @a ) {
+  -webkit-animation: @a;
+  -moz-animation: @a;
+  -o-animation: @a;
+  -ms-animation: @a;
+  animation: @a;
+}
+.transform-origin( @a ) {
+  -webkit-transform-origin: @a;
+  -moz-transform-origin: @a;
+  -o-transform-origin: @a;
+  -ms-transform-origin: @a;
+  transform-origin: @a;
+}
+
+/**
+ * 动画
+ */
+// 渐入
+.animate-fadein {
+  .animation(fadeIn 0.3s);
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 渐出
+.animate-fadeout {
+  .animation(fadeout 0.3s);
+}
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// 上滑
+.animate-popup {
+  .animation(popup 0.3s);
+}
+@keyframes popup {
+  0% {
+    .transform(translateY(100%));
+  }
+  to {
+    .transform(none);
+  }
+}
+
+// 下滑
+.animate-popdown {
+  .animation(popdown 0.3s);
+}
+@keyframes popdown {
+  0% {
+    .transform(none);
+  }
+  to {
+    .transform(translateY(100%));
+  }
+}
+
+// 左移
+.animate-slideleft {
+  .animation(slideleft 0.3s);
+}
+@keyframes slideleft {
+  0% {
+    .transform(translateX(100%));
+  }
+  to {
+    .transform(none);
+  }
+}
+
+// 右移
+.animate-slideright {
+  .animation(slideright 0.3s);
+}
+@keyframes slideright {
+  0% {
+    .transform(none);
+  }
+  to {
+    .transform(translateX(100%));
+  }
+}
+
+/*Retina 1px border start */
+.retina-border {
+  @media (-webkit-min-device-pixel-ratio: 2) {
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      .transform(scaleY(0.5));
+      .transform-origin(0 bottom);
+      background: #f4f4f4;
+    }
+  }
+}
+
+/**
+ * 清除浮动 兼容标准浏览器
+ */
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: ' ';
+  clear: both;
+}
