@@ -21,15 +21,15 @@ interface VideoInfo {
   video_lnum: string;
 }
 
-import videoListRes from './videoList.json';
 import { ref } from '@vue/reactivity';
+import Swiper, { Autoplay, EffectCoverflow, EffectCube, Navigation, Pagination } from 'swiper';
 import { onMounted } from 'vue';
-import Swiper, { Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation } from 'swiper';
+
+import videoListRes from './videoList.json';
 Swiper.use([Autoplay, EffectCoverflow, EffectCube, Pagination, Navigation]);
 
 // swiper-bundle.min.css 决定了小圆点和左右翻页标签，如果不需要可以不引用
 import 'swiper/swiper-bundle.min.css';
-
 // swiper.less/sass/css 决定了基础的样式
 import 'swiper/swiper.scss';
 

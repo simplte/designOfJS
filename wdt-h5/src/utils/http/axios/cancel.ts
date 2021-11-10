@@ -1,6 +1,7 @@
-import qs from 'qs';
 import axios, { AxiosRequestConfig, Canceler } from 'axios';
 import { isFunction } from 'lodash-es';
+import qs from 'qs';
+
 import { HttpRequestOptions } from './types';
 
 type PendingValue = [Canceler, boolean | undefined];

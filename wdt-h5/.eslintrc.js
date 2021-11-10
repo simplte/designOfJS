@@ -9,6 +9,8 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
+  plugins: ['simple-import-sort'],
+
   // 解析器
   // eslint-plugin-vue 里的大多数规则都需要 vue-eslint-parser 来解析 template 的AST， 然而 babel-eslint 和 vue-eslint-parser 在解析上有冲突，解决办法是把 "parser": "babel-eslint", 移入到 parserOptions 内。
   // 本项目需要对ts支持，所以需要@typescript-eslint/parser 来负责ts的语法检查
@@ -30,6 +32,8 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
   },
   overrides: [],
 };

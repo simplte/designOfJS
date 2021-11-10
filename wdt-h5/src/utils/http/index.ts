@@ -1,6 +1,6 @@
-import { ContentTypeEnum, HttpRequestHooks } from './axios/types';
-import { AxiosRequest } from './axios/request';
 import { axiosCanceler as canceler } from './axios/cancel';
+import { AxiosRequest } from './axios/request';
+import { ContentTypeEnum, HttpRequestHooks } from './axios/types';
 import { handleError } from './handleError';
 
 async function onBeforeRequest(config) {

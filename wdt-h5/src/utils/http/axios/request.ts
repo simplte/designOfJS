@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+
 import { axiosCanceler } from './cancel';
 import { axiosRetry } from './retry';
 import { ContentTypeEnum, HttpError, HttpRequestOptions, MethodEnum } from './types';
