@@ -26,3 +26,35 @@ B.prototype = new A();
 
 var b = new B();
 console.log(b.name); // 输出：sven 
+
+
+function Person() {
+
+}
+
+var person = new Person();
+
+console.log(person.__proto__ == Person.prototype) // true
+console.log(Person.prototype.constructor == Person) // true
+// 顺便学习一个ES5的方法,可以获得对象的原型
+console.log(Object.getPrototypeOf(person) === Person.prototype) // true
+
+// 注意点：
+function Person() {
+
+}
+var person = new Person();
+console.log(person.constructor === Person); // true
+
+// 为什么是true
+/********
+ * 1: 在person对象中查找constructor属性 找不到
+ * 2：顺着原型链person.__proto__ 找到Person.prototype 找到了constructor属性
+ * 3：Person.prototype.constructor = Person 所以 为true
+ */
+
+// 你不知道的js上面中说到：
+// js中对象的的继承并不是真正意义上的继承，继承是指复制操作，而js
+// 只是在两个对象中创建关联关系，叫委托应该更贴切一些
+
+
