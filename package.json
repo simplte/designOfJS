@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./npm/index.js --testParams",
+    "test:npm": "node ./npm/index.js",
+    "install": "node ./npm/index.js",
+    "more": "test && test:npm",
+    "env": "env"
+  },
+  "config": {
+    "port": 3000,
+    "baseUrl": "./"
   },
   "repository": {
     "type": "git",
@@ -18,6 +26,7 @@
   },
   "homepage": "https://github.com/simplte/designOfJS#readme",
   "devDependencies": {
+    "chalk": "^4.1.2",
     "jquery": "^3.5.1",
     "promises-aplus-tests": "^2.1.2",
     "recast": "^0.20.5"
