@@ -13,3 +13,17 @@ Function.prototype.bind2 = function (context) {
   fBound.prototype = new fNOP();
   return fBound;
 };
+
+// 利用call实现 bind
+Function.prototype.bind2 = function (context) {
+  // 1:保存需要执行的函数
+  let that = this;
+  // 2：保存剩余参数
+  const args = Array.prototype.slice.call(arguments, 1);
+  return function () {
+    // 3: 通过闭包保存需要执行的目标环境
+    // 4: 获取执行时传入的参数
+    const bindArgs = Array.prototype.slice.call(arguments);
+    return that.call(context, args.concat(bindArgs));
+  };
+};
