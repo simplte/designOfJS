@@ -27,3 +27,14 @@ Function.prototype.bind2 = function (context) {
     return that.call(context, args.concat(bindArgs));
   };
 };
+
+Function.prototype.bind1 = function (context) {
+  const that = Object.create(context) || window;
+
+  const args = Array.prototype.slice.call(arguments, 1);
+
+  return function () {
+    const argsNew = args.concat(Array.prototype.slice.call(arguments));
+    return that.call(context, argsNew);
+  };
+};
