@@ -26,3 +26,11 @@ const xiaohong = createNew(CreatePerson, 'xiaohong', 12);
 console.log(xiaohong.name);
 xiaohong.speak();
 xiaohong.jump();
+
+function CreateNew() {
+  let obj = new Object(null);
+  let Construtor = [].shift.call(arguments);
+  obj.__proto__ = Construtor.prototype;
+  const ret = Construtor.apply(obj, arguments);
+  return typeof ret === 'object' ? ret : obj;
+}
