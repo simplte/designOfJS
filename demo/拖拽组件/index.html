@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Document</title>
+
+    <style>
+        .wrapper {
+            display: flex;
+            border: 1px solid orangered;
+            padding: 10px;
+        }
+
+        .col {
+            border: 1px solid #808080;
+            height: 500px;
+            width: 200px;
+            margin: 0 10px;
+            padding: 10px;
+        }
+
+        .item {
+            border: 1px solid #808080;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="col1 col">
+            <div class="item" id="item1" draggable="true">
+                <div>item1</div>
+            </div>
+
+            <div class="item" id="item2" draggable="true">item2</div>
+        </div>
+    </div>
+
+    <script>
+        let cols = document.getElementsByClassName("col");
+
+        for (let col of cols) {
+            col.ondragstart = (e) => {
+                e.preventDefault();
+
+                console.log(e.target);
+            };
+        }
+
+        /*
+        
+            原生拖拽事件
+            1:作用于拖动目标上触发的事件
+             ondragstart 拖动元素开始被拖动
+             ondrag  拖动元素正在被拖动
+             ondragen 拖动元素拖动释放时触发
+            2：释放目标时触发的事件 个人理解是 拖动元素进入目标元素后触发的事件
+             ondragenter 拖动元素进入目标元素时触发
+             ondragover 拖动元素在目标元素上移动时触发
+             ondragleave 拖动元素离开目标元素时触发
+             ondrap 在目标元素中释放拖动元素时触发
+        
+        */
+    </script>
+</body>
+
+</html>
