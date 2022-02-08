@@ -4,18 +4,19 @@
 // 前面多次触发都不生效只有最后一次触发生效
 // 搜索输入框输入
 function debounce(func, delay = 500, ...args) {
-    let timer = null;
-    return function () {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            func.apply(this, args)
-        }, delay)
-    }
+  let timer = null;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
 }
+
 // ex:
 function test(params) {
-    console.log(params)
-    console.log('测试防抖')
+  console.log(params);
+  console.log('测试防抖');
 }
 var inp = document.getElementById('inp');
 inp.addEventListener('input', debounce(inp, 400));
@@ -26,24 +27,24 @@ inp.addEventListener('input', debounce(inp, 400));
 // 规定间隔多长时间执行一次
 // 联想搜索，页面滚动
 function throttle(fn, delay = 500, ...args) {
-    let isStart = false;
-    return function () {
-        if (isStart) return;
-        isStart = true;
-        setTimeout(() => {
-            fn.apply(this, args);
-            isStart = false;
-        }, delay)
-    }
+  let isStart = false;
+  return function () {
+    if (isStart) return;
+    isStart = true;
+    setTimeout(() => {
+      fn.apply(this, args);
+      isStart = false;
+    }, delay);
+  };
 }
+
 function sayHi(e) {
-    console.log(e.target.innerWidth, e.target.innerHeight);
+  console.log(e.target.innerWidth, e.target.innerHeight);
 }
 window.addEventListener('resize', throttle(sayHi));
 // 个人理解节流和防抖的区别：
 // 节流是规定间隔时间多长时间执行一次，且每次间隔时间结束都会触发执行对应函数
 // 防抖是在规定时间内触发后之前的触发都不会执行，只会执行最后一次触发
-
 
 // 3. Set Map WeakSet WeakMap 的区别
 /**
@@ -61,21 +62,34 @@ window.addEventListener('resize', throttle(sayHi));
  *      Weakmap 对象是一组键值对的集合，其中键是弱引用对象，每个键对自己所引用对象的引用都是弱引用，在没有其他引用和该键引用同一对象，这个对象将会被垃圾回收（相应的key则变成无效的），
  *      所以，WeakMap 的 key 是不可枚举的。
  *      键只接受对象类型
+
+
+Set对象可以存储任何类型的数据。值是唯一的，没有重复的值。
+
+Map对象保存键值对，任意值都可以成为它的键或值。
+
+WeakSet 结构与 Set 类似，也是不重复的值的集合 . WeakMap 对象是一组键值对的集合
+
+不同：WeakSet 的成员只能是对象，而不能是其他类型的值。WeakSet 不可遍历。
+
+WeakMap只接受对象作为键名（null除外），不接受其他类型的值作为键名。
+
+WeakMap的键名所指向的对象，不计入垃圾回收机制。
  */
 // 适用Set来进行去重
-let arr = [1, 1, 23, 1, 3, 2,]
-console.log([... new Set(arr)])
+let arr = [1, 1, 23, 1, 3, 2];
+console.log([...new Set(arr)]);
 let setArr = new Set();
-setArr.add(1)
-setArr.add(2)
-setArr.add(3)
+setArr.add(1);
+setArr.add(2);
+setArr.add(3);
 setArr.has(1);
 setArr.delete(1);
 // 获取Set数据的长度
-console.log(arr.size)
+console.log(arr.size);
 
 const m2 = new Map([['bar', 1]]);
-m2.get('bar')
+m2.get('bar');
 // 操作方法
 // set(key, value)：向字典中添加新元素
 // get(key)：通过键查找特定的数值并返回
@@ -83,21 +97,24 @@ m2.get('bar')
 // delete(key)：通过键 key 从字典中移除对应的数据
 // clear()：将这个字典中的所有元素删除
 // Map转Array
-const map = new Map([[1, 1], [2, 2], [3, 3]])
-console.log([...map])	// [[1, 1], [2, 2], [3, 3]]
-
+const map = new Map([
+  [1, 1],
+  [2, 2],
+  [3, 3],
+]);
+console.log([...map]); // [[1, 1], [2, 2], [3, 3]]
 
 // 4. ES5/ES6 的继承除了写法以外还有什么区别
 // 类可以直接通过 __proto__ 寻址到父类
-class Super { }
-class Sub extends Super { }
+class Super {}
+class Sub extends Super {}
 
 const sub = new Sub();
 
 Sub.__proto__ === Super;
 // 而通过 ES5 的方式，Sub.__proto__ === Function.prototype
-function Super() { }
-function Sub() { }
+function Super() {}
+function Sub() {}
 
 Sub.prototype = new Super();
 Sub.prototype.constructor = Sub;
@@ -106,15 +123,13 @@ var sub = new Sub();
 
 Sub.__proto__ === Function.prototype;
 
-
 // 5. commonjs和Esm的区别
 // 1：写法区别  commonjs:  exports.xxx  require  （exports实际上是对moudle.exprots的引用）
-//              esm: export = xxx  import from   
+//              esm: export = xxx  import from
 // 2: commonjs 模块的依赖发生在代码运行阶段
 // 3：esm  在编译时就引入了代码模块
 // 4: commonjs模块引用后是一个值得拷贝
 // 5：esm是一个值得额动态映射
-
 
 // 6. 全局声明的let const 会在Scopes下的Script里面  而var是在Global里面
 // const 和 let会生成块级作用域，可以理解为
@@ -122,15 +137,15 @@ let a = 10;
 const b = 20;
 // 相当于
 (function () {
-    var a = 10;
-    var b = 20;
-})()
+  var a = 10;
+  var b = 20;
+})();
 
-// 7. iffe中的函数不能够重新赋值，所以b不能被赋值为20 
+// 7. iffe中的函数不能够重新赋值，所以b不能被赋值为20
 var b = 10;
 (function b() {
-    b = 20;
-    console.log(b);
+  b = 20;
+  console.log(b);
 })();
 // 打印的值时function b
 
@@ -145,28 +160,28 @@ var b = 10;
  */
 let a = 1;
 const test = () => {
-    console.log(a)
-}
+  console.log(a);
+};
 function test1() {
-    console.log(this.a);
+  console.log(this.a);
 }
 let b = {
-    a: 22,
-    testFn: test,
-    test1Fn: test1,
-}
-b.testFn()
-b.test1Fn()
+  a: 22,
+  testFn: test,
+  test1Fn: test1,
+};
+b.testFn();
+b.test1Fn();
 
 // 9.获取抽象语法书ast的工具  recast
 // npm i recast -S
-const recast = require("recast");
+const recast = require('recast');
 const code1 = `a.b.c.d`;
-const code2 = `a['b']['c']['d']`
+const code2 = `a['b']['c']['d']`;
 // 解析
-const ast1 = recast.parse(code1)
-const ast2 = recast.parse(code2)
-console.log(ast1, ast2)
+const ast1 = recast.parse(code1);
+const ast2 = recast.parse(code2);
+console.log(ast1, ast2);
 // 执行就可获取抽象语法树
 // {
 //     program: Script {
@@ -213,13 +228,13 @@ console.log(ast1, ast2)
 //       { type: 'Punctuator', value: '.', loc: [Object] },
 //       { type: 'Identifier', value: 'd', loc: [Object] }
 //     ]
-//   } 
+//   }
 
 // 10. for 比 foreach 性能好的原因
 // 1:百万级数据一样for的性能优势才能显现出来
 // 2:forEach 有诸多的参数和上下文需要在执行的时候考虑所以会拖慢性能
 
-// 11. 任何一个 Symbol 类型的值都是不相等的，所以不会被覆盖。 
+// 11. 任何一个 Symbol 类型的值都是不相等的，所以不会被覆盖。
 
 // 12. var let const 的区别
 /**
@@ -229,24 +244,24 @@ console.log(ast1, ast2)
  *      var a ; // 完成了声明和初始化，并且栈内存中分配了存储空间
  *      a = 1;  // 栈内存中存储了实际变量值1
  *      a = {b:1} // 在堆内存中分配存储引用类型空间 栈内存中预分配的内存会存储 指向堆内存的指针
- * 2：在有 let const 中的作用域中， 
+ * 2：在有 let const 中的作用域中，
  *    在其他语句执行之前，只会进行对let const的声明，不会进行初始化,
  *    这也是先读取let/const 声明的变量值，会报错的原因，也是会产生暂时性死区的原因
- * 
+ *
  *    同时let/const 在声明的时候不会分配栈内存空间
  *    在let/const 被实际赋值时，先会检查是否有同名变量，有就报错，，没有就会存储实际值或者堆内存的指针
- *      
+ *
  */
 
 // 13. 一道内存指针笔试题
 
 function changeObjProperty(o) {
-    // 对老地址中的数据进行修改
-    o.siteUrl = "http://www.baidu.com"
-    // 这时候开辟了一个新的堆内存空间，并且a的栈内存存储的指针指向了新地址
-    o = new Object()
-    // 这时修改的只是新指针中堆内存的数据,不会影响老地址中的数据
-    o.siteUrl = "http://www.google.com"
+  // 对老地址中的数据进行修改
+  o.siteUrl = 'http://www.baidu.com';
+  // 这时候开辟了一个新的堆内存空间，并且a的栈内存存储的指针指向了新地址
+  o = new Object();
+  // 这时修改的只是新指针中堆内存的数据,不会影响老地址中的数据
+  o.siteUrl = 'http://www.google.com';
 }
 let webSite = new Object();
 //   只是将webSite的栈内存指针copy给了changeObjProperty的a形参
@@ -256,23 +271,23 @@ console.log(webSite.siteUrl); // 输出："http://www.baidu.com"
 
 // 14. 一道关于原型挂载的面试题
 function Foo() {
-    Foo.a = function () {
-        console.log(1)
-    }
-    this.a = function () {
-        console.log(2)
-    }
+  Foo.a = function () {
+    console.log(1);
+  };
+  this.a = function () {
+    console.log(2);
+  };
 }
 // 以上只是生命了Foo,并没有执行过
 
 // 在Foo的原型链上，挂载a方法，实力中可以获取到
 Foo.prototype.a = function () {
-    console.log(3)
-}
+  console.log(3);
+};
 // 直接在Foo上面挂载了原型方法a，
 Foo.a = function () {
-    console.log(4)
-}
+  console.log(4);
+};
 // 这时执行就是上面刚挂载的方法a，输出4
 Foo.a();
 // 这是执行了Foo方法，之前的挂载在原型链和Foo方法上面的a方法都Foo方法中定义的数据顶替掉
@@ -281,3 +296,30 @@ let obj = new Foo();
 obj.a();
 // 输出1
 Foo.a();
+
+// new关键字做了4件事:
+function _new(constructor, ...arg) {
+  // 创建一个空对象
+  var obj = {};
+  // 空对象的`__proto__`指向构造函数的`prototype`, 为这个新对象添加属性
+  obj.__proto__ = constructor.prototype;
+  // 构造函数的作用域赋给新对象
+  var res = constructor.apply(obj, arg);
+  // 返回新对象.如果没有显式return语句，则返回this
+  return Object.prototype.toString.call(res) === '[object Object]' ? res : obj;
+}
+
+function __new(constructor, ...rest) {
+  let obj = {};
+  obj.__proto__ = constructor.prototype;
+  let res = constructor.apply(obj, rest);
+  return Object.prototype.toString.call(res) == '[object  Object]' ? res : obj;
+}
+// 不应该使用箭头函数一些情况：
+/*****
+当想要函数被提升时(箭头函数是匿名的)
+要在函数中使用this/arguments时，由于箭头函数本身不具有this/arguments，因此它们取决于外部上下文
+使用命名函数(箭头函数是匿名的)
+使用函数作为构造函数时(箭头函数没有构造函数)
+当想在对象字面是以将函数作为属性添加并在其中使用对象时，因为咱们无法访问 this 即对象本身
+ */
