@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+
+        .slides {
+            /* We set the scroll snapping */
+            scroll-snap-type: x mandatory;
+            /* Necessary for mobile scrolling */
+            -webkit-overflow-scrolling: touch;
+            /* For layout purposes */
+            display: flex;
+            /* To allow horizontal scrolling */
+            overflow-x: scroll;
+        }
+
+        section {
+            /* For styling purposes */
+            height: 10vh;
+            min-width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Set where the snapping should happen */
+            scroll-snap-align: start;
+        }
+
+        /* Styling for the sections */
+        section h2 {
+            font-family: system-ui, sans-serif;
+            font-size: 2rem;
+            color: #1a1a1a;
+            font-weight: 100;
+        }
+
+        section h3 {
+            font-family: system-ui, sans-serif;
+            font-size: 2rem;
+            color: #ffffff;
+            font-weight: 100;
+        }
+
+        .section-1 {
+            background-image: url("https://images.unsplash.com/photo-1524260855046-f743b3cdad07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1401&q=80");
+        }
+
+        .section-2 {
+            background-image: url("https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+        }
+
+        .section-3 {
+            background-image: url("https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1378&q=80");
+        }
+
+        .section-4 {
+            background-image: url("https://images.unsplash.com/photo-1501791330673-603715379ded?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+        }
+    </style>
+</head>
+
+<body>
+    <main class="slides">
+        <section class="section-1">
+            <h2>向右滑动 >>></h2>
+        </section>
+        <section class="section-2">
+            <h3>再滑 >>></h3>
+        </section>
+        <section class="section-3">
+            <h2>再滑 >>></h2>
+        </section>
+        <section class="section-4">
+            <h3>不用JavaScript啦</h3>
+        </section>
+    </main>
+
+</body>
+
+</html>
