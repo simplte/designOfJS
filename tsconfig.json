@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/": ["./src/assets/images/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
+  },
+  "include": [
+    "ts相关笔记/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

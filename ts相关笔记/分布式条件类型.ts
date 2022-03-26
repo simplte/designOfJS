@@ -111,3 +111,67 @@ type Merge<T extends PlainObjectType, U extends PlainObjectType> = ObjectKeysInt
   ObjectKeysDiffence<U, T>;
 
 // tips 普通集合交集使用的是 | ，但对象的交集使用的是交叉类型 &
+
+type Pick<T, U extends keyof T> = {
+  [P in U]: T[P];
+};
+
+type Omit<T, U extends keyof any> = Pick<T, Exclude<keyof T, U>>;
+
+const user = { name: 'amy', age: 18 };
+type UserType = typeof user;
+
+function getPersonInfo<T extends keyof UserType>(key: T): UserType[T] {
+  return user[key];
+}
+
+const userName = getPersonInfo('name'); // string
+
+// 4: 使用 infer 解析url参数为对象类型
+type UrlParse<T extends string> = T extends `${infer Key}=${infer Value}&${infer Nextkey}`
+  ? { [k in Key]: Value & UrlParse<Nextkey> }
+  : T extends `${infer Key2}=${infer Value2}`
+  ? { [k in Key2]: Value2 }
+  : null;
+
+type U1 = UrlParse<'a=2'>;
+
+// 根据interface类型来定义 函数格式的对象
+type Getters<T> = {
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];
+};
+interface Person {
+  name: string;
+  age: number;
+}
+
+type PersonGetters = Getters<Person>;
+const personCase: PersonGetters = {
+  getName: () => {
+    return '22';
+  },
+  getAge: () => {
+    return 22;
+  },
+};
+console.log(personCase);
+// 最新的ts中 结构出的变量如果前面有_  则会认为 这解构变量标记是未使用的 只会报 second 没有被使用。
+// 不知道为什么我本地没有用
+function getValues() {
+  return ['a', 'b'];
+}
+const [_first, second] = getValues();
+
+// 常用的工具函数
+/**
+ * 1: Partial 将传入属性变为可选项
+ * 2：Required  将传入属性经过转换后就可以变成必填
+ * 3：Readonly 把所有参数变成只读
+ * 4：Record 用来快速定义一个对象的 key 和 value 类型的
+ * 5：Pick 从前面抽取包含后面的属性
+ * 6：Omit 从前面删除包含后面的属性
+ * 7：Exclude 过滤出前面独有的属性
+ * 8：Extrac 取相交值
+ * 9：Parameters 将函数的参数作为元祖类型返回
+ * 10：ReturnType 获取函数返回值
+ */
