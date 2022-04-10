@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "``` 1.实现多人（三个人）实时聊天 2.多人聊天记录共享 3.做一个聊天主界面 4.tab切换人员发送消息 5.某一人发送消息后另外两个人回复哦 ```",
+  "main": "index.js",
+  "dependencies": {
+    "_nodejs-websocket@1.7.2@nodejs-websocket": "^1.7.2",
+    "nodejs-websocket": "^1.7.2"
+  },
+  "devDependencies": {
+    "koa": "^2.13.4",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
+    "nodejs-websocket": "^1.7.2"
+  },
+  "scripts": {
+    "link:socket": "node ./socket.ts",
+    "server": "nodemon ./app.js",
+    "testShell": "node ./testExecShell/runCmd.js "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
