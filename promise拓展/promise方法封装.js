@@ -14,3 +14,26 @@ const promisify = (func) => {
 };
 const delay = promisify((d, cb) => setTimeout(cb, d));
 delay(2000).then(() => console.log('Hi!')); //-> Promise resolves after 2s
+
+/**
+ * 文件夹遍历
+ */
+const recursive = (dir, handler) => {
+  return runPromisesInSeries(
+    require('fs')
+      .readdirSync(dir)
+      .map((name) => async () => {
+        const filename = require('path').join(dir, name);
+        const stats = require('fs').statSync(filename);
+        if (stats.isFile()) {
+          await handler(filename);
+        } else if (stats.isDirectory()) {
+          await recursive(filename, handler);
+        }
+      })
+  );
+};
+let dir = recursive('../../JSMODEL', (res) => {
+  console.log(res);
+});
+dir();
