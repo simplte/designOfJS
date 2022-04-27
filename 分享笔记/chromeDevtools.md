@@ -49,6 +49,32 @@
 ```
 
 6. Event Listener Breakpoints 元素事件监听
+   eg: Mouse -> click
+7. 给 dom 节点打断点
+
+```
+1: subtree modifications 子节点内容改变（增加/删除）时触发断点 不包括子节点属性的改变
+2：attribute modifications 当前节点属性改变时触发断点
+3：node removel  当前节点删除的时候触发断点
+eg:
+document.getElementsByClassName("col-12 marg5-left row cen-between  height120")[0].removeChild(document.getElementsByClassName("col-12 marg5-left row cen-between  height120")[0].childNodes[0])
+```
+
+8. xhr/fetch Breakpoionts 给某个请求打断点
+
+- 默认有一个选项 Any XHR or fetch 会拦截所有的请求
+- 增加一个 eg: queryInfo 断点就在发起这个请求的脚本中触发
+
+#### Network
+
+1: filter 支持正则和一些字符串匹配 如果需要排除掉一些请求前面加 - 就可以忽略这些请求
+2：Disable cache 忽略缓存选项
+
+```
+会在请求头中增加缓存头
+http1.0 pragme:no-cache
+http1.1 cache-control:no-cache
+```
 
 #### lighthouse
 
