@@ -19,11 +19,20 @@
    · 样式中点击 flex 旁边的按钮可以修改
 3. 开启标尺 偏好设置-> Elements -> show Rulers...
 
+4. 高亮页面中正在重绘的 dom
+
+- 工具栏三个点 -> more tools -> Rendering -> Paint flashing
+
+5. 监听/调试页面动画
+
+- 工具栏三个点 -> more tools -> Rendering -> Animations
+
 #### Console
 
 1. 表格输出 console.table()
 2. 断言 console.assert() 断言失败： Assertion failed: console.assert
 3. console.debug()
+4. 刷新不清楚控制台输入信息 console -> 右上角设置 -> Preserve log
 
 #### Network
 
@@ -64,6 +73,14 @@ document.getElementsByClassName("col-12 marg5-left row cen-between  height120")[
 
 - 默认有一个选项 Any XHR or fetch 会拦截所有的请求
 - 增加一个 eg: queryInfo 断点就在发起这个请求的脚本中触发
+
+9. 对混淆过后的代码进行格式化 选中混淆过脚本/css 文件后 点击 {} 按钮对混淆过代码进行格式化
+
+10. 选中 js/css 进行修改 然后保存可以快速生效，避免热启动耗时，方便调试
+
+11. 编辑器内修改项目文件查看效果
+
+- Source->左边栏->Filesystem-> Add folder to workspace 导入项目，修改后能实时同步到本地文件
 
 #### Network
 
