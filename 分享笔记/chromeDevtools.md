@@ -93,7 +93,54 @@ http1.0 pragme:no-cache
 http1.1 cache-control:no-cache
 ```
 
+3. 阻止某些请求
+
+- 工具栏三个点 -> more tools -> network request blocking
+
+```
+eg: add pattern
+usecar/icon_security_entrance@2x.gif
+```
+
 #### lighthouse
+
+- Performance - 性能检测，如网页的加载速度、响时间等
+
+- Accessibility - 铺助检测，如网页的可访问性问题，HTML 代码标签之类的优化等
+
+- Best Practices - 实践性检测，如网页安全性，如是否开启 HTTPS、网页存在的漏洞等
+
+- SEO - 搜索引擎优化检测，如网页 title 是否符合搜索引擎的优化标准等
+
+- FCP: 首次绘制到屏幕上
+
+- Speed Index:
+
+```
+速度指数衡量的是内容在页面加载过程中的视觉显示速度。
+Lighthouse首先会在浏览器中捕获一段页面加载的视频，并计算出各帧之间的视觉进度。
+然后，Lighthouse使用Speedline Node.js模块来生成速度指数得分。
+
+使用Opportunities 中给出的优化项进行处理优化
+```
+
+- LCP: 最大内容画 在视口中可见的最大图像或文本块的渲染时间 为了提供良好的用户体验，网站应该努力使最大内容画幅达到 2.5 秒或更少
+- CLS: 累积布局偏移 它量化了页面内容在视觉上的移动程度，CLS 得分低是给开发者的一个信号，表明他们的用户没有经历不必要的内容移动
+
+#### Performance 性能
+
+- eg: https://googlechrome.github.io/devtools-samples/jank/
+
+1. 降低性能 cpu 性能
+
+- Performance -> CPU
+
+2. Frames 查看 fps 帧数 卡顿时会标红
+
+3. 查看 Network 栏 分析哪次请求耗时较长
+4. Call tree 显示哪些 js 代码执行比较耗时
+
+#### Memory 内存监控
 
 ```
 
