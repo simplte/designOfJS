@@ -13,9 +13,14 @@
 #### Elements
 
 1. 快速修改角度颜色
+
+```
+css:
+background-image: linear-gradient(107deg, black, transparent);
+```
+
 2. flex 布局页面操作徽章
    · layout -> flexBox 下面可以看到当前页面下的所有的 flex 布局元素
-   · 样式中点击 flex 旁边的按钮可以修改
    · 样式中点击 flex 旁边的按钮可以修改
 3. 开启标尺 偏好设置-> Elements -> show Rulers...
 
@@ -32,19 +37,41 @@
 1. 表格输出 console.table()
 2. 断言 console.assert() 断言失败： Assertion failed: console.assert
 3. console.debug()
-4. 刷新不清楚控制台输入信息 console -> 右上角设置 -> Preserve log
+4. 刷新页面后不清除控制台输入信息 console -> 右上角设置 -> Preserve log
 
 #### Network
 
 1. 将接口返回数据存入控制台
-   Preview -> Store Object as global variable -> consle 出现 tempx 就可以直接使用了
+   Preview -> Store Object as global variable -> console 出现 tempx 就可以直接使用了
+
+2. filter 支持正则和一些字符串匹配 如果需要排除掉一些请求前面加 - 就可以忽略这些请求
+3. Disable cache 忽略缓存选项
+
+```
+会在请求头中增加缓存头
+http1.0 pragme:no-cache
+http1.1 cache-control:no-cache
+```
+
+4. 阻止某些请求
+
+- 工具栏三个点 -> more tools -> network request blocking
+
+```
+eg: add pattern
+usecar/icon_security_entrance@2x.gif
+```
 
 #### Source
 
 1. watch 获取当前作用域下某个变量的值
 2. BreakPotions 当前执行脚本中所打的断点
 3. Call Stack 当前函数执行的调用栈
-4. Scope todo
+4. Scope 作用域数据
+
+- local 当前作用域
+- global 全局作用域
+
 5. 断点执行按钮 从左往右
 
 ```
@@ -52,14 +79,13 @@
 2：逐行执行 不进入方法中
 3：如果执行的当前行是函数或者类 会进入方法中或者是类的构造函数中
 4：返回调用当前函数的那行代码处
-5：todo
+5：单步执行
 6：禁用所有代码
-7：todo
 ```
 
 6. Event Listener Breakpoints 元素事件监听
    eg: Mouse -> click
-7. 给 dom 节点打断点
+7. 给 dom 节点打断点 break on
 
 ```
 1: subtree modifications 子节点内容改变（增加/删除）时触发断点 不包括子节点属性的改变
@@ -81,26 +107,6 @@ document.getElementsByClassName("col-12 marg5-left row cen-between  height120")[
 11. 编辑器内修改项目文件查看效果
 
 - Source->左边栏->Filesystem-> Add folder to workspace 导入项目，修改后能实时同步到本地文件
-
-#### Network
-
-1: filter 支持正则和一些字符串匹配 如果需要排除掉一些请求前面加 - 就可以忽略这些请求
-2：Disable cache 忽略缓存选项
-
-```
-会在请求头中增加缓存头
-http1.0 pragme:no-cache
-http1.1 cache-control:no-cache
-```
-
-3. 阻止某些请求
-
-- 工具栏三个点 -> more tools -> network request blocking
-
-```
-eg: add pattern
-usecar/icon_security_entrance@2x.gif
-```
 
 #### lighthouse
 
