@@ -6,7 +6,6 @@
 > Network
 > Lighthouse
 > Performance
-> Memory
 > Security
 > Recorder
 
@@ -168,9 +167,3 @@ CLS 得分低是给开发者的一个信号，表明他们的用户没有经历�
 
 3. 查看 Network 栏 分析哪次请求耗时较长
 4. Call tree 显示哪些 js 代码执行比较耗时
-
-#### Memory 内存监控
-
-```
-
-```
