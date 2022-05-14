@@ -37,12 +37,12 @@ const pv = getPersonVal(2);
 type Callback1<T> = (item: T) => void;
 
 // 在声明阶段就已经确定了 callback 接口中的泛型参数为外部传入的
-const forEach = <T>(arr: T[], callback: Callback1<T>) => {
-  for (let i = 0; i < arr.length - 1; i++) {
-    callback(arr[i]);
-  }
-};
-forEach<string | number>(['1', 2, 3, '4'], (item) => {});
+// const forEach = <T>(arr: T[], callback: Callback1<T>) => {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     callback(arr[i]);
+//   }
+// };
+// forEach<string | number>(['1', 2, 3, '4'], (item) => {});
 
 // 错误的callback接口约束写法
 type Callback = <T>(item: T) => void;
@@ -57,3 +57,37 @@ const forEach = <T>(arr: T[], callback: Callback) => {
 
 // 所以这里我们并不清楚 callback 定义中的T是什么类型，自然它的类型还是T
 forEach(['1', 2, 3, '4'], (item) => {});
+
+// --------------------------
+// 泛型约束-约束泛型/限制泛型,给泛型增加条件
+interface IHasLength {
+  length: number;
+}
+function getLength<T extends IHasLength>(arg: T) {
+  return arg.length;
+}
+
+getLength([1, 2, 3]); // correct
+getLength('123'); // correct
+// getLength(1);
+
+// ----------------------------------------------------------------
+
+// keyof 关键字
+interface IProps {
+  name: string;
+  age: number;
+  sex: string;
+}
+type Keys = keyof IProps;
+const valK: Keys = 'name';
+type KeysA = keyof any;
+// any 可以代表任何类型。那么任何类型的 key 都可能为 string 、 number 或者 symbol 。
+// 所以自然 keyof any 为 string | number | symbol 的联合类型。
+
+// 该函数希望接受两个参数，第一个参数为一个对象object，第二个参数为该对象的 key 。
+// 函数内部通过传入的 object 以及对应的 key 返回 object[key] 。
+function getObjVal<T extends object, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+getObjVal({ a: 2 }, 'a');
