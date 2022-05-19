@@ -276,3 +276,20 @@ type MyParameters<T extends (...args: any) => any> = T extends (...args: infer R
 // 快速获取元祖中的类型
 type ArrToUnion<T extends any[]> = T extends Array<infer R> ? R : never;
 type CC = ArrToUnion<[1, '123', true]>;
+
+// as 子句对映射类型中的键进行重新映射
+// type MappedTypeWithNewKeys<T> = {
+//      [K in keyof T as NewKeyType]: T[K]
+//      //            ^^^^^^^^^^^^^
+//      //            这是新的语法！
+//  }
+
+type Getter<T> = {
+  [K in keyof T as `bqc${Capitalize<string & K>}`]: () => T[K];
+};
+interface Person1 {
+  name: string;
+  age: number;
+  sex: boolean;
+}
+type FuturePerson = Getter<Person1>;
