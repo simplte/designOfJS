@@ -3,6 +3,7 @@ const generate = require('@babel/generator').default;
 const fs = require('fs');
 const path = require('path');
 const minePlugin = require('./plugin.js');
+const minePlugin1 = require('./useful-babel-tools.js');
 const source = fs.readFileSync(path.join(__dirname, './source.js'), 'utf8');
 const ast = parse(source);
 console.log(source);
@@ -10,7 +11,7 @@ console.log(source);
 const { code } = transformFromAstSync(ast, source, {
   plugins: [
     [
-      minePlugin,
+      minePlugin1,
       {
         // named default namespaced
         // log: {
