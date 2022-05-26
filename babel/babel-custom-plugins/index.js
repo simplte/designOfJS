@@ -13,15 +13,15 @@ const { code } = transformFromAstSync(ast, source, {
       minePlugin,
       {
         // named default namespaced
-        log: {
-          kind: 'named',
-          require: 'track',
-          identifierName: 'log',
-        },
-        noRequire: {
-          kind: 'named',
-        },
-        testCode: "alert('插入代码测试')",
+        // log: {
+        //   kind: 'named',
+        //   require: 'track',
+        //   identifierName: 'log',
+        // },
+        // noRequire: {
+        //   kind: 'named',
+        // },
+        // testCode: "alert('插入代码测试')",
       },
     ],
   ],

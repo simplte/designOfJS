@@ -1,6 +1,12 @@
-// @inject:log
-function fn() {
-  log();
-  console.log('fn');
-  alert('插入代码测试');
+// // @inject:log
+// function fn() {
+//   console.log('fn');
+// }
+// ----------------------------------------------------------------
+// a + b + c;
+// ----------------------------------------------------------------
+function square(x) {
+  return x * x;
 }
+
+n;
