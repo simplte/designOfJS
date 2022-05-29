@@ -57,7 +57,7 @@ console.log(generate(ast1).code);
 
 /**
  * 总结：
- * 1：babylon  个人理解和 @babel/core其中parse的作用一致，将脚本内容字符串转换为ast
+ * 1：babylon  个人理解和 @babel/core其中parse的作用一致，将脚本内容字符串转换为ast， babylon是老版本
  * 2：babel-traverse 一句话总结：遍历ast节点树，并在各个钩子中对节点进行增删改
  * 3：babel-types  类似于lodash的工具方法库，简化对于path等相关节点信息的判断
  * 4：babel-generator 将ast转换为代码code和源码映射
