@@ -26,7 +26,23 @@ function log1(msg) {
 module.exports = ({ types: t }) => {
   return {
     visitor: {
-      Identifier(path, state) {},
+      Identifier(path, state) {
+        // 6.检查标识符 identifier 是否被引用
+        if (path.isReferencedIdentifier()) {
+          log1('被引用');
+        } else {
+          log('没有被引用');
+          log(JSON.stringify(path.node));
+        }
+        // 6.1 或者
+        if (!path.isReferenced(path.node, path.parent)) {
+          log('没有被引用1');
+          log1(JSON.stringify(path.parent));
+        }
+      },
+      Literal(path, state) {
+        console.log(JSON.stringify(path.node.value));
+      },
       BinaryExpression(path, state) {
         // 1.path.node.property 下面有 left right operator  分别能渠道  运算符左侧 运算符右侧  和运算符的具体内容
         if (path.node.operator !== '===') return;
@@ -38,9 +54,23 @@ module.exports = ({ types: t }) => {
         if (t.isIdentifier(path.node.left)) {
           log1(JSON.stringify(path.node.left.name));
         }
+        // 4.对接点做浅层的检查
+        if (t.isIdentifier(path.node.right, { name: 'wq2' })) {
+          log('浅层检查');
+        }
+        // 5.检查路径Path类型
+        // 下面相当于 if (t.isIdentifier(path.node.left, { name: "bqc2" })) {
+        if (path.get('left').isIdentifier({ name: 'bqc2' })) {
+          log(path.get('left'));
+        }
+        // 7.找到特定父路径
+        console.log(path.getFunctionParent());
+        if (path.findParent((path) => path.isObjectExpression())) {
+          console.log('找到特定父路径');
+        }
       },
       Program(path) {
-        log1(path.get('body.0'));
+        log1(path.get('body.0') + '--------');
       },
     },
   };
