@@ -9,11 +9,11 @@ const path = require('path');
 // const minePlugin = require('./customPlugins/plugin.js');
 // const minePlugin1 = require('./customPlugins/useful-babel-tools.js');
 // const minePlugin2 = require('./customPlugins/cutom-plugins1.js');
-const minePlugin2 = require('./customPlugins/cutom-plugins2.js');
+const minePlugin2 = require('./customPlugins/cutom-plugins3.js');
 // 需处理文件
 // const source = fs.readFileSync(path.join(__dirname, './source/source.js'), 'utf8');
 // const source1 = fs.readFileSync(path.join(__dirname, './source/source-plugin1.js'), 'utf8');
-const source1 = fs.readFileSync(path.join(__dirname, './source/source-plugin2.js'), 'utf8');
+const source1 = fs.readFileSync(path.join(__dirname, './source/source-plugin3.js'), 'utf8');
 // 转ast
 const ast = parse(source1);
 

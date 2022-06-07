@@ -68,6 +68,8 @@ module.exports = ({ types: t }) => {
         if (path.findParent((path) => path.isObjectExpression())) {
           console.log('找到特定父路径');
         }
+        // 8.向上遍历语法树 直到找到在列表中的父节点路径
+        console.log(path.getStatementParent());
       },
       Program(path) {
         log1(path.get('body.0') + '--------');
