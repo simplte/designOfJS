@@ -6,7 +6,11 @@ function log(msg) {
 function log1(msg) {
   console.log(red(msg));
 }
-
+const process = {
+  env: {
+    NODE_ENV: 'development',
+  },
+};
 /**
  * 总结：
  * 1：babylon  个人理解和 @babel/core其中parse的作用一致，将脚本内容字符串转换为ast
@@ -35,7 +39,27 @@ module.exports = ({ types: t }) => {
       //   log(path.container); // [pathA, pathB, pathC]
       // },
       BinaryExpression(path) {
+        if (path.node.operator !== '*') return;
+        console.log(path.replaceWith);
         path.replaceWith(t.binaryExpression('==', path.node.left, t.NumericLiteral(2)));
+      },
+      MemberExpression(path, state) {
+        // path.get("object") 获取到的就是 object(process.env)对应的 path实例。
+        // path.get("object").matchesPattern("process.env") 检查 object 是否符合 "process.env" 这种模式
+        if (path.get('object').matchesPattern('process.env')) {
+          // path.toComputedKey() 获取成员表达式的键(key)
+          const key = path.toComputedKey();
+          console.log(key);
+          if (t.isStringLiteral(key)) {
+            path.replaceWith(t.valueToNode(process.env[key.value]));
+          }
+        }
+      },
+      Identifier(path, state) {
+        log1(path.node.name);
+      },
+      FunctionDeclaration(path, state) {
+        console.log(path.get('body.0'));
       },
     },
   };
