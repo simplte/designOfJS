@@ -41,6 +41,7 @@ module.exports = ({ types: t }) => {
       BinaryExpression(path) {
         if (path.node.operator !== '*') return;
         console.log(path.replaceWith);
+        // 处理 1： 替换一个节点
         path.replaceWith(t.binaryExpression('==', path.node.left, t.NumericLiteral(2)));
       },
       MemberExpression(path, state) {
@@ -58,8 +59,22 @@ module.exports = ({ types: t }) => {
       Identifier(path, state) {
         log1(path.node.name);
       },
+      // 处理 2： 用多节点替换单节点
+      ReturnStatement(path) {
+        path.replaceWithMultiple([
+          t.expressionStatement(t.stringLiteral('Is this the real life?')),
+          t.expressionStatement(t.stringLiteral('Is this just fantasy?')),
+          t.expressionStatement(t.stringLiteral('(Enjoy singing the rest of the song in your head)')),
+        ]);
+      },
       FunctionDeclaration(path, state) {
-        console.log(path.get('body.0'));
+        //  用字符串源码替换节点
+        // path.replaceWithSourceString(function add(a, b) {
+        //   return a + b;
+        // });
+        // 插入兄弟节点
+        path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
+        path.insertAfter(t.expressionStatement(t.stringLiteral('A little high, little low.')));
       },
     },
   };

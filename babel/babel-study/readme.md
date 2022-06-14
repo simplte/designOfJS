@@ -115,3 +115,40 @@ useBuiltIns这个属性决定是否引入polyfill，可以配置三个值：fals
 
 一个显而易见的区别就是打开IE11浏览器，如果引入了@babel/polyfill，在控制台我们可以执行Object.assign({}, {})；而如果引入了@babel/runtime，会提示你报错，因为Object上没有assign函数。
 ```
+### 处理
+
+1. 替换一个节点
+```
+visitor-> BinaryExpression 
+
+BinaryExpression(path) {
+  path.replaceWith(
+    t.binaryExpression("**", path.node.left, t.numberLiteral(2))
+  );
+}
+```
+
+2. 用多节点替换单节点
+
+```
+visitor -> ReturnStatement
+
+ReturnStatement(path) {
+  path.replaceWithMultiple([
+    t.expressionStatement(t.stringLiteral("Is this the real life?")),
+    t.expressionStatement(t.stringLiteral("Is this just fantasy?")),
+    t.expressionStatement(t.stringLiteral("(Enjoy singing the rest of the song in your head)")),
+  ]);
+}
+```
+
+3. 用字符串源码替换节点
+
+```
+visitor -》 FunctionDeclaration
+FunctionDeclaration(path, state) {
+  path.replaceWithSourceStr(function add(a, b) {
+    return a + b;
+  });
+},
+```
