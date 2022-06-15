@@ -152,3 +152,33 @@ FunctionDeclaration(path, state) {
   });
 },
 ```
+4. 插入兄弟节点
+```
+visitor -》 FunctionDeclaration
+
+path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
+
+path.insertAfter(t.expressionStatement(t.stringLiteral('A little high, little low.')));
+```
+5. 删除一个节点
+```
+ path.remove();
+```
+6. 替换父节点
+```
+visitor -> BinaryExpression
+
+BinaryExpression(path) {
+  path.parentPath.replaceWith(
+    t.expressionStatement(t.stringLiteral("Anyway the wind blows, doesn't really matter to me, to me."))
+  );
+}
+```
+7. 删除父节点
+```
+visitor -> BinaryExpression
+
+BinaryExpression(path) {
+  path.parentPath.remove()
+}
+```

@@ -39,10 +39,14 @@ module.exports = ({ types: t }) => {
       //   log(path.container); // [pathA, pathB, pathC]
       // },
       BinaryExpression(path) {
-        if (path.node.operator !== '*') return;
+        if (path.node.operator !== '*' || path.node.operator !== '+') return;
         console.log(path.replaceWith);
         // 处理 1： 替换一个节点
         path.replaceWith(t.binaryExpression('==', path.node.left, t.NumericLiteral(2)));
+        // 替换父节点
+        // path.parentPath.replaceWith(t.expressionStatement(t.stringLiteral('parentPath.replaceWith')));
+        // 删除父节点
+        // path.parentPath.remove();
       },
       MemberExpression(path, state) {
         // path.get("object") 获取到的就是 object(process.env)对应的 path实例。
@@ -61,20 +65,47 @@ module.exports = ({ types: t }) => {
       },
       // 处理 2： 用多节点替换单节点
       ReturnStatement(path) {
-        path.replaceWithMultiple([
-          t.expressionStatement(t.stringLiteral('Is this the real life?')),
-          t.expressionStatement(t.stringLiteral('Is this just fantasy?')),
-          t.expressionStatement(t.stringLiteral('(Enjoy singing the rest of the song in your head)')),
-        ]);
+        // path.replaceWithMultiple([
+        //   t.expressionStatement(t.stringLiteral('Is this the real life?')),
+        //   t.expressionStatement(t.stringLiteral('Is this just fantasy?')),
+        //   t.expressionStatement(t.stringLiteral('(Enjoy singing the rest of the song in your head)')),
+        // ]);
       },
       FunctionDeclaration(path, state) {
         //  用字符串源码替换节点
         // path.replaceWithSourceString(function add(a, b) {
         //   return a + b;
         // });
+
         // 插入兄弟节点
-        path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
-        path.insertAfter(t.expressionStatement(t.stringLiteral('A little high, little low.')));
+        // path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
+        // path.insertAfter(t.expressionStatement(t.stringLiteral('A little high, little low.')));
+
+        // 删除一个节点
+        // path.remove();
+
+        // 检查本地变量是否被绑定
+        if (path.scope.hasBinding('n')) {
+          path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go.")));
+          path.insertAfter(t.expressionStatement(t.stringLiteral('A little high, little low.')));
+        }
+        if (path.scope.hasBinding('c')) {
+          path.insertBefore(t.expressionStatement(t.stringLiteral("Because I'm easy come, easy go. 1")));
+          path.insertAfter(t.expressionStatement(t.stringLiteral('A little high, little low. 1')));
+        }
+        if (path.scope.hasOwnBinding('n')) {
+          console.log('222222');
+        }
+        // 创建一个 UID
+        path.scope.generateUidIdentifier('uid');
+        // 提升变量声明至父级作用域
+        // const id = path.scope.generateUidIdentifierBasedOnNode(path.node.id);
+        // path.remove();
+        // path.scope.parent.push({ id, init: path.node });
+        // 重命名绑定及其引用
+        path.scope.rename('n', 'x');
+        // 您可以将绑定重命名为生成的唯一标识符：
+        path.scope.rename('x');
       },
     },
   };
