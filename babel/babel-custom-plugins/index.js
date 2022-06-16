@@ -9,7 +9,7 @@ const path = require('path');
 // const minePlugin = require('./customPlugins/plugin.js');
 // const minePlugin1 = require('./customPlugins/useful-babel-tools.js');
 // const minePlugin2 = require('./customPlugins/cutom-plugins1.js');
-const minePlugin2 = require('./customPlugins/cutom-plugins3.js');
+const minePlugin2 = require('./customPlugins/cutom-plugins4.js');
 // 需处理文件
 // const source = fs.readFileSync(path.join(__dirname, './source/source.js'), 'utf8');
 // const source1 = fs.readFileSync(path.join(__dirname, './source/source-plugin1.js'), 'utf8');
@@ -23,15 +23,15 @@ const { code } = transformFromAstSync(ast, source1, {
       minePlugin2,
       {
         // named default namespaced
-        // log: {
-        //   kind: 'named',
-        //   require: 'track',
-        //   identifierName: 'log',
-        // },
-        // noRequire: {
-        //   kind: 'named',
-        // },
-        // testCode: "alert('插入代码测试')",
+        log: {
+          kind: 'named',
+          require: 'track',
+          identifierName: 'log',
+        },
+        noRequire: {
+          kind: 'named',
+        },
+        testCode: "alert('插入代码测试')",
       },
     ],
   ],
