@@ -541,3 +541,16 @@ module.exports = merge(commonConfig, prodConfig)
 --------------------------
 建议在生产环境中配置 css js配置css和js的压缩 这样会提高效率
 ```
+
+
+#### 其他配置处理
+
+```
+module.exports = {
+    target: 'node' , // 打包出来的代码运行的环境，为了不将Node.js内置的模块打包进输出文件中
+    externals: {  
+        jquery:'jQuery' // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)。
+    },  // 开发npm包时  将一些项目中依赖的包如 axios vue 这些加入这个配置  不进行打包处理 减少npm包的体积
+    libraryTarget: 'commonjs2', // 编译的代码按commonjs2规范导出渲染函数 以供采用Node.js 编写的http服务器代码调用
+}
+```
