@@ -552,5 +552,36 @@ module.exports = {
         jquery:'jQuery' // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)。
     },  // 开发npm包时  将一些项目中依赖的包如 axios vue 这些加入这个配置  不进行打包处理 减少npm包的体积
     libraryTarget: 'commonjs2', // 编译的代码按commonjs2规范导出渲染函数 以供采用Node.js 编写的http服务器代码调用
+
+    resolve: {
+        alias: {
+            // 使用alias将导入vue的语句转换成直接使用完整的vue文件
+            // 减少耗时的递归操作解析
+            // 整体性强的库可以使用这种方式，如果是lodash这种库不建议使用，会影响treeshaking
+            'vue': path.resolve(__dirname, './node_modules/vue/dist/vue.js'),
+            // 设置路径别名，减少模块引入时相对路径的问题
+            '@': path.resolve(__dirname, 'src'),
+        },
+        // 模块引入不加后缀时，依次匹配的顺序
+        extensions: ['.ts','.js'],
+    },
+    module: {
+        // 配置无需解析的模块
+        noParse: [/vue\.min\.js$]
+    }
 }
+```
+
+### 构建优化
+- 缩小文件搜索范围相关
+1. resolve.alias 减少耗时的递归操作解析
+2. module.extensions 模块引入不加后缀时，减少依次匹配的顺序时间
+3. module.noParse 配置无需解析的模块
+4. module.rules -> loader 增加对应的include exclude test 精准匹配对应文件，减少匹配时间
+5. resolve.modules 配置第三方模块所在的位置
+
+### dll
+> .dll 为后缀的文件 叫做动态链接库 web项目引入动态链接库的目的是  减少第三方模块被重复编译时的时间
+```
+
 ```
