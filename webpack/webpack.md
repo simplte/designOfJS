@@ -585,3 +585,36 @@ module.exports = {
 ```
 
 ```
+### webpack5中支持的处理方式
+1. 多进程打包使用 thread-loader 建议在大的项目中使用 因为开启进程需要0.6s 不再建议使用happyPack
+2. js压缩  使用wp5自带的TerserWebpackPlugin 不需要单独安装
+```
+const TerserPlugin = require("terser-webpack-plugin");
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: 4,
+        terserOptions: {
+          parse: {
+            ecma: 8,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
+  },
+```
