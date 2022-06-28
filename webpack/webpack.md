@@ -280,7 +280,7 @@ const devConfig = {
         new webpack.HotModuleReplacementPlugin(),
     ],
     optimization:{
-        usedExports: true
+        usedExports: true //开启treeshaking
     }
 }
 
@@ -587,7 +587,7 @@ module.exports = {
 ```
 ### webpack5中支持的处理方式
 1. 多进程打包使用 thread-loader 建议在大的项目中使用 因为开启进程需要0.6s 不再建议使用happyPack
-2. js压缩  使用wp5自带的TerserWebpackPlugin 不需要单独安装
+2. js压缩  使用wp5自带的TerserWebpackPlugin 不需要单独安装，就是uglifyJS 
 ```
 const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
@@ -617,4 +617,78 @@ module.exports = {
       }),
     ],
   },
+```
+3. css-minimizer-webpack-plugin css压缩插件
+mini-css-extract-plugin css单独抽离成文件
+> MiniCssExtractPlugin.loader 要放在 style-loader 后面。
+```
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.module\.(scss|sass)$/,
+        include: paths.appSrc,
+        use: [
+          "style-loader",
+          isEnvProduction && MiniCssExtractPlugin.loader, // 仅生产环境
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [["postcss-preset-env"]],
+              },
+            },
+          },
+          {
+            loader: "thread-loader",
+            options: {
+              workerParallelJobs: 2,
+            },
+          },
+          "sass-loader",
+        ].filter(Boolean),
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4,
+      }),
+    ],
+  },
+};
+```
+
+4. SplitChunksPlugin 公用代码抽离  wp5之后 不再使用commonChunkPlugin
+
+```
+module.exports = {
+  splitChunks: {
+    // include all types of chunks
+    chunks: "all",
+    // 重复打包问题
+    cacheGroups: {
+      vendors: {
+        // node_modules里的代码
+        test: /[\\/]node_modules[\\/]/,
+        chunks: "all",
+        // name: 'vendors', 一定不要定义固定的name
+        priority: 10, // 优先级
+        enforce: true,
+      },
+    },
+  },
+};
 ```
