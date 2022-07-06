@@ -1,0 +1,14 @@
+{
+  "name": "comment-require-loader",
+  "version": "1.0.0",
+  "description": "webpack js loader for require in comment",
+  "keywords": [
+    "webpack",
+    "fis3",
+    "@require",
+    "comment",
+    "css"
+  ],
+  "main": "index.js",
+  "license": "ISC"
+}
