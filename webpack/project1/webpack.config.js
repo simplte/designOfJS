@@ -1,4 +1,5 @@
 const path = require('path');
+const EndWebpackPlugin = require('./plugins/EndWebpackPlugin');
 module.exports = {
   entry: {
     // 多入口文件配置
@@ -14,6 +15,17 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
+  plugins: [
+    new EndWebpackPlugin(
+      (stats) => {
+        console.log('编译完成-done');
+        console.log('EndWebpackPlugin');
+      },
+      (err) => {
+        console.log(err);
+      }
+    ),
+  ],
   module: {
     rules: [
       {
