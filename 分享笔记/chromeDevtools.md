@@ -166,3 +166,16 @@ CLS 得分低是给开发者的一个信号，表明他们的用户没有经历�
 
 3. 查看 Network 栏 分析哪次请求耗时较长
 4. Call tree 显示哪些 js 代码执行比较耗时
+
+
+<!-- 掘金小册中看到的有用的调试技巧 -->
+### command 
+1. 屏幕截取
+- ... -> run Command -> screen  capture node screenshot
+
+2. 代码块的使用
+- source -> Snippet -> 添加代码块 并命名  右击run 即可运行 可多次使用
+
+3. $ 等于 document.querySelector
+
+4. 条件断点 右击断点 edit Breakpoints
