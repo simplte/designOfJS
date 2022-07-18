@@ -587,7 +587,7 @@ module.exports = {
 ```
 ### webpack5中支持的处理方式
 1. 多进程打包使用 thread-loader 建议在大的项目中使用 因为开启进程需要0.6s 不再建议使用happyPack
-2. js压缩  使用wp5自带的TerserWebpackPlugin 不需要单独安装，就是uglifyJS 
+2. js压缩  使用wp5自带的TerserWebpackPlugin 不需要单独安装，TerserWebpackPlugin作用等同于uglifyJS 
 ```
 const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
