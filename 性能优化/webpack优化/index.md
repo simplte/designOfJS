@@ -24,15 +24,41 @@ new webpack.DllReferencePlugin({
 }),
 运行生成打包代码
 ```
-### 多进程打包 wp5 
+### 多进程打包/代码压缩 wp5 
 ```
 
  optimization: {
+   // 告知 webpack 使用 TerserPlugin 或其它在 optimization.minimizer定义的插件压缩 bundle。
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        <!-- 多进程打包 -->
         parallel: true,
+        <!-- 代码压缩配置 -->
+        terserOptions: {
+          parse: {
+            ecma: 8,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
       }),
     ],
   },
 ```
+
+### wp5 tree-sharking
+https://juejin.cn/post/7004297344300777502
+
