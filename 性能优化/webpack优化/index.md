@@ -62,3 +62,30 @@ new webpack.DllReferencePlugin({
 ### wp5 tree-sharking
 https://juejin.cn/post/7004297344300777502
 
+### 按需加载
+```
+使用：import()
+
+
+import _ from 'lodash';
+
+function component () {
+  const element = document.createElement('div');
+  const btn = document.createElement('button');
+  const br = document.createElement('br');
+  btn.innerHTML = 'Click me and look at the console!';
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.appendChild(br);
+  element.appendChild(btn);
+
+  btn.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
+    const print = module.default;
+    print();
+  });
+
+  return element;
+}
+document.body.appendChild(component());
+
+当调用 ES6 模块的 import() 方法（引入模块）时，必须指向模块的 .default 值，因为它才是 promise 被处理后返回的实际的 module 对象。
+```
