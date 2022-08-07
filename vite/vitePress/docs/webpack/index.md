@@ -1,4 +1,5 @@
 ### 打包速度优化
+<!-- 利用缓存，多线程打包，精准匹配文件，使用新版本webpack，剔除无用配置, 按环境区分打包配置 -->
 1. speed-measure-webpack-plugin
 > 作用： 用于查看各loader和plugin的运行时长，根据插件和loader的运行时长针对性去优化
 
@@ -23,7 +24,6 @@ module.exports = smp.wrap({
 
 - 开启babel-loader缓存配置，降低二次构建的时间
 > 坑点：会将资源存放在浏览器cache的cache storage中，再次访问直接加载缓存中的资源，因此关掉启动项目，还是可以访问到页面
-webpack4以下版本配置会有一定效果，webpack5的版本只是用cache配置效果更好
 
 ```
  <!-- babal-loader 缓存配置 -->
@@ -38,14 +38,42 @@ webpack4以下版本配置会有一定效果，webpack5的版本只是用cache�
     }
 }
 ```
-<!-- todo webpack5中如何配置cache -->
+webpack4以下版本推荐使用cacheDirectory配置，webpack5的版本推荐使用cache配置缓存
 
+----
+<!--  webpack5中如何配置cache -->
+- webpack5中配置cache缓存
 
+```
+基本配置介绍：
+module.exports = {
+  cache: {
+    type: "filesystem", // 使用文件缓存
+    buildDependencies: { // 是将哪些文件 or 目录作为 buildDependencies 如果文件发生改变，则缓存失效
+      config: [__filename]
+    }
+  },
+};
+
+```
+第一次构建：
+![老项目-build](../img/webpack/webpack5.jpg)
+
+第二次构建：
+![老项目-build](../img/webpack/webpack6.jpg)
+
+cache配置缓存的优势：
+
+1：开箱即用
+
+2：基于 content hash 的缓存对比策略，即 timestamp + content hash
+
+----
 -  多线程提高构建速度
 
 > 多线程提高构建速度，针对耗时较长的loader配置单独的worker池，可以同步其他loader构建
->> thread-loader 适用webpack5版本
 >> happypack-plugin 适用于webpack3以下版本
+>> thread-loader 适用webpack4以上版本
 
 + 四合一项目-build开启happypack
 
@@ -82,12 +110,28 @@ plugins: [
 ],
 
 
-
 ```
 ![四合一项目-build](../img/webpack/webpack3.png)
 <!-- threadloader配置 -->
++ thread-loader的基本配置
+```
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve("src"),
+        use: [
+          "thread-loader",
+          "babel-loader"
+        ]
+      }
+    ]
+  }
+}
+```
 
-3: 通过配置 resolve module 减少打包时间
+3: 通过配置 resolve/module 减少打包时间
 - symlinks
 > 不使用npm link的情况下直接关掉会减少解析工作量 四合一项目关闭后打包时间减少两秒左右
 ```
@@ -99,6 +143,13 @@ module.exports = {
 ```
 ![四合一项目-build](../img/webpack/webpack2.png)
 
+----
+- dll 动态链接库
+>  web项目引入动态链接库的目的是  减少第三方模块被重复编译时的时间
+
+webpack5之后推荐使用cache配置缓存，本质上都是缓存文件二次打包时对比使用
+
+----
 - 减少查找过程
 ```
 1. 配置文件查找顺序的优先级,页面脚本引入文件时不写后缀时更快查找
@@ -113,17 +164,30 @@ module: {
     noParse: [/vue\.min\.js$]
 }
 ```
+----
+- 资源模块处理字体图标
 
+代替file-loader/url-loader/raw-loader ，减少 loader 配置数量，减少了打包时间
+```
+ module: {
+   rules: [
+     {
+       test: /\.png/,
+       type: 'asset/resource'
+     }
+   ]
+ },
+```
+
+----
 ### 前端性能优化
-1. 公用代码抽离
+<!-- 代码压缩 代码分离 gzip 文件hash值配置合理利用浏览器缓存 sourcemap -->
+1. 公用代码抽离，避免首屏bundle文件过大，减少加载时长
 >   wp3以下： CommonsChunkPlugin
 >   wp4以上： SplitChunksPlugin
 
 
-<!-- todo 配一张四合一项目使用commonChunkPlugin的效果时间图 -->
 -  CommonsChunkPlugin 
-    > 避免首屏bundle文件过大，减少加载时长
-
 ```
 entry配置的入口： entry chunk
 child chunk：入口a依赖文件b  b为 child chunk
