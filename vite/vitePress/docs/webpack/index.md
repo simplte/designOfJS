@@ -208,7 +208,7 @@ async: 配合children属性 用于生产新的common chunk 当 children chunk被
 
 ![四合一项目-build](../img/webpack/webpack4.png)
 
-- splitChunks
+- SplitChunksPlugin
 
     > 解决了入口文件过大的问题还能有效自动化的解决懒加载模块之间的代码重复问题
 
@@ -243,7 +243,102 @@ externals: {
   jquery:'jQuery',
 },
 ```
-> 
+
+3. js代码压缩
+- webpack5以上： terser-webpack-plugin 
+
+优势：
+
+1、webpack5内置开箱即用
+
+2、默认开启parallel 多进程并发运行压缩
+
+3、无需再配置ParallelUglifyPlugin进行多进程打包，减少了插件运行时间
+
+```
+const TerserPlugin = require("terser-webpack-plugin");
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: 4, // 并发运行的默认数量： os.cpus().length - 1 
+        terserOptions: {},
+      }),
+    ],
+  },
+};
+```
+- webpack4.7.0以下： UglifyJsPlugin ,以后的版本中被移除
+
+```
+npm install uglifyjs-webpack-plugin --save-dev
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
+};
+```
+4. css压缩分离
+- webpack5： CssMinimizerWebpackPlugin 压缩
+
+优势：在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行
+
+```
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /.s?css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4,
+      }),
+    ],
+  },
+  plugins: [new MiniCssExtractPlugin()],
+};
+```
+- webpack4及以下： optimize-css-assets-webpack-plugin
+
+```
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        loader: MiniCssExtractPlugin.extract('style-loader', 'css-loader')
+        loader: MiniCssExtractPlugin.loader,
+        options: {publicPath: '/public/path/to/' }
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin('styles.css'),
+    //new OptimizeCssAssetsPlugin()
+    new OptimizeCSSAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true
+    }),
+  ]
+};
+```
 ### source map 
 
 ### 文件hash值
