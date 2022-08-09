@@ -283,7 +283,7 @@ module.exports = {
 4. css压缩分离
 - webpack5： CssMinimizerWebpackPlugin 压缩
 
-优势：在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行
+优势：支持缓存和并发模式下运行
 
 ```
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -340,16 +340,55 @@ module.exports = {
 };
 ```
 ### source map 
+- 作用
+```
+解决源码被webpack编译后 如果页面出现问题没办法定位问题的情况，
+source-map 会生成源码映射文件 用于定位问题解决问题
+```
+- 如何配置
+```
+devtool:'inline-cheap-source-map'
 
+不同环境使用不同的devtool值
+development环境下,配置 devtool:'cheap-module-eval-source-map'
+production环境下,配置 devtool:'cheap-module-source-map'
+
+几个区别：
+1、eval：sourcemap会被直接写入到bundle中，不会产生单独的source-map文件，
+优势：不影响构建速度，但影响执行速度和安全，建议开发环境中使用，生产阶段不要使用
+
+2、cheap：开发者工具就只能看到行是否有问题或者信息打印 不能看到具体映射的代码类型
+优势：安全不暴露源码内容
+
+3、不生成source-map: nosources-source-map
+```
 ### 文件hash值
+- hash：
+每次构建会生成一个hash。只要项目中文件有变化所有的文件hash都会变化。
 
+- contenthash：
+和单个文件的内容相关。指定文件的内容发生改变，就会改变hash。
 
-<a src="https://juejin.cn/post/7127303956400701470"></a>
-https://zhuanlan.zhihu.com/p/406222865
-https://blog.csdn.net/lin_fightin/article/details/115494427
+- chunkhash：
+分组hash值和webpack打包生成的chunk相关。每一个entry，都会有不同的hash。
+
+```
+entry: {
+    main: './src/main.js',
+    console: './src/console.js'
+  },
+output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'js/[name].[chunkhash].js',
+  },
+```
+
+<!-- <a src="https://juejin.cn/post/7127303956400701470"></a> -->
+<!-- https://zhuanlan.zhihu.com/p/406222865 -->
+<!-- https://blog.csdn.net/lin_fightin/article/details/115494427 -->
 
 <!-- CommonsChunkPlugin -->
-https://segmentfault.com/a/1190000012828879
+<!-- https://segmentfault.com/a/1190000012828879 -->
 
 <!-- 3-5配置对比 -->
-https://zhuanlan.zhihu.com/p/451435548
+<!-- https://zhuanlan.zhihu.com/p/451435548 -->
