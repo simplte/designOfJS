@@ -72,8 +72,10 @@ cache配置缓存的优势：
 -  多线程提高构建速度
 
 > 多线程提高构建速度，针对耗时较长的loader配置单独的worker池，可以同步其他loader构建
->> happypack-plugin 适用于webpack3以下版本
->> thread-loader 适用webpack4以上版本
+
+1、happypack-plugin 适用于webpack3以下版本
+
+2、 thread-loader 适用webpack4以上版本
 
 + 四合一项目-build开启happypack
 
@@ -157,7 +159,7 @@ resolve: {extension: ['js', 'jsx']}
 2. 设置文件夹默认默认入口文件,减少搜索步骤
 resolve: {mainFiles: ['index']}    
 ```
-- 配置无需解析的模块但会被打包到最终的bundle中
+- noParse:配置无需解析的模块但会被打包到最终的bundle中
 ```
 module: {
     // 配置无需解析的模块
@@ -363,13 +365,15 @@ production环境下,配置 devtool:'cheap-module-source-map'
 3、不生成source-map: nosources-source-map
 ```
 ### 文件hash值
-- hash：
+> 根据项目需要配置对应的hash值，可以更好的利用浏览器缓存，提高加载速度
+
+1. hash：
 每次构建会生成一个hash。只要项目中文件有变化所有的文件hash都会变化。
 
-- contenthash：
+2. contenthash：
 和单个文件的内容相关。指定文件的内容发生改变，就会改变hash。
 
-- chunkhash：
+3. chunkhash：
 分组hash值和webpack打包生成的chunk相关。每一个entry，都会有不同的hash。
 
 ```
@@ -383,12 +387,32 @@ output: {
   },
 ```
 
-<!-- <a src="https://juejin.cn/post/7127303956400701470"></a> -->
-<!-- https://zhuanlan.zhihu.com/p/406222865 -->
-<!-- https://blog.csdn.net/lin_fightin/article/details/115494427 -->
+### webpack-bundle-analyzer
 
-<!-- CommonsChunkPlugin -->
-<!-- https://segmentfault.com/a/1190000012828879 -->
 
-<!-- 3-5配置对比 -->
-<!-- https://zhuanlan.zhihu.com/p/451435548 -->
+### 其他优化点
+1. 使用最新的wbpack 
+
+>  webpack5 较于 webpack4，新增了持久化缓存、改进缓存算法等优化
+
+2. Tree Shaking
+
+> 删除无用代码,需要配置sideEffects 避免全局css文件不被打包进去
+
+3. 按需加载
+
+> 通过 webpack 提供的 import() 语法 动态导入 功能进行代码分离
+
+4. 充分利用浏览器的强缓存和协商缓存
+
+### 参考资料.
+[深入浅出webpack]()
+[https://juejin.cn/post/7127303956400701470](https://juejin.cn/post/7127303956400701470)
+
+[https://zhuanlan.zhihu.com/p/406222865](https://zhuanlan.zhihu.com/p/406222865)
+
+[https://segmentfault.com/a/1190000012828879](https://segmentfault.com/a/1190000012828879)
+
+[https://zhuanlan.zhihu.com/p/451435548](https://zhuanlan.zhihu.com/p/451435548)
+
+[https://blog.csdn.net/lin_fightin/article/details/115494427](https://blog.csdn.net/lin_fightin/article/details/115494427)
