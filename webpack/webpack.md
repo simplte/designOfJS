@@ -128,6 +128,15 @@ devtool:'inline-cheap-source-map'
 不同环境使用不同的devtool值
 development环境下,配置 devtool:'cheap-module-eval-source-map'
 production环境下,配置 devtool:'cheap-module-source-map'
+
+几个区别：
+1、eval：sourcemap会被直接写入到bundle中，不会产生单独的source-map文件，
+优势：不影响构建速度，但影响执行速度和安全，建议开发环境中使用，生产阶段不要使用
+
+2、cheap：开发者工具就只能看到行是否有问题或者信息打印 不能看到具体映射的代码类型
+优势：安全不暴露源码内容
+
+3、不生成source-map: nosources-source-map
 ```
 #### 使用webpack开启一个本地服务
 - webpack-dev-server
