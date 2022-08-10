@@ -132,6 +132,7 @@ module.exports = {
   }
 }
 ```
+[https://webpack.docschina.org/loaders/thread-loader/#root](https://webpack.docschina.org/loaders/thread-loader/#root)
 
 3: 通过配置 resolve/module 减少打包时间
 - symlinks
@@ -149,7 +150,26 @@ module.exports = {
 - dll 动态链接库
 >  web项目引入动态链接库的目的是  减少第三方模块被重复编译时的时间
 
+```
+dll处理分三步：
+1：创建单独的dll webpack打包文件，
+2：运行dll webpack 获取打包结果
+3：在其他webpack配置中使用
+plugins: [
+  new webpack.DllReferencePlugin({
+    context: __dirname,
+    // manifest就是我们第一步中打包出来的json文件
+    manifest: require('./dist-fest/vendor.manifest.json'),
+  }),
+  new CleanWebpackPlugin(),
+  new webpack.ProvidePlugin({
+    fabric: 'fabric',
+  }),
+],
+```
+
 webpack5之后推荐使用cache配置缓存，本质上都是缓存文件二次打包时对比使用
+
 
 ----
 - 减少查找过程
