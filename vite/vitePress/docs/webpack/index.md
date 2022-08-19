@@ -56,6 +56,24 @@ module.exports = {
 };
 
 ```
+cache参数介绍：
+```
+1: buildDependencies
+用于指定可能对构建过程产生影响的依赖项，
+默认值是： {defaultWebpack: ["webpack/lib"]} 默认值的作用是当node_modules中的webpack或webpack依赖项发生变化时，当前构建的缓存失效，
+另外一种配置也是订单详情抽离的写法：
+{config:[__filename]}, 作用：1 获取最新的配置和配置的依赖项，2挡配置文件内容或配置文件依赖的模块文件发生变化时，当前构建的缓存失效。
+个人理解：webpackconfig文件发生改变或者是 webpackconfig文件依赖的模块文件（webpack依赖的模块，或者是本地编写的js文件被webpackcofig引用）发生变化是构建失败了。 
+```
+2: version
+cache.version
+当配置文件和代码都没有发生变化时，希望按照环境去区分使用缓存，
+cache: {version: process.env.NODE_ENV}
+3: name
+缓存的名称，可以通过命名不同的name做缓存的区分
+比如说：按照环境区分缓存，保留多个环境的打包缓存
+cache: {name: process.env.NODE_ENV}
+
 第一次构建：
 ![老项目-build](../img/webpack/webpack5.jpg)
 
