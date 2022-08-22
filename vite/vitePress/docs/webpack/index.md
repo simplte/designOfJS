@@ -379,6 +379,11 @@ module.exports = {
   ]
 };
 ```
+5. 无用代码清除-usedExports
+```
+optimization.usedExports  配合TerserPlugin 做treeSharking
+```
+
 ### source map 
 - 作用
 ```
