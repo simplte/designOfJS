@@ -9,15 +9,6 @@
 # 36 天蓝色
 # 37 白色
 
-function echoSetColor() {
-    if [ $sysOS == "Darwin" ];then
-        echo "\033[$1m$2\033[0m"
-    elif [ $sysOS == "Linux" ];then
-        echo "\033[$1m$2\033[0m"
-    else
-        echo "$2"
-    fi
-}
 
 ls
 echo  'hello world'
@@ -89,6 +80,33 @@ for i in `seq 1 10`
 do
 	echo $i
 done  
+
+sysOS=`uname -s`
+function echoSetColor() {
+    if [ $sysOS == "Darwin" ];then
+        echo "\033[$1m$2\033[0m"
+    elif [ $sysOS == "Linux" ];then
+        echo "\033[$1m$2\033[0m"
+    else
+        echo "$2"
+    fi
+}
+
+echoSetColor 33 "bqcccc111"
+
+printStr() {
+    echo $1
+    local var1='局部变量'
+    echo $var1;
+    return "return值=$1" 
+}
+printStr "bqcccc"
+
+echo "打印返回值：$?"
+
+
+
+
 
 
 

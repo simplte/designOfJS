@@ -193,3 +193,41 @@ do
 	echo $i
 done  
 ```
+7. 测试字符串
+$string1 = $string2 表示两个字符串是否相等。
+$string1 != $string2 表示两个字符串是否不相等。
+-z $string 表示字符串 string 是否为空。
+-n $string 表示字符串 string 是否不为空。
+
+8. 测试数字
+$num1 -eq $num2 equal 的缩写，表示两个数字是否相等。
+$num1 -ne $num2 not equal 的缩写，表示两个数字是否不相等。
+$num1 -lt $num2 lower than 的缩写，表示 num1 是否小于 num2 。
+$num1 -le $num2 lower or equal 的缩写，表示 num1 是否小于或等于 num2 。
+$num1 -gt $num2 greater than 的缩写，表示 num1 是否大于 num2 。
+$num1 -ge $num2 greate or equal 的缩写，表示 num1 是否大于或等于 num2 。
+
+9. 测试文件
+-e $file exist 的缩写，表示文件是否存在。
+-d $file directory 的缩写，表示文件是否为一个目录。
+-f $file file 的缩写，表示文件是否是一个文件。
+-L $file Link 的缩写，表示链接。
+-r $file readable 的缩写，表示文件是否可读。
+-w $file writable 的缩写，表示文件是否可写。
+-x $file executable 的缩写，表示文件是否可执行。
+$file1 -nt $file2 表示文件 file1 是否比 file2 更新。
+$file1 -ot $file2 表示文件 file1 是否比 file2 更旧。
+
+- 函数
+1. 函数定义 函数名() {} 和js一样
+2. 返回值通过return ，注意  numeric argument required错误是因为return 出去的值只能是整数值，可以通过给结构赋值的情况避免return值
+3. 通过 local  定义局部变量
+```sh
+printStr() {
+    echo $1
+    return "return值=$1" 
+}
+printStr "bqcccc"
+
+echo "打印返回值：$?"
+```
