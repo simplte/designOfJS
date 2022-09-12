@@ -7,6 +7,9 @@ const testCode = fs.readFileSync(testFilePath, 'utf8');
 console.log(testCode);
 // const { code, map, ast } = babel.transform('() => { console.log(123) } ');
 // const { code, map, ast } = babel.transform(testCode);
-const { code, map, ast } = babel.transformFileSync(testFilePath);
+const customPlugin = require('../plugins/index.js');
+const { code, map, ast } = babel.transformFileSync(testFilePath, {
+  plugins: customPlugin,
+});
 
 console.log(code);
