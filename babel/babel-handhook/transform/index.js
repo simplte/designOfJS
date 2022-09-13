@@ -8,8 +8,12 @@ console.log(testCode);
 // const { code, map, ast } = babel.transform('() => { console.log(123) } ');
 // const { code, map, ast } = babel.transform(testCode);
 const customPlugin = require('../plugins/index.js');
+
 const { code, map, ast } = babel.transformFileSync(testFilePath, {
   plugins: customPlugin,
+  generatorOpts: {
+    quotes: 'double',
+  },
 });
 
 console.log(code);
