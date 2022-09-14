@@ -63,9 +63,115 @@ module.exports = ({ types: t }) => {
           if (funName == 'get') {
             const firstArg = path.parent.arguments[0];
             if (firstArg.type == 'StringLiteral') {
-              path.node.object.type = 'ThisExpression';
-              path.node.object.loc.identifierName = undefined;
+              // ctx.get('xxx') => this.$refs.xxx
+              // 处理ctx => this
               delete path.node.object.name;
+              path.node.object.loc.identifierName = undefined;
+              path.node.object.type = 'ThisExpression';
+
+              // 处理 get => $refs
+              path.node.property = {
+                type: 'Identifier',
+                loc: {
+                  identifierName: '$refs',
+                },
+                name: '$refs',
+              };
+
+              // 处理('xxx')=> .xxx
+              path.parent.type = 'MemberExpression';
+              path.parent.object = path.node;
+              path.parent.property = {
+                type: 'Identifier',
+                loc: {
+                  start: {},
+                  end: {},
+                  identifierName: firstArg.value,
+                },
+                name: firstArg.value,
+              };
+              delete path.parent.arguments;
+              delete path.parent.callee;
+            } else if (firstArg.type == 'Identifier') {
+              // ctx.get(code) => this.$refs.xxx
+              // ctx => this
+              delete path.node.object.name;
+              path.node.object.loc.identifierName = undefined;
+              path.node.object.type = 'ThisExpression';
+
+              // get => $refs
+              path.node.property = {
+                type: 'Identifier',
+                loc: {
+                  identifierName: '$refs',
+                },
+                name: '$refs',
+              };
+
+              // 处理(code) => .code
+              path.parent.type = 'MemberExpression';
+              path.parent.object = path.node;
+              path.parent.property = {
+                type: 'Identifier',
+                loc: {
+                  start: {},
+                  end: {},
+                  identifierName: firstArg.name,
+                },
+                name: firstArg.name,
+              };
+              delete path.parent.arguments;
+              delete path.parent.callee;
+            } else if (firstArg.type == 'MemberExpression') {
+              // ctx.get(codes[i]) => this.$refs[codes[i]]
+              // this
+
+              // 自己的写法
+              path.node.object.type = 'ThisExpression';
+              delete path.node.object.name;
+
+              path.node.property = {
+                type: 'Identifier',
+                loc: {
+                  identifierName: '$refs',
+                },
+                name: '$refs',
+              };
+
+              path.parent.type = 'MemberExpression';
+              path.parent.object = path.node;
+              path.parent.property = firstArg;
+              path.parent.computed = true;
+              delete path.parent.callee;
+              delete path.parent.arguments;
+
+              // 文章上的写法
+              // path.node.object.loc.identifierName = undefined;
+              // path.node.object.type = 'MemberExpression';
+              // delete path.node.object.name;
+              // path.node.object.object = {
+              //   type: 'ThisExpression',
+              //   loc: {
+              //     start: {},
+              //     end: {},
+              //   },
+              // };
+
+              // path.node.object.property = {
+              //   type: 'Identifier',
+              //   loc: {
+              //     identifierName: '$refs',
+              //   },
+              //   name: '$refs',
+              // };
+
+              // path.node.property = firstArg;
+              // path.parent.type = 'MemberExpression';
+              // path.parent.object = path.node.object;
+              // path.parent.property = path.node.property;
+              // path.parent.computed = true;
+              // delete path.parent.arguments;
+              // delete path.parent.callee;
             }
           }
         }

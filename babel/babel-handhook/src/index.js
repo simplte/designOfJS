@@ -20,6 +20,9 @@
 function save(ctx) {
   xp.message('hello');
 }
-ctx.get('xxx');
-ctx.get(code);
-ctx.get(codes[i]);
+function test(ctx) {
+  ctx.get('xxx');
+  ctx.get(code);
+  ctx.get(codes[i]);
+  ctx.data;
+}
