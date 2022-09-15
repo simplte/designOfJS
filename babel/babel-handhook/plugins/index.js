@@ -175,7 +175,50 @@ module.exports = ({ types: t }) => {
             }
           }
         }
+        if (
+          path.node.object.name == 'ctx' &&
+          path.node.property.type == 'Identifier' &&
+          path.node.property.name == 'data'
+        ) {
+          path.node.type = 'ThisExpression';
+          delete path.node.object;
+          delete path.node.property;
+        }
+      },
+      ArrowFunctionExpression(path, state) {
+        // 箭头函数去除参数ctx
+        spliceFunctionExpressionFirstArguCtx(path);
+      },
+      FunctionDeclaration(path, state) {
+        // 转换普通函数为箭头函数  去掉ctx参数
+        // 下面是自己实现的有问题_this问题
+        // path.node.declarations = [
+        //   {
+        //     type: 'VariableDeclarator',
+        //     id: path.node.id,
+        //     init: {
+        //       type: 'ArrowFunctionExpression',
+        //       id: 'null',
+        //       params: path.node.params,
+        //       body: path.node.body,
+        //       expression: false,
+        //       generator: false,
+        //       async: false,
+        //     },
+        //   },
+        // ];
+        // path.node.type = 'VariableDeclaration';
+        // path.node.kind = 'const';
+
+        spliceFunctionExpressionFirstArguCtx(path);
       },
     },
   };
 };
+// 去掉函数表达式的第一个参数（如果是ctx）
+function spliceFunctionExpressionFirstArguCtx(path) {
+  const argus = path.node.params;
+  if (argus.length && argus[0] && argus[0].type === 'Identifier' && argus[0].name === 'ctx') {
+    path.node.params.splice(0, 1);
+  }
+}

@@ -25,4 +25,9 @@ function test(ctx) {
   ctx.get(code);
   ctx.get(codes[i]);
   ctx.data;
+  this.data = 1;
 }
+
+const test1 = (ctx) => {
+  console.log(1);
+};
