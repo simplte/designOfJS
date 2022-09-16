@@ -19,6 +19,7 @@
 // const a = 123;
 function save(ctx) {
   xp.message('hello');
+  xp.templateFactory.xxx(ctx);
 }
 function test(ctx) {
   ctx.get('xxx');
@@ -31,3 +32,16 @@ function test(ctx) {
 const test1 = (ctx) => {
   console.log(1);
 };
+setTimeout(function () {
+  console.log('123');
+}, 100);
+
+function a() {}
+function b() {
+  a(ctx); // 需要处理
+  xp.templateFactory.xxx(ctx);
+  const c = function () {};
+  c(); // 不用管
+  ctx.get('crud').$xxx;
+  // -> this.$xxxCrud
+}

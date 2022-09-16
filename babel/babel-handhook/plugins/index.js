@@ -44,6 +44,10 @@ module.exports = ({ types: t }) => {
           console.log('被引用');
           console.log(path.node.name);
         }
+        // 将ctx => this
+        if (path.node.name == 'ctx') {
+          path.node.name = 'this';
+        }
       },
       // save
       MemberExpression(path, state) {
@@ -190,6 +194,10 @@ module.exports = ({ types: t }) => {
         spliceFunctionExpressionFirstArguCtx(path);
       },
       FunctionDeclaration(path, state) {
+        spliceFunctionExpressionFirstArguCtx(path);
+      },
+      // 匿名函数转换监听函数
+      FunctionExpression(path, state) {
         // 转换普通函数为箭头函数  去掉ctx参数
         // 下面是自己实现的有问题_this问题
         // path.node.declarations = [
@@ -209,8 +217,22 @@ module.exports = ({ types: t }) => {
         // ];
         // path.node.type = 'VariableDeclaration';
         // path.node.kind = 'const';
-
+        // -----
+        path.node.type = 'ArrowFunctionExpression';
         spliceFunctionExpressionFirstArguCtx(path);
+      },
+      CallExpression(path, state) {
+        // a(ctx) => this.a()
+        if (path.node.callee.type == 'Identifier' && path.node.callee.name == 'a') {
+          path.node.callee = {
+            type: 'MemberExpression',
+            object: {
+              type: 'ThisExpression',
+            },
+            property: path.node.callee,
+          };
+          path.node.arguments = [];
+        }
       },
     },
   };
