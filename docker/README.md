@@ -15,6 +15,8 @@ Options:
       --no-trunc        不要截断输出
   -q, --quiet           仅显示数字ID
   -s, --size            显示总文件大小
+
+docker ps ls            当前运行的容器
 ```
 
 ### 编写 dockerfile
@@ -44,6 +46,12 @@ EXPOSE 80
 ### 根据镜像创建容器
 
 ```sh
+# 创建容器
 docker container create -p 2333:80 hello-docker:1.0.0
+# 运行已经停止的容器 xxx可以为容器的
 docker container start xxx
+
+# docker container start 和 docker container run的区别
+# docker container start 启动一个停止的容器不会新建容器
+# docker container run   生成一个新的容器并启动这个容器
 ```
