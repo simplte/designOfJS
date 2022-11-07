@@ -60,6 +60,8 @@ jobs: 具体执行脚本
             # 这个地方注意 tags 的名称一定要一dockerhub的账号名/ 开始否则会提示没有权限
             tags: simplte/vite-vue3-h5:0.0.2
             labels: vite-vue3-h5-labels
-
-
 ```
+
+#### Dockerfile
+
+> 见上层 readme.md
