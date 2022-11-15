@@ -65,3 +65,16 @@ jobs: 具体执行脚本
 #### Dockerfile
 
 > 见上层 readme.md
+
+#### 流程梳理
+
+1. master 分支推送远程
+2. 触发 github action
+3. 执行.github 下的 xxx.yml 文件 的 jobs
+
+- 设置运行环境
+- 设置 action
+- 执行项目编译命令
+- 登录 docker
+- 生成 docker 镜像
+- docker 镜像推送远程
