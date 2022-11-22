@@ -31,3 +31,23 @@ main        # 全局配置，对全局生效
 │   └── ...
 └── ...
 ```
+
+### gzip
+
+> 配置 gzip
+
+```
+1. 浏览器请求时携带请求头 ： Accept-Encoding: gzip
+2. 服务器响应时携带： content-encoding: gzip
+
+3.
+gzip on; # 默认off，是否开启gzip
+gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+4. 最好小于1kb的文件不压缩
+gzip_min_length 1k;
+
+5. 最好使用webpack完成gzip压缩生成gz文件上传，减少服务器的计算资源消耗
+```
+
+link: https://juejin.cn/post/6844904144235413512#heading-12
