@@ -19,3 +19,15 @@ type MyReadonly<T> = {
 type TupleToObject<T extends readonly (string | number)[]> = {
   [K in T[number]]: K;
 };
+// 5. 取类型数组中的第一个值
+type First<T extends unknown[]> = T['length'] extends 0 ? never : T[0];
+type test1 = [1, 2, 3, 4];
+type res = First<test1>;
+
+// 6. 获取元祖类型的长度
+type Length<T extends unknown[]> = T['length'] extends 0 ? 0 : T['length'];
+type reslen = Length<test1>;
+
+// 7. 实现 exclude 排除
+// T extends K  = T K中都有的不要  保留没有的
+type MyExclude<T, K> = T extends K ? never : T;
