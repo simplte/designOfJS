@@ -75,3 +75,24 @@ type MyInclude<T extends readonly unknown[], R> = T extends [infer F, ...infer r
   : false;
 
 type isPillarMen = MyInclude<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>;
+
+// 12. push
+type MyPush<T extends readonly unknown[], R> = [...T, R];
+// type Result = MyPush<[1, 2], '3'> // [1, 2, '3']
+
+// 13. Unshift
+type MyUnshift<T extends readonly unknown[], R> = [R, ...T];
+// type Result = MyUnshift<[1, 2], 0>; // [0, 1, 2,]
+
+// 14. FunctionParamsType
+/**
+ * 读取方法中的参数类型
+ * 1.约束传入的泛型为函数类型
+ * 2.使用infer 定义 函数 入参的类型
+ * 3. 判断 T 是不是函数类型 如果是的话则返回 infer定义的形参类型 U 否则 返回nerver
+ */
+type MyParameters<T extends (...args: any[]) => any> = T extends (...args: infer U) => any ? U : never;
+const foo = (arg1: string, arg2: number): void => {};
+type FnType = MyParameters<typeof foo>;
+
+type Exclude<T, R> = T extends R ? never : R;
