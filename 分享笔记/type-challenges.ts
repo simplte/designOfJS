@@ -96,3 +96,43 @@ const foo = (arg1: string, arg2: number): void => {};
 type FnType = MyParameters<typeof foo>;
 
 type Exclude<T, R> = T extends R ? never : R;
+type MP<T extends (...args: any[]) => any> = T extends (...any: infer R) => any ? R : never;
+
+// 15. 获取函数返回类型
+type MyFnReturnType<T extends (...args: any[]) => any> = T extends (...any: any[]) => infer T ? T : never;
+// const fn = (v: boolean) => {
+//   if (v) return 1;
+//   else return 2;
+// };
+// type a = MyFnReturnType<typeof fn>; // 应推导出 "1 | 2"
+
+// 16. Omit
+/**
+ * 1. 限制第二个泛型为 第一个泛型中的key
+ * 2. 使用in 关键字循环 T
+ * 3. 使用as 关键字 处理 循环的当前 P 类型是不是 属于第二泛型类型
+ *    属于的话就返回never 不属于就返回 当前循环的 P
+ *    P in xx  P相当于 xxx.foreach(x=> ...)循环中 x 指当前循环的形参（这里值形类型）
+ */
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+type MyOmit<T, R extends keyof T> = {
+  [P in keyof T as P extends R ? never : P]: T[P];
+};
+type TodoPreview = MyOmit<Todo, 'description' | 'title'>;
+
+const todo: TodoPreview = {
+  completed: false,
+};
+
+// 17.Readonly 2
+
+type MyReadonly2<T, R extends keyof T = keyof T> = {
+  [P in R]: T[P];
+} & {
+  [P in Exclude<keyof T, R>]: T[P];
+};
