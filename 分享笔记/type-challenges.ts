@@ -164,3 +164,8 @@ type MyReadonly2<T, K extends keyof T = keyof T> = {
 // valTodo.title = '123';
 // valTodo.description = '123';
 // valTodo.completed = false;
+
+// 18. deepReadonly
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: keyof T[P] extends never ? T[P] : DeepReadonly<T[P]>;
+};
