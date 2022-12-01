@@ -95,7 +95,7 @@ type MyParameters<T extends (...args: any[]) => any> = T extends (...args: infer
 const foo = (arg1: string, arg2: number): void => {};
 type FnType = MyParameters<typeof foo>;
 
-type Exclude<T, R> = T extends R ? never : R;
+// type Exclude<T, R> = T extends R ? never : R;
 type MP<T extends (...args: any[]) => any> = T extends (...any: infer R) => any ? R : never;
 
 // 15. 获取函数返回类型
@@ -114,25 +114,53 @@ type MyFnReturnType<T extends (...args: any[]) => any> = T extends (...any: any[
  *    属于的话就返回never 不属于就返回 当前循环的 P
  *    P in xx  P相当于 xxx.foreach(x=> ...)循环中 x 指当前循环的形参（这里值形类型）
  */
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
 
 type MyOmit<T, R extends keyof T> = {
   [P in keyof T as P extends R ? never : P]: T[P];
 };
-type TodoPreview = MyOmit<Todo, 'description' | 'title'>;
+// interface Todo {
+//   title: string;
+//   description: string;
+//   completed: boolean;
+// }
 
-const todo: TodoPreview = {
-  completed: false,
-};
+// type TodoPreview = MyOmit<Todo, 'description' | 'title'>;
+
+// const todo: TodoPreview = {
+//   completed: false,
+// };
 
 // 17.Readonly 2
-
-type MyReadonly2<T, R extends keyof T = keyof T> = {
-  [P in R]: T[P];
+/**
+ * 用法：接收两个类型
+ * 第一个类型：需要处理的类型
+ * 第二个类型：需要处理的第一个类型中的key的集合
+ *
+ * 1.首先限制第一个泛型没有什么特别限制
+ * 2.第二个泛型必须是第一个泛型的key 因此需要  K extends keyof T  不过后面的 = keyof T 不知道是什么意思
+ * 3.然后先处理只能readonly的key 使用 in 循环 泛型
+ *  {
+      readonly [P in K]: T[P];
+    }
+   4.最后将第一个泛型中剩余的key处理出来 , 使用 Exclude 将第一个泛型T 中不包含第二泛型的值处理出来
+   {
+      [P in Exclude<keyof T, K>]: T[P];
+    }
+ * */
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P];
 } & {
-  [P in Exclude<keyof T, R>]: T[P];
+  [P in Exclude<keyof T, K>]: T[P];
 };
+
+// interface Todo1 {
+//   title: string;
+//   description: string;
+//   completed: boolean;
+// }
+
+// type todo = MyReadonly2<Todo1, 'title' | 'description'>;
+// const valTodo: todo = { title: '', description: '', completed: false };
+// valTodo.title = '123';
+// valTodo.description = '123';
+// valTodo.completed = false;
