@@ -166,6 +166,53 @@ type MyReadonly2<T, K extends keyof T = keyof T> = {
 // valTodo.completed = false;
 
 // 18. deepReadonly
+/**
+ * 1. 通过 in 循环泛型 的key
+ * 2. 判断当前循环的泛型类型是不是对象类型
+ *   通过 keyof T[P] extends never 判断当前类型是不是对象
+ *   属于 never 则直接返回当前泛型类型对应的类型
+ *   不属于
+ */
 type DeepReadonly<T> = {
   readonly [P in keyof T]: keyof T[P] extends never ? T[P] : DeepReadonly<T[P]>;
 };
+// type X = {
+//   x: {
+//     a: 1;
+//     b: 'hi';
+//   };
+//   y: 'hey';
+// };
+
+// type Expected = {
+//   readonly x: {
+//     readonly a: 1;
+//     readonly b: 'hi';
+//   };
+//   readonly y: 'hey';
+// };
+// type Todo = DeepReadonly<X>;
+// let a: Todo = {
+//   x: {
+//     a: 1,
+//     b: 'hi',
+//   },
+//   y: 'hey',
+// };
+
+// 19：TupleToUnion 它返回元组所有值的合集。
+/**
+ * 1. 限制泛型为数组
+ * 2. 需要用到循环且不能使用in的情况基本上都需要用到递归 (个人理解 in 仅用在 对对象类型的 key值的循环中)
+ * 3. 通过infer 对泛型T进行分割，然后单个值判断
+ *    T extends [infer R, ...infer Rest]
+ *    将数组分割成 R 和Rest两部分
+ * 4. 通过 extend 判断泛型T是不是属于 数组
+ *    属于则返回R 且递归执行 Rest
+ *    直至不属于数组类型 则返回 never
+ *
+ *
+ */
+type TupleToUnion<T extends unknown[]> = T extends [infer R, ...infer Rest] ? R | TupleToUnion<Rest> : never;
+type Arr = ['1', '2', '3'];
+type Test = TupleToUnion<Arr>;
