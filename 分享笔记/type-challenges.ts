@@ -216,3 +216,38 @@ type DeepReadonly<T> = {
 type TupleToUnion<T extends unknown[]> = T extends [infer R, ...infer Rest] ? R | TupleToUnion<Rest> : never;
 type Arr = ['1', '2', '3'];
 type Test = TupleToUnion<Arr>;
+
+// 20. 可串联构造器
+type Chainable<options = {}> = {
+  option<K extends string, V>(key: K, value: V): Chainable<options & { [S in K]: V }>;
+  get(): { [P in keyof options]: options[P] };
+};
+// declare const config: Chainable;
+
+// const result = config
+//   .option('foo', 123)
+//   .option('name', 'type-challenges')
+//   .option('bar', { value: 'Hello World' })
+//   .get();
+
+// // 期望 result 的类型是：
+// interface Result {
+//   foo: number;
+//   name: string;
+//   bar: {
+//     value: string;
+//   };
+// }
+
+// 21.获取数组的最有一个元素类型
+/**
+ * 利用之前总结的一个方法 如果是需要循环取到需要值的方法 就需要用到递归
+ * 判断空数组需要用到  Rest extends []
+ * 还是利用 infer 去占位类型 然后递归判断占位的类型是否满足条件
+ */
+type Last<T extends unknown[]> = T extends [infer F, ...infer Rest] ? (Rest extends [] ? Last<Rest> : F) : never;
+type arr1 = ['a', 'b', 'c'];
+type arr2 = [3, 2, 1];
+
+type tail1 = Last<arr1>; // expected to be 'c'
+type tail2 = Last<arr2>; // expected to be 1
