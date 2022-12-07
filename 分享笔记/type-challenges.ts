@@ -246,8 +246,54 @@ type Chainable<options = {}> = {
  * 还是利用 infer 去占位类型 然后递归判断占位的类型是否满足条件
  */
 type Last<T extends unknown[]> = T extends [infer F, ...infer Rest] ? (Rest extends [] ? Last<Rest> : F) : never;
-type arr1 = ['a', 'b', 'c'];
+// type arr1 = ['a', 'b', 'c'];
+// type arr2 = [3, 2, 1];
+
+// type tail1 = Last<arr1>; // expected to be 'c'
+// type tail2 = Last<arr2>; // expected to be 1
+
+// 22. 删除数组中最后一个类型
+type Pop<T extends unknown[]> = T extends [...infer F, any] ? F : T;
+type arr1 = ['a', 'b', 'c', 'd'];
 type arr2 = [3, 2, 1];
 
-type tail1 = Last<arr1>; // expected to be 'c'
-type tail2 = Last<arr2>; // expected to be 1
+type re1 = Pop<arr1>; // expected to be ['a', 'b', 'c']
+type re2 = Pop<arr2>; // expected to be [3, 2]
+
+type Unshift<T extends unknown[], R> = [R, ...T];
+type re3 = Unshift<arr1, '1'>;
+type Push<T extends unknown[], R> = [...T, R];
+type re4 = Push<arr1, '1'>;
+type shift<T extends unknown[]> = T extends [infer R, ...infer Rest] ? Rest : T;
+type re5 = shift<arr1>;
+
+// 23. Promise.all
+/**
+ * 1.声明函数 declare function
+ * 2.定义泛型T为数组类型
+ * 3.限制入参value 为只读类型的数组 value: readonly [...T] 因为 使用时传入的入参都是只读类型的
+ * 4.定义返回值 按照题解提示 输出值为 Promise类型
+ *  因此外面肯定是 Promise<>
+ *  然后循环传入数组判断数组当前类型是不是Promise类型 且使用infer A 定义Promise的形参
+ *    是promise类型则返回类型形参A
+ *    不是promise类型则返回 当前数组对应的值 T[K]
+ *    [K in keyof T] ? T[K] extends Promise<infer A> ? A : T[K];
+ * @param value
+ */
+declare function PromiseAll<T extends unknown[]>(
+  value: readonly [...T]
+): Promise<{
+  [K in keyof T]: T[K] extends Promise<infer A> ? A : T[K];
+}>;
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise<string>((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+// expected to be `Promise<[number, 42, string]>`
+const p = PromiseAll([promise1, promise2, promise3] as const);
+
+// 24. LookUp
+// 获取联合类型中对应type值的类型
+type LookUp<U extends { type: string }, T> = U extends any ? (U['type'] extends T ? U : never) : never;
