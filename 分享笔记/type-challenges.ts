@@ -296,4 +296,60 @@ const p = PromiseAll([promise1, promise2, promise3] as const);
 
 // 24. LookUp
 // 获取联合类型中对应type值的类型
-type LookUp<U extends { type: string }, T> = U extends any ? (U['type'] extends T ? U : never) : never;
+/**
+ * 题解分析：
+ * 因为是需要判断传入类型中 某个属性为第二个泛型的值 并返回对应的类型
+ * 1.因此需要限制第一个泛型 必须含有type 类型 T extends { type: string }
+ * 这里的入参基本上都是联合类型 联合类型(Cat | Dog)中都要要满足 有type属性
+ * 2.然后判断联合类型中 那个类型的type属性为第二个泛型值  然后返回出 此类型
+ *  这里有点困惑  ： Cat | Dog 这种联合类型传入LookUp中作为第一个泛型T
+ *    在使用 T extends any 的是会默认使用循环去循环联合类型吗
+ *    在满足 T['type'] extends U 之后 当前就返回联合类型中满足条件的那个类型吗 那 T 是不是也可以理解成形参类型
+ */
+type LookUp<T extends { type: string }, U> = T extends any ? (T['type'] extends U ? T : never) : never;
+// interface Cat {
+//   type: 'cat';
+//   breeds: 'Abyssinian' | 'Shorthair' | 'Curl' | 'Bengal';
+// }
+
+// interface Dog {
+//   type: 'dog';
+//   breeds: 'Hound' | 'Brittany' | 'Bulldog' | 'Boxer';
+//   color: 'brown' | 'white' | 'black';
+// }
+
+// type MyDogType = LookUp<Cat | Dog, 'dog'>; // expected to be `Dog`
+
+// 25. TrimLeft<T>
+// 它接收确定的字符串类型并返回一个新的字符串，其中新返回的字符串删除了原字符串开头的空白字符串。
+type TrimLeft<T extends string> = T extends `${' ' | '\n' | '\t'}${infer R}` ? TrimLeft<R> : T;
+// type trimed = TrimLeft<'  Hello World  '>; // 应推导出 'Hello World  '
+// 26. trim 将左右的空格都去掉
+type Trim<T extends string> = T extends `${' ' | '\n' | '\t'}${infer R}`
+  ? Trim<R>
+  : T extends `${infer L}${' ' | '\n' | '\t'}`
+  ? Trim<L>
+  : T;
+type trimed = Trim<'  Hello World  '>;
+// 27. Capitalize 第一个字符串首字母大写其余不变
+// type Capitalize<T extends string> = T extends `${infer L}${infer R}` ? `${Uppercase<L>}${R}` : T;
+// type capitalized = Capitalize<'hello world'>;
+// type capitalized1 = Capitalize<'hello'>;
+
+// 增强版 单词首字母大写
+type Capitalize<T extends string> = T extends `${infer F}${infer L}${' ' | '\n' | '\t'}${infer R}`
+  ? `${Uppercase<F>}${L} ${Capitalize<R>}`
+  : T extends `${infer RF}${infer R}`
+  ? `${Uppercase<RF>}${R}`
+  : `${Uppercase<T>}`;
+
+// 26. Replace
+type Replace<T extends string, V extends string, N extends string> = T extends `${infer L}${V}${infer R}`
+  ? `${L}${N}${R}`
+  : T;
+// type replaced = Replace<'fun', 'fun', 'awesome'>; // expected to be 'types are awesome!'
+// 26. ReplaceAll
+type ReplaceAll<T extends string, V extends string, N extends string> = T extends `${infer L}${V}${infer R}`
+  ? `${L}${N}${ReplaceAll<R, V, N>}`
+  : T;
+type replaced = ReplaceAll<'t y p e s', ' ', ''>;
