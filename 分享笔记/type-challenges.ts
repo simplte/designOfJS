@@ -353,3 +353,21 @@ type ReplaceAll<T extends string, V extends string, N extends string> = T extend
   ? `${L}${N}${ReplaceAll<R, V, N>}`
   : T;
 type replaced = ReplaceAll<'t y p e s', ' ', ''>;
+
+// 27. AppendArgument
+/**
+ * 1. ReturnType 获取函数类型的返回值
+ */
+type AppendArgument<F extends (...args: any[]) => any, A> = F extends (...args: infer P) => any
+  ? (...args: [...P, A]) => ReturnType<F>
+  : never;
+
+// function getUser() {
+//   return {name: 'xxx', age: 10}
+// }
+
+// type GetUserType = typeof getUser;
+// type ReturnUser = ReturnType<GetUserType>
+
+// 28. Permutation
+type Permutation<T, C = T> = [T] extends [never] ? [] : C extends infer U ? [U, ...Permutation<Exclude<T, U>>] : never;
