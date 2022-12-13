@@ -371,3 +371,30 @@ type AppendArgument<F extends (...args: any[]) => any, A> = F extends (...args: 
 
 // 28. Permutation
 type Permutation<T, C = T> = [T] extends [never] ? [] : C extends infer U ? [U, ...Permutation<Exclude<T, U>>] : never;
+// 29. LengthOfString
+/**
+ * 1. 将字符串利用infer 递归转成数组
+ * 2. 然后使用返回数组长度的方式获取字符串长度
+ */
+type StrSplit<T extends string> = T extends `${infer R}${infer Rest}` ? [R, ...StrSplit<Rest>] : [];
+type StringLen<T extends string> = StrSplit<T>['length'];
+// type str = '123';
+// type strLen = StringLen<str>;
+
+// 30. Flatten 扁平化数组
+/**
+ * 1. 如果infer R 为数组类型 则使用... 将R展开并递归使用Flatten
+ */
+type Flatten<T extends unknown[]> = T extends [infer R, ...infer Rest]
+  ? R extends unknown[]
+    ? Flatten<[...R, ...Rest]>
+    : [R, ...Flatten<Rest>]
+  : [];
+type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]>;
+
+// 31. AppendToObject
+type AppendToObject<T extends { [K in string]: any }, U extends string, V> = {
+  [K in keyof T | U]: K extends U ? V : T[K];
+};
+type Test1 = { id: '1' };
+type Result = AppendToObject<Test1, 'value', 4>;
