@@ -393,8 +393,22 @@ type Flatten<T extends unknown[]> = T extends [infer R, ...infer Rest]
 type flatten = Flatten<[1, 2, [3, 4], [[[5]]]]>;
 
 // 31. AppendToObject
-type AppendToObject<T extends { [K in string]: any }, U extends string, V> = {
-  [K in keyof T | U]: K extends U ? V : T[K];
+/**
+ * 1.限制第一个泛型为对象类型  T extends {[k in string] : any}
+ * 2. 这里有一个点没有想到过： 一直使用的都是 Key in T  没想到过可以使用联合类型的方式增加key 的循环范围
+ * [Key in keyof T | K]
+ */
+type AppendToObject<T extends { [K in string]: any }, K extends string, V> = {
+  [Key in keyof T | K]: Key extends K ? V : T[Key];
 };
 type Test1 = { id: '1' };
 type Result = AppendToObject<Test1, 'value', 4>;
+
+// 32.Absolute
+// 这里主要是利用`` 将泛型转为字符串类型 然后 使用 infer 取非- 的值
+type Absolute<T extends string | bigint | number> = `${T}` extends `-${infer R}` ? `${R}` : `${T}`;
+
+// 33.StringToUnion
+type StringToUnion<T extends string> = T extends `${infer F}${infer R}` ? F | StringToUnion<R> : never;
+type Test3 = '123';
+type Result1 = StringToUnion<Test3>;
