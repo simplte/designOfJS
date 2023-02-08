@@ -412,3 +412,19 @@ type Absolute<T extends string | bigint | number> = `${T}` extends `-${infer R}`
 type StringToUnion<T extends string> = T extends `${infer F}${infer R}` ? F | StringToUnion<R> : never;
 type Test3 = '123';
 type Result1 = StringToUnion<Test3>;
+
+type Exclude<T, U> = T extends U ? never : T;
+
+type Includes<T extends unknown[], U extends string> = T extends [infer F, ...infer Rest]
+  ? Equal<F, U> extends true
+    ? true
+    : Includes<Rest, U>
+  : false;
+
+type Readonly2<T, U extends keyof T> = {
+  readonly [P in U]: T[P];
+} & {
+  [P in Exclude<keyof T, U>]: T[P];
+};
+
+type LookUp2<T extends { type: string }, U extends string> = T extends any ? (T['type'] extends U ? T : never) : never;
