@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "mini": "node ./wxmini.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "glob": "^10.2.6",
+    "htmlparser2": "^9.0.0",
     "typescript": "^5.0.4"
   }
 }
