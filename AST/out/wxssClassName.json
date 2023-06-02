@@ -1,1 +1,694 @@
-{"sfcIndex":{"wxss":["container","row","cen-start","cen-center","flex-shrink","fs24","swiper-box","swiper-box-tips","swiper-pagination","swiper-word-item","flex1","flex-shrink","header","action","margin-both-16","ing-orders","mission-wrapper","section-wrapper","steps","arrow","banner","swiper-box","swiper-slide","questions","safe-warp","safe-bottom","img-credit-enhanch","map-box","img-zengxin","safe-box","widget-positon","bg-bottom","map-content","bottom-box","announ-warp","map-container","back-icon","pannel-box"],"wxml":["container","{{sfcNewHomeAB}}","map-box","map-white","pannel-box","safe-box","pevtoff","bg1","widget","df","dfc","dfm","dfdc","widget-positon","pevton","action","{{sfcNewHomeAB","==","'A'","?","'test-a'",":","''}}","announ-warp","main","test-a","address","img-zengxin","header","bg","summary","title","sub-title","action","main","tips","swiper-box","tips-content","swiper-no-swiping","le","tips-icon","flex-shrink","fs24","flex1","swiper-word-item","arrow","flex-shrink","address","up-style","ing-orders","row","le","ri","steps","steps-in","read","entry","le","title","sub-title","row","cen-start","arrow","entry-arrow","entry","entry-right","ri","title","sub-title","row","cen-start","arrow","entry-arrow","banner","swiper-box","img-fa","swiper-pagination","span","swiper-pagination-bullet","{{bannerIndex===","index","?","'active':","''}}","questions","title-line","title","more","row","cen-center","arrow","que-arrow","list","li","section-wrapper","safe-bottom","img-credit-enhanch","pa"]}}
+[
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/webview/webview.wxml",
+    "noUseC": [
+      ".auth-btn {\n  width: 70%;\n  border-radius: 2rem;\n  color: #fff;\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  font-weight: 600;\n  text-align: center;\n  z-index: 9998;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/ticketGroup/ticketGroup.wxml",
+    "noUseC": [
+      ".trade-gothic-font {\n  font-family: 'trade-gothic' !important;\n}",
+      ".coupon-content {\n  position: absolute;\n  top: 50%;\n  left: 26%;\n  transform: translate(0, -50%);\n  font-weight: bold;\n  color: rgba(255, 255, 255, 1);\n}",
+      ".coupon-name {\n  font-size: 46rpx;\n  font-weight: bold;\n  padding-top: 14rpx;\n}",
+      ".coupon-price {\n  font-weight: normal;\n  margin-top: 20rpx;\n}",
+      ".yhq-text {\n  position: absolute;\n  top: 50%;\n  right: 26%;\n  transform: translate(0, -50%);\n  align-items: center;\n  font-size: 32rpx;\n  font-weight: 500;\n  width: 30rpx;\n  color: rgba(255, 255, 255, 1);\n  line-height: 1.36;\n}",
+      ".rule-wrapper {\n  padding: 40rpx 40rpx 63rpx;\n}",
+      ".rule-wrapper2 {\n  padding: 40rpx 40rpx 176rpx;\n}",
+      ".rule-wrapper-x {\n  padding: 40rpx 40rpx 97rpx;\n}",
+      ".rule-wrapper2-x {\n  padding: 40rpx 40rpx 210rpx;\n}",
+      ".button-label {\n  margin-right: 12rpx;\n}",
+      ".buy-wrapper-x {\n  height: 154rpx;\n}",
+      ".buy-right-x {\n  padding-bottom: 34rpx;\n}",
+      ".member4 {\n  /* justify-content: space-evenly; */\n}",
+      ".long-btn {\n  justify-content: center !important;\n}",
+      ".colorFF3838 {\n  color: #ff3838;\n}",
+      ".friend-ul {\n  margin-top: 40rpx;\n  padding-bottom: 40rpx;\n}",
+      ".friend-li {\n  position: relative;\n  height: 107rpx;\n  background: rgba(255, 242, 230, 1);\n  border-radius: 10rpx;\n  margin-bottom: 16rpx;\n}",
+      ".friend-price {\n  padding: 0 80rpx 0 36rpx;\n  font-weight: bold;\n}",
+      ".give-btn {\n  width: 126rpx;\n  height: 44rpx;\n  line-height: 42rpx;\n  align-items: unset;\n  background: rgba(255, 89, 35, 1);\n  border-radius: 22rpx;\n  font-size: 22rpx;\n  color: rgba(255, 255, 255, 1);\n  margin: 0 40rpx;\n  white-space: nowrap;\n}",
+      ".give-ban-btn {\n  background: rgba(255, 193, 173, 1);\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/sfcIndex.wxml",
+    "noUseC": [
+      ".bg-bottom {\n  width: 100%;\n  height: 289rpx;\n  background-image: linear-gradient(179deg, #06C584 49%, rgba(6,197,132,0.00) 94%);\n  position: absolute;\n  top: 0;\n\n}",
+      ".map-content {\n  background:red;\n  width:100%;\n  height:100%;\n  border-radius: 24rpx 24rpx 0 0;\n}",
+      ".bottom-box {\n  width: 100%;\n  height: 51rpx;\n}",
+      "\n.map-container {\n  border-radius: 24rpx 24rpx 0 0;\n  overflow: hidden;\n  position: relative;\n  transform: translate3d(0,0,0);\n}",
+      ".back-icon {\n  width: 60rpx !important;\n  height: 60rpx !important;\n  border-radius: 32rpx;\n  background-color: #fff;\n  transform: rotate(0deg) !important; \n  padding: 15rpx;\n  box-sizing: border-box;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/steps/steps.wxml",
+    "noUseC": [".first-img {\n  position: relative;\n}", ".img-box {\n  position: relative;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcCrossTip/sfcCrossTip.wxml",
+    "noUseC": [
+      "\n.bg-big {\n  width: 194rpx;\n  background-image: url('https://file.40017.cn/groundtrafficstage/bg_big_price.png');\n  background-size: 100% 100%;\n}",
+      "\n.bg-small {\n  width: 166rpx;\n  background-image: url('https://file.40017.cn/groundtrafficstage/bg_small_price.png');\n  background-size: 100% 100%;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcBanner/sfcBanner.wxml",
+    "noUseC": [
+      ".swiper-slide {\n  border-radius: 24rpx;\n}",
+      "\n.swiper-word-item {\n  max-width: 550rpx;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  line-height: 24rpx;\n  /* font-size: 24rpx; */\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcAddress/sfcAddress.wxml",
+    "noUseC": [
+      "\n.flex {\n  display: flex;\n}",
+      "\n.hide {\n  display: none !important;\n}",
+      "\n.pr24 {\n  padding-right: 24rpx !important;\n}",
+      "\n.addr-tips {\n  position: relative;\n  left: 42rpx;\n}",
+      "\n.addr-tip-close {\n  position: absolute;\n  left: 144rpx;\n  width: 92rpx;\n  height: 60rpx;\n  top: 50%;\n  transform: translate(0, -50%)\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/order/order.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/customHeader/customHeader.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/sfcBook.wxml",
+    "noUseC": [
+      ".map-style {\n    /* z-index:10; */\n   \n}",
+      "\n\n.safe-box {\n    position: absolute;\n    bottom: 16rpx;\n    left: 16rpx;\n    width: 100%;\n}",
+      "\n.widget-positon {\n    position: absolute;\n    margin-top: 10rpx;\n    right: 40rpx;\n    bottom: 22rpx;\n    width: 64rpx;\n    height: 64rpx;\n    box-shadow: 0 4rpx 8rpx 0 rgba(0, 0, 0, 0.10);\n    border-radius: 16rpx;\n    z-index: 1;\n}",
+      ".head-card {\n    bottom: 110rpx;\n}",
+      ".icon-locat{\n    bottom:47rpx!important;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceDetail/priceDetail.wxml",
+    "noUseC": [
+      ".cen-center{\n    -webkit-box-align: center;\n    -webkit-box-pack: center;\n    align-items: center;\n    justify-content: center;\n  }",
+      "  .start-cen {\n    -webkit-box-align: center;\n    -webkit-box-pack: start;\n    align-items: start;\n    justify-content: center;\n  }",
+      "  \n  .posi {\n    top: 20rpx;\n    right: 25rpx;\n    align-items: center;\n  }",
+      "  \n  .box-iphoneX {\n    padding-bottom: 30rpx !important;\n  }"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceDetail/pinSwitch/pinSwitch.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceComp/index.wxml",
+    "noUseC": [
+      ".book-page {\n  width:100%;\n  height: 100vh;\n  overflow: hidden;\n  position:relative;\n}",
+      ".a-active {\n  background: #F8FFFC;\n}",
+      ".mt55 {\n  margin-top: 55rpx;\n}",
+      ".fs20{\n  font-size: 20rpx;\n}",
+      ".fs24{\n  font-size: 24rpx;\n}",
+      ".b08 {\n  bottom: -8rpx;\n}",
+      ".b011 {\n  bottom: -12rpx;\n}",
+      ".light-gray{\n\tcolor: #00000033!important;\n\tfont-weight: 400!important;\n}",
+      ".timepick-container{\n\tdisplay: flex;\n\tpadding: 0 22rpx 0 32rpx;\n\theight: 64rpx;\n  align-items: center;\n  justify-content: center;\n\tborder-radius: 32rpx;\n\tborder: 0.8px solid rgba(228,228,228,0.8);\n\tmargin: 0 auto;\n}",
+      "\n.notice{\n  max-height: 600rpx;\n  padding:40rpx;\n  font-size: 24rpx;\n}",
+      ".pas-active-text{\n    color: #06C584!important;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceComp/modules/noPrice/noPrice.wxml",
+    "noUseC": [
+      ".refresh-img {\n    width: 48rpx;\n    height: 48rpx;\n    margin-bottom: 32rpx;\n}",
+      ".new-error {\n    font-size: 28rpx;\n    font-weight: bold;\n    margin-bottom: 50rpx;\n    color: #000;\n}",
+      ".refresh-btn {\n    width: 480rpx;\n    height: 104rpx;\n    line-height: 104rpx;\n    border-radius: 52rpx;\n    border: 2rpx solid rgba(6,197,132,1);\n    font-weight: bold;\n    font-size:36rpx;\n    text-align: center;\n    color:#06C584;\n}",
+      "\n.npPriceText {\n    display: inline-block;\n    font-size: 36rpx;\n    padding: 0 4rpx;\n}",
+      ".dot-space {\n    display: inline-block;\n    margin: auto 2px;\n}",
+      ".mt {\n    margin: 159rpx auto 50rpx;\n}",
+      "\n.mt-cross {\n    margin: 201rpx auto 50rpx;\n}",
+      ".mt-39 {\n    margin-top: 199rpx;\n}",
+      ".mt-72 {\n    margin-top: 232rpx;\n}",
+      ".m-32 {\n    margin: 42rpx auto 0rpx;\n}",
+      ".m-28 {\n    margin: 28rpx auto 0rpx;\n}",
+      ".loading-transparent{\n    background: transparent;\n    position: absolute;\n    top: 0;\n    bottom: 130rpx;\n    left: 0;\n    right: 0;\n    margin: auto;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/payConfirm/index.wxml",
+    "noUseC": [
+      ".display-flex {\n  height: 52rpx;\n  border-radius: 29rpx;\n  background: rgba(247,247,247,1);\n  padding: 36rpx 47rpx;\n  font-size: 32rpx;\n  color: #000;\n  margin-bottom: 56rpx;\n}",
+      ".phc {\n  font-size: 32rpx;\n  color: rgba(0,0,0,0.4);\n}",
+      ".number-box {\n  width: 155rpx;\n  height: 155rpx;\n  border-radius: 2r4px;\n  opacity: 1;\n  border: 3rpx solid rgba(229,229,229,1);\n  color: #000;\n  line-height: 155rpx;\n  display: flex;\n  align-items: baseline;\n  justify-content: center;\n  font-size: 48rpx;\n  font-weight: bold;\n  border-radius: 24rpx;\n}",
+      ".text-style-h {\n  font-size: 24rpx;\n}",
+      ".cancel {\n  width: 216rpx;\nheight: 104rpx;\nborder-radius: 55rpx;\nborder: 1rpx solid rgba(216,216,216,1);\nfont-size: 36rpx;\nline-height: 104rpx;\ntext-align: center;\ncolor: #000;\n}",
+      "\n.price {\n  display: flex;\n  align-items: baseline;\n  margin-top: 10rpx;\n  \n}",
+      ".btn {\n  height: 104rpx;\n  border-radius: 55rpx;\n  background: rgba(6,197,132,1);\n  text-align: center;\n font-size: 36rpx;\n font-weight: bold;\n line-height: 104rpx;\n color: #fff;\n width: 670rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/mileDeduction/mileDeduction.wxml",
+    "noUseC": [".liChengAlert {\n  padding: 40rpx 40rpx 80rpx;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/leaveMessage/leaveMessage.wxml",
+    "noUseC": [
+      ".item-active{\n    border: 1rpx solid #06c584ff;\n    background: #f8fffcff;\n    color: #06C584;\n    font-weight: bold;\n}",
+      ".submit-disable{\n    opacity: .4;\n}",
+      ".tips-active{\n    border: 1rpx solid #06c584ff!important;\n    background: #f8fffcff;\n    font-weight: bold;\n    color: #06c584ff!important;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/giftBag/giftBag.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/changePhone/index.wxml",
+    "noUseC": [
+      ".phc {\n  font-weight: normal;\n  font-size: 32rpx;\n  color: rgba(0,0,0,0.4);\n}",
+      ".number-box {\n  width: 155rpx;\n  height: 155rpx;\n  border-radius: 2r4px;\n  opacity: 1;\n  border: 3rpx solid rgba(229,229,229,1);\n  color: #000;\n  line-height: 155rpx;\n  display: flex;\n  align-items: baseline;\n  justify-content: center;\n  font-size: 48rpx;\n  font-weight: bold;\n  border-radius: 24rpx;\n}",
+      ".text-style-h {\n  font-size: 24rpx;\n}",
+      ".cancel {\n  width: 216rpx;\nheight: 104rpx;\nborder-radius: 55rpx;\nborder: 1rpx solid rgba(216,216,216,1);\nfont-size: 36rpx;\nline-height: 104rpx;\ntext-align: center;\ncolor: #000;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/bookNumber/index.wxml",
+    "noUseC": [
+      ".fontsize48{\n  font-size: 48rpx;\n}",
+      ".fontsize28 {\n  font-size: 28rpx;\n}",
+      ".num {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectTime/selectTime.wxml",
+    "noUseC": [
+      ".picker-indicator {\n  height:48px;\n  line-height:48px;\n}",
+      "\n.pickerSelected{\n  font-weight:800;\n  font-size: 30rpx;\n  /* background-color: rgba(200,0,0,0.2); */\n}",
+      "\n.tl {\n  text-align: left\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/selectCar.wxml",
+    "noUseC": [
+      "\n.map-ele-hidden {\n  opacity: 0;\n}",
+      "\n.openImg {\n  width: 68rpx;\n  height: 15rpx;\n}",
+      "\n.peakInfo{\n  min-height: 60rpx;\n  width: 100%;\n  z-index: 98;\n  align-items: center;\n}",
+      ".line-box {\n  width: 100%;\n  height: 24rpx;\n  padding: 8rpx;\n}",
+      ".btnCol{\n  background: #06c584;\n}",
+      ".btnCcc{\n  background-image: linear-gradient(to right,rgba(0, 217, 137, .4),rgba(0, 213, 101, .4));\n}",
+      ".emptyImg{\n  width: 24rpx;\n}",
+      ".ellips {\n  width: 84rpx;\n}",
+      "\n\n.appointment-text{\n  color: #F25353;\n  padding: 0 3rpx;\n}",
+      "\n\n.appointmentSan{\n  width:0;\n  height:0;\n  border-top:8rpx solid transparent;\n  border-bottom:8rpx solid transparent;\n  border-left:8rpx solid #06C584;\n  margin-left: 8rpx;\n}",
+      "\n.m {\n  color: #FFC400;\n  font-weight: 500;\n}",
+      "\n.text-06C584 {\n  color: #06C584;\n}",
+      ".text-F25353 {\n  color:#F25353\n}",
+      "\n.routeWarp {\n  padding: 20rpx;\n  /* background: #06C584; */\n}",
+      ".routeInfo {\n  /* transform: translateY(80rpx); */\n  line-height: 34rpx;\n  border-radius: 4rpx;\n  /* padding: 0 0 0 16rpx; */\n}",
+      "\n.distanceTips{\n  z-index: 10;\n  background: rgba(79, 87, 97, 0.8);\n  color: #fff;\n  text-align: center;\n}",
+      "\n.routeleft {\n  right: 0;\n}",
+      ".routeright {\n  left: 0;\n}",
+      "\n.cca {\n  color: #06C684;\n}",
+      "\n.li-box {\n  left: 15rpx;\n  font-size: 22rpx;\n}",
+      "\n.li-box1 {\n  border: 0.5rpx solid #F25353;\n  color: #F25353;\n  padding: 0rpx 6rpx 0rpx 6rpx;\n  height: 34rpx;\n  box-sizing: border-box;\n  border-radius: 4rpx 0 0 4rpx;\n}",
+      "\n.li-box2 {\n  background: #F25353;\n  margin-right: -2rpx;\n  border-radius: 0 4rpx 4rpx 0 ;\n  padding: 0 6rpx 0 6rpx;\n  height: 34rpx;\n}",
+      "\n.right-arry {\n  position: absolute;\n  left: -2px;\n  transform: rotate(135deg);\n  z-index: 100;\n  border: solid #F25353;\n  border-width: 0 0.5rpx 0.5rpx 0;\n  height: 5px;\n  width: 5px;\n  background: #fff;\n}",
+      "\n.li-switch {\n  transform: scale(.8);\n  position: absolute\n}",
+      "\n.mar0 {\n  margin-top: 0;\n}",
+      ".plague{\n  width: 100vw;\n  height: 102rpx;\n  margin-bottom: -20rpx;\n  padding: 0 20rpx;\n}",
+      ".plagueContent{\n  height: 102rpx;\n  padding: 0 29rpx;\n  background-color: #E1EAEF;\n  border-radius: 20rpx 20rpx 0px 0px;\n  display: flex;\n  /* align-items:center; */\n  justify-content: space-between;\n}",
+      ".plagueLeft{\n  height: 82rpx;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: space-around;\n  padding: 5rpx 0 10rpx;\n}",
+      ".plagueTop{\n  display: inline-flex;\n  align-items:center;\n  justify-content: flex-start;\n  /* margin-top: 7rpx; */\n}",
+      ".plagueIMG{\n  width: 32rpx;\n  height: 32rpx;\n  /* display: block; */\n}",
+      ".plagueRight{\n height: 82rpx;\n display: inline-flex;\n align-items:center;\n}",
+      ".plagueText{\n  line-height: 1;\n}",
+      ".plagueBto{\n  line-height: 1;\n  /* margin-top: 5rpx; */\n}",
+      ".plagueOpocity{\n  margin: 0 10rpx;\n  opacity: 0.3;\n}",
+      ".scroll-wrapper-outer {\n  overflow: hidden;\n  height: 88rpx;\n}",
+      ".number-container-big {\n  width: 33rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/template/skeleton.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/template/payMent.wxml",
+    "noUseC": [
+      ".pay-ment-cls{\n  width: 28rpx !important;\n  height: 28rpx !important;\n  padding: 20rpx !important;\n  right: 19rpx !important;\n}",
+      "\n.li-top-bord {\n  position: relative;\n  padding-top: 32rpx;\n  margin: 0 40rpx 0 40rpx\n}",
+      "\n.li-top {\n  margin: 0 60rpx 0 60rpx\n}",
+      ".li-body{\n  margin-top: 24rpx;\n  margin-bottom: 50rpx;\n  padding: 0 20rpx;\n}",
+      ".li-body-inner{\n}",
+      ".li-separate{\n  color: #EBEBEB;\n  padding: 0 24rpx;\n}",
+      ".seperate-text{\n  margin: 0 16rpx;\n}"
+    ]
+  },
+  { "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/template/carBox.wxml", "noUseC": [] },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/wxpayConfrim/wxpayConfrim.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/sfcEntry/sfcEntry.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/mileage/mileage.wxml",
+    "noUseC": ["\n.disabled{\n    opacity: 0.1;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/foldedcar/FoldedPopup/FoldedPopup.wxml",
+    "noUseC": ["\n\r\n.bolder {\r\n  font-weight: bolder;\r\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/foldedcar/FoldedEnter/FoldedEnter.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/business/monthCard/monthCard.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/locationPage/locationPage.wxml",
+    "noUseC": [
+      ".map-container{\n    width: 100%;\n    height: 100%;\n}",
+      "\n.arrow-class {\n    display: none !important;\n    width: 0 !important; \n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/index.wxml",
+    "noUseC": [
+      "\n.startSelectIcon {\n  width: 90rpx;\n  height: 112rpx;\n  position: absolute;\n  /* top: calc(50vh - 45rpx - 170rpx); */\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -100%);\n  margin-top: 20rpx;\n}",
+      "\n.main-scroll {\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: yellowgreen;\n}",
+      "\n.mainbox-bg {\n  height: 400rpx;\n  width: 100vw;\n  background-color: azure;\n}",
+      ".tablist {\n  top: 0;\n  padding: 0 25rpx;\n  width: 100%;\n  height: 80rpx;\n  color: #fff;\n}",
+      ".tablist-bg {\n  width: 100%;\n  height: 96rpx;\n  background: rgba(0, 0, 0, 0.4);\n  border-radius: 16rpx;\n}",
+      ".tablist-wmask {\n  top: 80rpx;\n  height: 32rpx;\n  width: 100%;\n}",
+      "\n.tabItem {\n  line-height: 80rpx;\n  padding: 0 25rpx;\n}",
+      ".tabItem-light-bg {\n  bottom: 0;\n  line-height: 89rpx;\n  z-index: 2;\n  color: #333;\n  font-size: 36rpx;\n}",
+      "\n.queryPriceBox {\n  flex-shrink: 1;\n}",
+      "\n.floor-area {\n  background: transparent;\n  margin-bottom: 20rpx;\n}",
+      "\n.DIN-android {\n  padding-top: 12rpx;\n}",
+      "\n.top26 {\n  top: 26rpx;\n}",
+      ".top36 {\n  top: 36rpx;\n}",
+      "\n.switchOff {\n  /* height: 20rpx; */\n  flex: 0 0 20rpx;\n}",
+      "\n.pt340 {\n  padding-top: 340rpx;\n}",
+      ".pt356-iphonex {\n  padding-top: 356rpx;\n}",
+      ".pt375 {\n  padding-top: 375rpx;\n}",
+      "\n.scroll-view_H {\n  height: calc(100vh - 90rpx);\n  background-color: #fff;\n  background: linear-gradient(to bottom, #fff 15%, #F5F5F5 60%);\n}",
+      "\n.immediatebus{\n  position: absolute;\n  /* width:251rpx; */\n  height:70rpx;\n  background:rgba(79,87,97,1);\n  box-shadow:0px 0px 29px 2px rgba(104,112,121,0.2);\n  border-radius:76rpx;\n  top: 50%;\n  /* top: calc(50vh - 45rpx - 150rpx); */\n  left: 50%;\n  transform: translate(-50%, -100%);\n  margin-top: -80rpx;\n}",
+      ".immediatebuswidth{\n  width: 100%;\n  height: 100%;\n  padding: 0 32rpx;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}",
+      ".immediatebusImage{\n  margin-left: 8rpx;\n  display: block;\n  width: 15rpx;\n  height: 24rpx;\n}",
+      "\n.bottomLogo {\n  width: 100%;\n  height: 70rpx;\n  background: white;\n}",
+      ".bottomLogoX {\n  width: 100%;\n  height: 110rpx;\n  background: white;\n}",
+      "\n.new-style {\n  margin: 0 20rpx;\n}",
+      "\n.abstyle{\n  border-radius: 24rpx 24rpx 0 0;\n  /*margin-left: -20rpx;*/\n  /*margin-right: -20rpx;*/\n}",
+      ".section-wrap {\n  width: 718rpx;\n  border-radius: 24rpx;\n  background: #fff;\n  padding-top: 24rpx;\n  margin-bottom: 16rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/template/addressSelect.wxml",
+    "noUseC": [
+      ".addressInput {\n  /* align-items: center; */\n  margin: 0 40rpx 0;\n  /* height: 122rpx; */\n  /* padding: 36rpx 0; */\n  font-family: PingFangSC-Regular;\n  margin-bottom: 40rpx;\n  padding-bottom: 36rpx;\n  display: flex;\n  /* align-items: center; */\n}",
+      "\n.input-content {\n  align-items: center;\n  flex-grow: 1;\n  overflow: hidden;\n}",
+      "\n.quick-selection {\n  white-space: nowrap;\n  overflow: hidden;\n  margin: 20rpx 0 0 10rpx;\n  width: auto;\n  max-height: 100rpx;\n  transition: max-height 0.2s ease-in-out;\n  transform: translate(0, 0);\n}",
+      ".selection-item {\n  padding: 0 10rpx;\n  background-color: #f7f8f9;\n  border-radius: 8rpx;\n  line-height: 1;\n  height: 40rpx;\n  display: inline-flex;\n  align-items: center;\n  /* max-width: 256rpx; */\n}",
+      "\n.quick-active {\n  background: #E5F9F2;  \n  border: 1rpx solid rgba(6, 197, 132, 0.5019607843137255);\n  border-radius: 8rpx;\n  font-family: PingFang SC;\n  font-weight: 400;\n  color: #06C584;\n}",
+      "\n.rec-pots-tips {\n  color: #666666;\n  margin: 10rpx 0 0 10rpx;\n}",
+      "\n.ticketTips {\n  margin: 6rpx 0 0 24rpx;\n}",
+      ".productnewtab {\n  border-radius: 32rpx;\n  padding: 18rpx 26rpx;\n  position: relative;\n}",
+      ".kuachengbg {\n  background-image: url(\"https://file.40017.cn/groundtrafficstage/usecar/usecar/train/img/Inter-city-travel.png\");\n  background-size: 100%;\n  background-repeat: no-repeat;\n  background-position: center center;\n  width: 118rpx;\n  height: 28rpx;\n}",
+      "\n.acitve-line {\n  width: 63rpx;\n  height: 10rpx;\n  background: linear-gradient(270deg, #FFF852 0%, #FAD81B 100%);\n  border-radius: 8rpx;\n  margin-top: 6rpx;\n}",
+      "\n.gray-line {\n  width: 63rpx;\n  height: 10rpx;\n  border-radius: 8rpx;\n  margin-top: 6rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/components/CouponRebate/CouponRebate.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/translateJS/translateJS.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/menu/menu.wxml",
+    "noUseC": [".unstartOrderScroll {\n  bottom: 16rpx;\n  pointer-events: auto;\n  width: 100vw;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/infoSelecter/infoSelecter.wxml",
+    "noUseC": [
+      "\n.productTabSwitch {\n  margin: 0 0 20rpx 0;\n  background: #F7F8F8;\n  border-top-left-radius: 20rpx;\n  border-top-right-radius: 20rpx;\n}",
+      ".arr-time {\n  margin-left: 20rpx;\n  margin-top: 10rpx;\n}",
+      ".detail-export {\n\tposition: fixed;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\tbackground: rgba(0,0,0,.7);\n}",
+      ".details {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 0;\n\tright: 0;\n\tbackground-color: #FFF;\n\tborder-radius: 20rpx 20rpx 0 0;\n  padding: 0 32rpx constant(safe-area-inset-bottom);\n  padding: 0 32rpx env(safe-area-inset-bottom);\n}",
+      ".childs {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tjustify-content: space-around;\n\tmargin-bottom: 40rpx;\n}",
+      ".child-poi {\n\twidth: 216rpx;\n\theight: 60rpx;\n\talign-items: center;\n\tdisplay: flex;\n\tjustify-content: center;\n\tborder-radius: 30rpx;\n\tmargin-top: 20rpx;\n\tpadding: 0 20rpx;\n\tflex-shrink: 0;\n}",
+      "\n.btn-close-export{\n\tbackground: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUBAMAAADuRQ3yAAAAIVBMVEVHcEyioqKkpKSjo6OioqKjo6Ojo6Ojo6Ojo6Ojo6Ojo6MmcWTmAAAACnRSTlMATQ02IUbGeqPjoeECTwAAAqZJREFUSMelVztz00AQPp/Pg+lyltSkkgPJDF2U0KSznMBMUkWBNKkYhooqdSqGkhKo3DEDCd5fyZ0kS7v3kO6GGxe2/Gmf3+7tMmYcfnF6W2W3pxc5GznnlWxP9noQLAqFWOc5O3ip3klWfuQLKXtR/FzKEz+SylE6TnzId4Z13IMVMrUfltJhLy+SPPDpm8zpr6jem4+m8tjtgf1HkfriUibGu5k3NbyiYqsbf2IOMxLSbCDfVGxxM8SMwyTIUlNsuRhm5rILD5erYaiQO63TZIzwxc6C8noMOttZMKZfWZCF6u8sWC7GoS2mWI1DRdKEahypQHmgqa2xE2Tq2ugfyNg9HdU+wfMtifAEPvQ0SalXV/AHQ/fhN/ELe/UcYK//9QyQVKb8EsgrsYGn/tcDPCJuKuVTXH9vAe6R0I+4Go/ZDOeKf+7FfiNC2fJaf9A5AvjSRqP71pJrgWPVyPprfOmjVVIG7IQdIasbl1OLLI3f2OgusIVRrI3jllDGE1aZda3ErlSAf5ncylhlcmgC8POSpK05DqhK/XZDydBKtYk9BYCt3W2lA8rOAH4wB9Q2gN2Brb+2NXf45fCKu6D78GgloIaaKahzYGdAp8DqAjqzdl51Yg26aL58tSlY02VpRLAhHzc5qElIqd2Jm9NyqalNCgaRjxZhXTCkDBH5VCA+MVqGuLiZQJ4/wBZ7rCJFGuEliqcmIyMtAweWMvoO86tWjkr2Fcn9DOA7bW+oaRrt7Qy1t7ppolY8p4wWm3vairFfa2/XbggYcm20qiMuo4grjlXBF2fMdRxxyUeMDhEDScyYMzI8zZKwOc+a9MIHvZjxMWIojRl1WekboNP/Gcudwz4v3TlXy0bgChGzmMSsO90SpXBjS5QWFbqatQuflK6F7x9wJ6YYWGLJowAAAABJRU5ErkJggg==) 0 0 no-repeat;\n\tbackground-size: 100% 100%;\n\twidth: 42rpx;\n\theight: 42rpx;\n\n\tposition: absolute;\n\ttop: 31rpx;\n\tright: 31rpx;\n}",
+      "\n.right-space {\n\tpadding-right: 180rpx;\n}",
+      "\n.vhidden {\n\tvisibility: hidden;\n}",
+      ".detail-exports {\n\tdisplay: flex;\n\talign-items: center;\n}",
+      ".specific-export {\n\tposition: absolute;\n\tright: 0rpx;\n\ttop: -6rpx;\n\tcolor: #06c584;\n\tfont-size: 20rpx;\n\twhite-space: nowrap;\n\t/*padding: 6rpx 13rpx;*/\n\t/*\n\tdisplay: flex;\n\talign-items: center;\n\tfont-weight: normal;\n\theight: 40rpx;\n\twidth: 134rpx;\n\tpadding-top: 2rpx;\n\tline-height: 1;\n\tjustify-content: center;\n}",
+      ".text-red {\n  color: #fe3e2d;\n  font-weight: bold;\n}",
+      ".dots{\n\tfont-size: 30rpx;\n\tcolor: #333;\n\twidth: 4rpx;\n\theight: 20rpx;\n\n\t/* margin-left: 14rpx; */\n\t/* margin-top: 3rpx; */\n\tmargin-left: 10rpx;\n}",
+      "\n.address-dots{\n  width: 30rpx;\n  height: 60rpx;\n  display: flex;\n  align-items: center;\n\tflex-shrink: 0;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/endBubble/endBubble.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/immediateCar/immediateCar.wxml",
+    "noUseC": [
+      "\n.startSelectIcon {\n  width: 90rpx;\n  height: 112rpx;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -100%);\n  margin-top: 20rpx;\n}",
+      "\n.main-scroll {\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: yellowgreen;\n}",
+      "\n.mainbox-bg {\n  height: 400rpx;\n  width: 100vw;\n  background-color: azure;\n}",
+      ".tablist {\n  top: 0;\n  padding: 0 25rpx;\n  width: 100%;\n  height: 80rpx;\n  color: #fff;\n}",
+      ".tablist-bg {\n  width: 100%;\n  height: 96rpx;\n  background: rgba(0, 0, 0, 0.4);\n  border-radius: 16rpx;\n}",
+      ".tablist-wmask {\n  top: 80rpx;\n  height: 32rpx;\n  width: 100%;\n}",
+      "\n.tabItem {\n  line-height: 80rpx;\n  padding: 0 25rpx;\n}",
+      ".tabItem-light-bg {\n  bottom: 0;\n  line-height: 89rpx;\n  z-index: 2;\n  color: #333;\n  font-size: 36rpx;\n}",
+      "\n.queryPriceBox {\n  flex-shrink: 1;\n}",
+      ".car-nav {\n  height: 90rpx;\n  background-color: #fff;\n}",
+      ".nav-item {\n  text-align: center;\n}",
+      ".nav-txt {\n  height: 100%;\n}",
+      ".nav-imgTitle {\n  height: 80rpx;\n  width: 168rpx;\n}",
+      "\n.nav-title-flag {\n  width: 100rpx;\n  height: 34rpx;\n  top: -6rpx;\n  right: -6rpx;\n}",
+      ".navbar-container {\n  position: relative;\n  z-index: 2;\n  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.06);\n}",
+      ".scroll-view_H {\n  height: calc(100vh - 90rpx);\n  background-color: #fff;\n  background: linear-gradient(to bottom, #fff 15%, #F5F5F5 60%);\n}",
+      "\n.immediatebus{\n  position: absolute;\n  /* width:251rpx; */\n  height:70rpx;\n  background:rgba(79,87,97,1);\n  box-shadow:0px 0px 29px 2px rgba(104,112,121,0.2);\n  border-radius:76rpx;\n  top: 53%;\n  left: 50%;\n  transform: translate(-50%, -100%);\n  margin-top: -100rpx;\n}",
+      ".immediatebuswidth{\n  width: 100%;\n  height: 100%;\n  padding: 0 32rpx;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}",
+      ".immediatebusImage{\n  margin-left: 8rpx;\n  display: block;\n  width: 15rpx;\n  height: 24rpx;\n}",
+      ".recPoiPicker {\n  padding-top: 44rpx;\n}",
+      ".pickerView {\n  height: 300rpx;\n  margin: 0 0 30rpx;\n}",
+      ".picker-indicator {\n  height: 48px;\n  line-height: 48px;\n}",
+      ".picker-item{\n  color:#333;\n  font-size:30rpx;\n  text-align:center;\n  line-height:48px;\n  font-weight:600;\n  /* border: 2px solid red; */\n}",
+      "\n.recPoiDot {\n  width: 18rpx;\n  height: 18rpx;\n  border-radius: 50%;\n  border: 4rpx solid #fff;\n  z-index: 1;\n}",
+      "\n.recCancel {\n  line-height: 64rpx;\n}",
+      "\n.bounce {\n  animation-name: bounce;\n  transform-origin: center bottom;\n}",
+      "\n.noBounce {\n  animation: none;\n}"
+    ]
+  },
+  { "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/ycMap/index.wxml", "noUseC": [] },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/transition/transition.wxml",
+    "noUseC": [
+      ".tc-transition {\n  transition-timing-function: ease;\n}",
+      ".tc-fade-leave-active {\n  transition-property: opacity;\n}",
+      ".tc-fade-leave-to {\n  opacity: 0;\n}",
+      ".tc-fade-right-leave-active {\n  transition-property: opacity, transform;\n}",
+      ".tc-fade-up-leave-to {\n  transform: translate3d(0, 100%, 0);\n  opacity: 0;\n}",
+      ".tc-fade-down-leave-to {\n  transform: translate3d(0, -100%, 0);\n  opacity: 0;\n}",
+      ".tc-fade-left-leave-to {\n  transform: translate3d(-100%, 0, 0);\n  opacity: 0;\n}",
+      ".tc-fade-right-leave-to {\n  transform: translate3d(100%, 0, 0);\n  opacity: 0;\n}",
+      ".tc-slide-right-leave-active {\n  transition-property: transform;\n}",
+      ".tc-slide-up-leave-to {\n  transform: translate3d(0, 100%, 0);\n}",
+      ".tc-slide-down-leave-to {\n  transform: translate3d(0, -100%, 0);\n}",
+      ".tc-slide-left-leave-to {\n  transform: translate3d(-100%, 0, 0);\n}",
+      ".tc-slide-right-leave-to {\n  transform: translate3d(100%, 0, 0);\n}",
+      ".tc-grow-up-leave-active {\n  transition-property: height;\n}",
+      ".tc-grow-up-leave-to {\n  overflow: hidden;\n  height: 0;\n}"
+    ]
+  },
+  { "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/toast/toast.wxml", "noUseC": [] },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/timepick/timer/timer.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/timepick/pickers/pickers.wxml",
+    "noUseC": [
+      "\n.timer-active {\n  font-weight: bold;\n  font-size: 36rpx;\n}",
+      "\n.picker-mask {\n  background: transparent;\n  position: fixed;\n  width: 100%;\n  height: 80%;\n  top: 0;\n  left: 0;\n}",
+      "\n.active-wrap {\n  opacity: 0!important;\n  background: transparent!important;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/timepick/index/index.wxml",
+    "noUseC": [
+      "\n\n.timer-result {\n    margin-top: 64rpx;\n    margin-bottom: 32rpx;\n}",
+      "\n.time-tip {\n    height: 40rpx;\n    line-height: 36rpx;\n    width: 180rpx;\n    border-radius: 20rpx;\n    border: 2rpx solid #cccccc;\n    /*no*/\n    margin: 0 auto 6rpx;\n}",
+      "\n.choosed {\n    color: #00c777;\n}",
+      "\n.timer-arrow {\n    height: 10rpx;\n    width: 40rpx;\n    position: relative;\n    margin-left: 30rpx;\n    margin-right: 30rpx;\n    margin-top: 54rpx;\n    background: url(https://file.40017.cn/groundtraffic/linebus/intercitybulter/car/book/arrow_time.png) center center / 100% 100% no-repeat;\n}",
+      "\n.less-padding{\n    margin: 0 -12rpx;\n}",
+      "\n.f24 {\n\tfont-size: 24rpx;\n}",
+      "\n  .timeduring-box-active{\n\tborder: 2rpx solid #06C584;\n\tbackground: #F8FFFC;\n  }"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/sfcCoupon/sfcCoupon.wxml",
+    "noUseC": [
+      ".unavailable {\n  color: #ff3400\n}",
+      "\n.bg-col {\n  background: #ffe8a1\n}",
+      "\n.f15 {\n  font-size: 30rpx !important;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/scrollNumber2/scrollNumber2.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/safeComp/safeComp.wxml",
+    "noUseC": [
+      "\n.colorPrimaryLight {\n    color:rgba(65, 118, 255, 0.6);\n}",
+      ".colorRedLight {\n    color: rgba(242, 83, 83, 0.6);\n}",
+      "\n.js-green {\n    background: var(--blue-light)\n}",
+      "\n.js-in-green {\n    background: var(--blue);\n}",
+      "\n.js-red {\n    background: rgba(242, 83, 83, 0.16);\n}",
+      "\n.js-in-red {\n    background: rgba(242, 83, 83, 1);\n}",
+      "\n.reset-icon-mt {\n    margin-top: 2rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/ruleTips/ruleTips.wxml",
+    "noUseC": [
+      "\n.ee2a2a {\n  color: #ee2a2a\n}",
+      ".ft28 {\n  font-size: 28rpx !important;\n  margin-top: 40rpx;\n}",
+      "\n.ft12 {\n  padding-bottom: 20rpx;\n}",
+      "\n.ft28 {\n  font-weight: bold;\n}",
+      "\n.padding-text {\n  margin: 14rpx 0 28rpx !important;\n  font-weight: normal !important;\n}",
+      "\n.gray-3 {\n  color: #000;\n}",
+      "\n.gray-9 {\n  color: #000;\n}",
+      "\n.color24A2FF {\n  color: #24a2ff;\n}",
+      "\n.fs26 {\n  font-size: 26rpx !important;\n}",
+      "\n.p-b-40 {\n  padding-bottom: 40rpx;\n}",
+      "\n.flex-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -ms-flex-pack: center;\n  justify-content: center;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  -ms-grid-row-align: center;\n  align-items: center;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/recStartPoi/recStartPoi.wxml",
+    "noUseC": [
+      ".recPoiPicker {\n  padding-top: 44rpx;\n  border-radius: 20rpx 20rpx 0 0;\n}",
+      ".pickerView {\n  height: 300rpx;\n  margin: 0 0 30rpx;\n}",
+      ".picker-indicator {\n  height: 102rpx;\n  line-height: 102rpx;\n}",
+      ".picker-item {\n  color:#333;\n  font-size:30rpx;\n  text-align:center;\n  line-height: 102rpx;\n  /* border: 2px solid red; */\n}",
+      ".poiMarker {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform-origin: center bottom;\n  width: 0;\n  height: 0;\n  overflow: visible;\n}",
+      "\n.recPoiMarker {\n  padding: 0 24rpx 0 32rpx;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: #fff;\n  margin-top: -40rpx;\n  z-index: 10;\n  box-sizing: border-box;\n  transform-origin: top left;\n  box-shadow: 0px 10rpx 10rpx rgba(0, 0, 0, 0.1);\n}",
+      "\n.reCircle {\n  width: 50rpx;\n  height: 50rpx;\n  background: #22C584;\n  border-radius: 50%;\n  margin-top: -40rpx;\n  z-index: 9;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}",
+      "\n.reCircleInner {\n  position: absolute;\n  width: 18rpx;\n  height: 18rpx;\n  background: #FFFFFF;\n  border-radius: 50%;\n  transform-origin: center center;\n}",
+      "\n.recMarkerZhu {\n  width: 6rpx;\n  background: #009F69;\n  z-index: 5;\n  height: 55rpx;\n  border-radius: 3rpx;\n}",
+      "\n.recPoiMarkerArrow {\n  width: 17rpx;\n  height: 17rpx;\n  margin-left: 5rpx;\n}",
+      "\n.text-recdesc {\n  color: #FFFFFF;\n  opacity: 0.8;\n  white-space: nowrap;\n  font-size: 18rpx;\n  line-height: 27rpx;\n  position: relative;\n  top: 2rpx;\n}",
+      "\n.recCancel {\n  line-height: 64rpx;\n}",
+      "\n.animated {\n}",
+      "\n.bounce {\n  animation-name: bounce;\n  transform-origin: center bottom;\n}",
+      "\n.noBounce {\n  animation: none;\n}",
+      "\n.adjust{\n  padding: 25rpx 0;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/questions/questions.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/productTypeChgDlg/index.wxml",
+    "noUseC": ["\n.light {\n  color: #06c584;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/popconfirm/index.wxml",
+    "noUseC": [
+      ".popup-wrap {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, .7);\n    z-index: 18;\n}",
+      ".cover-btm {\n  position: fixed;\n  left: 0;\n  top: 0;\n  background: transparent;\n  height: 100%;\n  height: 100%;\n}",
+      ".font-size85{\n    font-size: 34rpx;\n}",
+      ".font-size65{\n    font-size: 26rpx;\n}",
+      ".cover-btm {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 70rpx;\n  width: 245rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/pickupDateTime/index.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/pageLoading/pageLoading.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/pageEmpty/pageEmpty.wxml",
+    "noUseC": [
+      ".full-screen {\n  height: 100vh;\n  overflow: hidden;\n}",
+      ".not-full-screen {\n  height: auto;\n  overflow: unset;\n}",
+      ".btn-normal {\n  font-weight: normal !important;\n}",
+      ".btn-bold {\n  font-weight: bold !important;\n}",
+      ".btn-green-color {\n  color: #06c584;\n  font-weight: bold;\n}",
+      ".btn-green-bg {\n  font-weight: bold;\n  background: linear-gradient(90deg, rgba(0, 218, 138, 1) 0%, rgba(0, 214, 101, 1) 100%);\n  box-shadow: 0rpx 10rpx 26rpx 0rpx rgba(13, 214, 108, 0.35);\n  color: #ffffff;\n}",
+      ".btn-primary {\n  color: #ffffff;\n  background-color: #06c584;\n}",
+      "\n.c06C584{\n\tcolor: #06C584;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/orderPopup/orderPopup.wxml",
+    "noUseC": ["\n.content-img{\n  width: 100%;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/numberScroller/numberScroller.wxml",
+    "noUseC": ["\n.easing {\n    transition: all 200ms linear;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/normalNumber/normalNumber.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/newCustomer/newCustomer.wxml",
+    "noUseC": [
+      "\n.zindex-reset {\n  z-index: 90;\n}",
+      "\n.top-reset {\n  top: 16rpx;\n}",
+      "\n.query {\n  background: url('https://file.40017.cn/groundtrafficstage/usecar/usecar/notice/bg_Inquiry.gif') no-repeat; \n  background-size: 100% 100%;\n}",
+      "\n.opacity {\n  opacity: 0.3;\n}",
+      "\n.forbidEv {\n  pointer-events: none;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/mission/mission.wxml",
+    "noUseC": [".missionR{\n  padding: 16rpx 40rpx;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/iconToast/iconToast.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/headCard/headCard.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/drawerOz/index.wxml",
+    "noUseC": [
+      "\n.hidden-slider {\n    overflow: hidden;\n}",
+      "\n.hidden-slot {\n    overflow: auto;\n}",
+      "\n.white-bg {\n    background-color: #fff;\n}",
+      "\n.f40 {\n    font-size: 40rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/drawer/index.wxml",
+    "noUseC": [
+      ".hidden-slider{\n    overflow: hidden;\n}",
+      ".hidden-slot{\n  overflow: auto;\n}",
+      "\n.white-bg {\n    background-color: #fff;\n}",
+      "\n.f40{\n\tfont-size: 40rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/customHeader/customHeader.wxml",
+    "noUseC": [
+      "\n.separator {\n  height: 40rpx;\n  width: 0;\n  box-sizing: border-box;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}",
+      "\n.title {\n  font-weight: bold;\n  font-size: 32rpx;\n  color: #fff;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/corssCar/corssCar.wxml",
+    "noUseC": [
+      "\n.cross-has-tags {\n  margin-bottom: 12rpx;\n}",
+      "\n\n.highline-nolist-wrapper {\n  font-size: 32rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/augmentedAndQa/augmentedAndQa.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/announcement/announcement.wxml",
+    "noUseC": ["\n.hide {\n  display: none;\n}"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/activityPopup/activityPopup.wxml",
+    "noUseC": [
+      "\n.content-wrapper-top0{\n  padding-top: 50rpx\n}",
+      "\n.right0 {\n  right: 1px;\n}",
+      ".margin-top14{\n  margin-top: -14%;\n}",
+      ".margin-top34{\n  margin-top: -34%;\n}",
+      "\n.padding16-bottom {\n  padding-bottom: 16rpx;\n}",
+      ".padding10-bottom {\n  padding-bottom: 10rpx;\n}",
+      ".price-amount{\n  margin: 0 8rpx;\n  font-weight: 900;\n  font-size: 50rpx;\n}",
+      ".price-amount4{\n  font-size: 38rpx;\n}",
+      ".price-sign{\n  margin-bottom: -16rpx;\n  padding-left: 8rpx;\n  font-size: 22rpx;\n}",
+      ".price-discount {\n  margin-bottom: -16rpx;\n  font-size: 22rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/actionSheet/actionSheet.wxml",
+    "noUseC": [
+      "\n.mask-hide{\n    display: none;\n}",
+      ".action-sheet-toggle{\n    -webkit-transform: translate(0);\n    transform: translate(0)\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/checkstand.wxml",
+    "noUseC": [
+      ".product-subtitle{\n    font-weight: bold;\n    margin-bottom:52rpx;\n}",
+      ".product-desc{\n    font-size: 26rpx;\n    margin-bottom:52rpx;\n    height: 100%;\n    box-sizing: border-box;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/components/status/status.wxml",
+    "noUseC": []
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/components/price/price.wxml",
+    "noUseC": [
+      ".txt-pad{\n    padding-left: 4rpx;\n    padding-right: 4rpx;\n}",
+      ".dis-txt{\n    display: inline-block;\n    transform: translateY(2rpx);\n}",
+      ".num-inline{\n    display: inline-block;\n    transform: translateY(3rpx);\n}",
+      ".vt-line{\n    width: 2rpx;\n    height: 16rpx;\n    opacity: 1;\n    background: #0000001a;\n    display: inline-block;\n    margin-right:16rpx;\n    margin-left:16rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/components/cancelNoWorry/cancelNoWorry.wxml",
+    "noUseC": [
+      ".content{\n    padding:56rpx 40rpx;\n}",
+      ".product-subtitle{\n    font-weight: bold;\n    margin-bottom:52rpx;\n\n}",
+      ".product-desc{\n    font-size: 26rpx;\n    margin-bottom:52rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/address/address.wxml",
+    "noUseC": [
+      ".margin-30 {\n  margin: 0 32rpx;\n}",
+      "\n.header-city {\n  line-height: 1;\n  margin-left: 40rpx;\n}",
+      ".header-where {\n  height: 60rpx;\n  margin-left: 20rpx;\n  /* background-color: #f8f8f8; */\n  color: #CCC;\n  position: relative;\n}",
+      ".placeholder {\n  font-size: 28rpx;\n  color: #CCC;\n}",
+      ".wrap-flex{\n  width:1300rpx;\n  display: flex;\n  align-items: flex-start;\n  justify-content: flex-start;\n  flex-wrap: wrap;\n}",
+      ".line-top {\n  padding-top: 35rpx;\n  position: relative;\n}",
+      ".border-top05-gray {\n  position: relative;\n}",
+      ".address-textarea-placeholder {\n  font-size: 28rpx;\n  color: #999999;\n}",
+      ".opacity05 {\n  opacity: 0.5\n}",
+      ".common-tag {\n  width: 60rpx;\n  height: 28rpx;\n  line-height: 28rpx;\n  padding: 0 10rpx;\n  font-family: PingFangSC-Regular;\n  font-size: 20rpx;\n  border-radius: 16rpx 16rpx 16rpx 0;\n}",
+      ".mini-common-tag {\n\twidth: 54rpx;\n\theight: 24rpx;\n\tline-height: 25rpx;\n\tpadding: 0 9rpx;\n\tfont-family: PingFangSC-Regular;\n\tfont-size: 18rpx;\n  border-radius: 12rpx 12rpx 12rpx 0;\n  position: absolute;\n  top: -14rpx;\n  right: 0;\n  z-index: 1;\n}",
+      ".collect-tag {\n  width: 76rpx;\n  height: 28rpx;\n  line-height: 28rpx;\n  padding: 0 8rpx;\n  font-family: PingFangSC-Regular;\n  font-size: 20rpx;\n\tborder-radius: 12rpx 12rpx 12rpx 0;\n}",
+      ".mini-collect-tag {\n  width: 72rpx;\n  height: 24rpx;\n  line-height: 25rpx;\n  padding: 0 9rpx;\n  font-family: PingFangSC-Regular;\n  font-size: 18rpx;\n  border-radius: 14rpx 14rpx 14rpx 0;\n  position: absolute;\n  top: -14rpx;\n  right: 0;\n  z-index: 1;\n  /* background: #F3ECFE;\n  color: #8A43F6; */\n}",
+      ".mt28 {\n\tmargin-top: 28rpx;\n}",
+      ".rail {\n  width: 100%;\n  height: 20rpx;\n  background-color: #F6F6F6;\n}",
+      "\n\n\n.b-result-item {\n  margin: 0 33rpx;\n}",
+      "\n.b-result-child {\n  display: flex;\n  flex-wrap: wrap;\n}",
+      ".b-result-child {\n  padding-bottom: 30rpx;\n}",
+      ".b-result-address {\n  padding-right: 20rpx;\n  margin-top: 4rpx;\n}"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/address/components/address-header2/address-header2.wxml",
+    "noUseC": [
+      "\n.search-clear {\n  padding: 36rpx 60rpx 36rpx 36rpx;\n  background: url('https://file.40017.cn/groundtrafficstage/usecar/distributioncomponents/img/icon_delete_search.png') 48rpx 22rpx/29rpx 29rpx no-repeat;\n}",
+      "\n.placeholder-focus {\n  font-size: 28rpx;\n  color: #CCC;\n}",
+      ".placeholder{\n  font-size: 28rpx;\n  color: #333;\n}",
+      ".show-close-icon {\n  position: relative;\n  padding-right: 56rpx;\n}"
+    ]
+  }
+]
