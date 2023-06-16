@@ -12,8 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "css-tree": "^2.3.1",
     "glob": "^10.2.6",
     "htmlparser2": "^9.0.0",
+    "prettier": "^2.8.8",
     "typescript": "^5.0.4"
   }
 }

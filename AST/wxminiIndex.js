@@ -2,7 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const htmlparser = require('htmlParser2');
 const uitls = require('./utils');
+const cssTree = require('css-tree');
+// const prettier = require('prettier');
+// const prettierConfig = require('../../prettier.config');
 
+const skipFileArr = ['transition.wxml'];
 // 需要删除的class清单
 let needDelClassName = [];
 // 定义一个对象来存储 CSS 属性
@@ -13,23 +17,36 @@ const regex = /^\s*\.([a-zA-Z0-9_-]+)\s*{([^}]+)}/gm;
 async function start() {
   const wxmlPath = uitls.scanWxmlFile();
   for (const wxmlP of wxmlPath) {
+    const isSkip = skipFileArr.some((item) => wxmlP.includes(item));
+    // console.log(isSkip)
     const wxssPath = uitls.changeFileExt(wxmlP, '.wxss');
-
-    if (fs.existsSync(wxssPath)) {
-      wxmlClass = [];
-      // 解析html class
-      const htmlStr = fs.readFileSync(wxmlP, 'utf8');
-      await dealWxmlClass(htmlStr);
-      // 解析wxss css
-      const wxssClassVal = dealCssName(wxssPath);
-      const noUseC = differenceClass(wxmlClass, wxssClassVal);
-      needDelClassName.push({
-        path: wxmlP,
-        noUseC,
-      });
+    if (!isSkip) {
+      if (fs.existsSync(wxssPath)) {
+        wxmlClass = [];
+        // 解析html class
+        const htmlStr = fs.readFileSync(wxmlP, 'utf8');
+        await dealWxmlClass(htmlStr);
+        // 解析wxss css
+        const wxssClassVal = dealCssName(wxssPath);
+        // console.log(wxmlClass)
+        const noUseC = differenceClass(wxmlClass, wxssClassVal);
+        if (noUseC.length > 0) {
+          needDelClassName.push({
+            path: wxmlP,
+            noUseC,
+          });
+        }
+      }
     }
   }
-  // console.log(needDelClassName);
+  // const formattedData = prettier.format(JSON.stringify(needDelClassName), {
+  //   parser: 'json',
+  //   trailingComma: 'es5', // 添加尾随逗号（可选值：none|es5|all）
+  //   singleQuote: true, // 使用单引号而不是双引号
+  //   tabWidth: 2, // 缩进宽度
+  //   printWidth: 80, // 每行最大字符数
+  // })
+  console.log(needDelClassName);
 
   uitls.writeFile(path.join(__dirname, './out/wxssClassName.json'), JSON.stringify(needDelClassName), 'utf-8');
 }
@@ -55,17 +72,44 @@ const dealWxmlClass = function (htmlStr) {
 // 获取css属性名
 function dealCssName(path) {
   const wxssStr = fs.readFileSync(path, 'utf8');
-  const classNames = [];
+  const ast = cssTree.parse(wxssStr);
+  let selectors = [];
   const classContent = [];
+
+  // 一：csstree ast检索选择器
+  // cssTree.walk(ast, (wxss) => {
+  //   if (wxss.type === 'StyleSheet') {
+  //     wxss.children.forEach((node) => {
+  //       if (node && node.type == 'Rule' && node.prelude.type == 'SelectorList') {
+  //         node.prelude.children.forEach((cnode) => {
+  //           cnode.children.forEach((cval) => {
+  //             if (cval.type == 'ClassSelector') {
+  //               selectors.push(cval.name);
+  //             }
+  //           });
+  //         });
+  //       }
+  //     });
+  //   }
+  // });
+
+  // 二：正则方式获取wxss选择器及内容
   while ((match = regex.exec(wxssStr)) != null) {
     if (match) {
       const className = match[1];
-      classNames.push(className);
+      selectors.push(className);
       classContent.push(match[0]);
     }
   }
+
+  selectors = [...new Set(selectors)];
+  console.log({
+    selectors,
+    classContent,
+  });
+
   return {
-    classNames,
+    selectors,
     classContent,
   };
 }
@@ -78,9 +122,10 @@ function dealCssName(path) {
  */
 function differenceClass(wxmlC, wxssC) {
   const noUseClass = [];
-  wxssC.classNames.forEach((c, i) => {
-    const nouse = wxmlC.findIndex((v) => v == c) == -1;
-    nouse && noUseClass.push(wxssC.classContent[i]);
+  wxssC.selectors.forEach((c, i) => {
+    const nouse = wxmlC.findIndex((v) => v.includes(c)) == -1;
+    //  nouse && noUseClass.push(wxssC.classContent[i]);
+    nouse && noUseClass.push(c);
   });
   return noUseClass;
 }
