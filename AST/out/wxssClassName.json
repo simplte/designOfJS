@@ -1,6 +1,7 @@
 [
-  { "noUseC": ["auth-btn"] },
+  { "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/webview/webview.wxml", "noUseC": ["auth-btn"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/ticketGroup/ticketGroup.wxml",
     "noUseC": [
       "trade-gothic-font",
       "coupon-content",
@@ -18,10 +19,20 @@
       "getcoupon-btn-img"
     ]
   },
-  { "noUseC": ["head-card", "bg-bottom", "map-content", "bottom-box", "map-container", "back-icon"] },
-  { "noUseC": ["step-img", "entry-arrow", "entry", "title", "sub-title", "entry-right", "le", "ri"] },
-  { "noUseC": ["swiper-wrapper", "swiper-slide", "swiper-word-item"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/sfcIndex.wxml",
+    "noUseC": ["head-card", "bg-bottom", "map-content", "bottom-box", "map-container", "back-icon"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/steps/steps.wxml",
+    "noUseC": ["step-img", "entry-arrow", "entry", "title", "sub-title", "entry-right", "le", "ri"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcBanner/sfcBanner.wxml",
+    "noUseC": ["swiper-wrapper", "swiper-slide", "swiper-word-item"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcAddress/sfcAddress.wxml",
     "noUseC": [
       "flex",
       "hide",
@@ -43,18 +54,52 @@
       "item"
     ]
   },
-  { "noUseC": ["map-style", "safe-box", "widget-positon", "icon-locat"] },
-  { "noUseC": ["cen-center", "start-cen", "posi", "box-iphoneX", "change"] },
-  { "noUseC": ["book-page", "disabled", "num-txt", "haluo-select-box", "day", "timepick-container", "notice"] },
-  { "noUseC": ["refresh-img", "new-error", "refresh-btn", "npPriceText", "dot-space"] },
-  { "noUseC": ["display-flex", "phc", "number-box", "text-style-h", "active", "cancel"] },
-  { "noUseC": ["liChengAlert"] },
-  { "noUseC": ["submit-disable"] },
-  { "noUseC": ["summary-img-head", "origin-price", "text-center"] },
-  { "noUseC": ["phc", "number-box", "text-style-h", "active", "cancel"] },
-  { "noUseC": ["number-item-1", "number-item-7"] },
-  { "noUseC": ["picker-indicator", "vline"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/sfcBook.wxml",
+    "noUseC": ["map-style", "safe-box", "widget-positon", "icon-locat"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceDetail/priceDetail.wxml",
+    "noUseC": ["cen-center", "start-cen", "posi", "box-iphoneX", "change"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceComp/index.wxml",
+    "noUseC": ["book-page", "disabled", "num-txt", "haluo-select-box", "day", "timepick-container", "notice"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceComp/modules/noPrice/noPrice.wxml",
+    "noUseC": ["refresh-img", "new-error", "refresh-btn", "npPriceText", "dot-space"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/payConfirm/index.wxml",
+    "noUseC": ["display-flex", "phc", "number-box", "text-style-h", "active", "cancel"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/mileDeduction/mileDeduction.wxml",
+    "noUseC": ["liChengAlert"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/leaveMessage/leaveMessage.wxml",
+    "noUseC": ["submit-disable"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/giftBag/giftBag.wxml",
+    "noUseC": ["summary-img-head", "origin-price", "text-center"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/changePhone/index.wxml",
+    "noUseC": ["phc", "number-box", "text-style-h", "active", "cancel"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/bookNumber/index.wxml",
+    "noUseC": ["number-item-1", "number-item-7"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectTime/selectTime.wxml",
+    "noUseC": ["picker-indicator", "vline"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/selectCar.wxml",
     "noUseC": [
       "sk-container",
       "openImg",
@@ -101,6 +146,7 @@
     ]
   },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/template/payMent.wxml",
     "noUseC": [
       "pay-ment-cls",
       "mark-icon",
@@ -116,12 +162,28 @@
       "seperate-text"
     ]
   },
-  { "noUseC": ["sfcCarIcon"] },
-  { "noUseC": ["image"] },
-  { "noUseC": ["bolder"] },
-  { "noUseC": ["x-symbol", "m-top", "label-line", "op0", "op1"] },
-  { "noUseC": ["map-container", "arrow-class"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/sfcEntry/sfcEntry.wxml",
+    "noUseC": ["sfcCarIcon"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/mileage/mileage.wxml",
+    "noUseC": ["image"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/foldedcar/FoldedPopup/FoldedPopup.wxml",
+    "noUseC": ["bolder"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/business/monthCard/monthCard.wxml",
+    "noUseC": ["x-symbol", "m-top", "label-line", "op0", "op1"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/locationPage/locationPage.wxml",
+    "noUseC": ["map-container", "arrow-class"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/index.wxml",
     "noUseC": [
       "startSelectIcon",
       "main-scroll",
@@ -146,6 +208,7 @@
     ]
   },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/template/addressSelect.wxml",
     "noUseC": [
       "addressInput",
       "c-input",
@@ -166,8 +229,12 @@
       "RIDE_SHARING"
     ]
   },
-  { "noUseC": ["unstartOrderScroll", "ycico-person", "ycico-position"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/menu/menu.wxml",
+    "noUseC": ["unstartOrderScroll", "ycico-person", "ycico-position"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/infoSelecter/infoSelecter.wxml",
     "noUseC": [
       "productTabSwitch",
       "arr-time",
@@ -194,6 +261,7 @@
     ]
   },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/immediateCar/immediateCar.wxml",
     "noUseC": [
       "pageMode2",
       "startSelectIcon",
@@ -232,10 +300,20 @@
       "noBounce"
     ]
   },
-  { "noUseC": ["pending0", "pending-1"] },
-  { "noUseC": ["picker-mask", "active-wrap"] },
-  { "noUseC": ["timer-result", "time-tip", "choosed", "timer-arrow", "less-padding", "f24"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/ycMap/index.wxml",
+    "noUseC": ["pending0", "pending-1"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/timepick/pickers/pickers.wxml",
+    "noUseC": ["picker-mask", "active-wrap"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/timepick/index/index.wxml",
+    "noUseC": ["timer-result", "time-tip", "choosed", "timer-arrow", "less-padding", "f24"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/sfcCoupon/sfcCoupon.wxml",
     "noUseC": [
       "unavailable",
       "bg-col",
@@ -251,9 +329,16 @@
       "f15"
     ]
   },
-  { "noUseC": ["number-item-1", "number-item-7"] },
-  { "noUseC": ["sfc"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/scrollNumber2/scrollNumber2.wxml",
+    "noUseC": ["number-item-1", "number-item-7"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/safeComp/safeComp.wxml",
+    "noUseC": ["sfc"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/ruleTips/ruleTips.wxml",
     "noUseC": [
       "ee2a2a",
       "ft12",
@@ -268,6 +353,7 @@
     ]
   },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/recStartPoi/recStartPoi.wxml",
     "noUseC": [
       "recConfirm",
       "recPoiPicker",
@@ -300,25 +386,72 @@
       "adjust"
     ]
   },
-  { "noUseC": ["triangle"] },
-  { "noUseC": ["light"] },
-  { "noUseC": ["popup-wrap", "cover-btm", "font-size85", "font-size65"] },
-  { "noUseC": ["underline", "btn-normal", "btn-bold", "btn-green-color", "btn-green-bg", "btn-primary", "c06C584"] },
-  { "noUseC": ["content-img", "type-1"] },
-  { "noUseC": ["number-item-1", "number-item-7"] },
-  { "noUseC": ["opacity", "forbidEv"] },
-  { "noUseC": ["fontStrong"] },
-  { "noUseC": ["hidden-slider", "hidden-slot", "white-bg", "f40"] },
-  { "noUseC": ["f40"] },
-  { "noUseC": ["separator", "title"] },
-  { "noUseC": ["highline-nolist-wrapper", "green"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/questions/questions.wxml",
+    "noUseC": ["triangle"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/productTypeChgDlg/index.wxml",
+    "noUseC": ["light"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/popconfirm/index.wxml",
+    "noUseC": ["popup-wrap", "cover-btm", "font-size85", "font-size65"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/pageEmpty/pageEmpty.wxml",
+    "noUseC": ["underline", "btn-normal", "btn-bold", "btn-green-color", "btn-green-bg", "btn-primary", "c06C584"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/orderPopup/orderPopup.wxml",
+    "noUseC": ["content-img", "type-1"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/normalNumber/normalNumber.wxml",
+    "noUseC": ["number-item-1", "number-item-7"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/newCustomer/newCustomer.wxml",
+    "noUseC": ["opacity", "forbidEv"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/headCard/headCard.wxml",
+    "noUseC": ["fontStrong"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/drawerOz/index.wxml",
+    "noUseC": ["hidden-slider", "hidden-slot", "white-bg", "f40"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/drawer/index.wxml",
+    "noUseC": ["f40"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/customHeader/customHeader.wxml",
+    "noUseC": ["separator", "title"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/corssCar/corssCar.wxml",
+    "noUseC": ["highline-nolist-wrapper", "green"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/activityPopup/activityPopup.wxml",
     "noUseC": ["padding16-bottom", "padding10-bottom", "price-amount", "price-amount4", "price-sign", "price-discount"]
   },
-  { "noUseC": ["product-subtitle", "product-desc"] },
-  { "noUseC": ["txt-pad", "dis-txt", "num-inline", "vt-line"] },
-  { "noUseC": ["content", "product-subtitle", "product-desc"] },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/checkstand.wxml",
+    "noUseC": ["product-subtitle", "product-desc"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/components/price/price.wxml",
+    "noUseC": ["txt-pad", "dis-txt", "num-inline", "vt-line"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/checkstand/components/cancelNoWorry/cancelNoWorry.wxml",
+    "noUseC": ["content", "product-subtitle", "product-desc"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/address/address.wxml",
     "noUseC": [
       "margin-30",
       "header-city",
@@ -336,5 +469,8 @@
       "b-result-address"
     ]
   },
-  { "noUseC": ["search-clear", "placeholder-focus", "placeholder", "input-wrap-end", "input-wrap-start"] }
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/address/components/address-header2/address-header2.wxml",
+    "noUseC": ["search-clear", "placeholder-focus", "placeholder", "input-wrap-end", "input-wrap-start"]
+  }
 ]
