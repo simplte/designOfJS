@@ -8,12 +8,15 @@
       "coupon-name",
       "coupon-price",
       "yhq-text",
+      "buy-right-tips",
       "colorFF3838",
       "friend-ul",
       "friend-li",
       "friend-price",
       "give-btn",
-      "give-ban-btn"
+      "give-ban-btn",
+      "getcoupon-btn",
+      "getcoupon-btn-img"
     ]
   },
   {
@@ -21,12 +24,35 @@
     "noUseC": ["head-card", "bg-bottom", "map-content", "bottom-box", "map-container", "back-icon"]
   },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/steps/steps.wxml",
+    "noUseC": ["step-img", "entry-arrow", "entry", "title", "sub-title", "entry-right", "le", "ri"]
+  },
+  {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcBanner/sfcBanner.wxml",
-    "noUseC": ["swiper-slide", "swiper-word-item"]
+    "noUseC": ["swiper-wrapper", "swiper-slide", "swiper-word-item"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcIndex/components/sfcAddress/sfcAddress.wxml",
-    "noUseC": ["flex", "hide", "pr24", "addr-tips", "addr-tip-close"]
+    "noUseC": [
+      "flex",
+      "hide",
+      "pr24",
+      "person-wrap",
+      "person-list",
+      "person-item",
+      "item-icon",
+      "item-word",
+      "item-icon-more",
+      "active-reset",
+      "no-addr",
+      "old-span",
+      "rightIcon",
+      "btn",
+      "addr-tips",
+      "tips-end",
+      "addr-tip-close",
+      "item"
+    ]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/sfcBook.wxml",
@@ -34,11 +60,11 @@
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceDetail/priceDetail.wxml",
-    "noUseC": ["cen-center", "start-cen", "posi", "box-iphoneX"]
+    "noUseC": ["cen-center", "start-cen", "posi", "box-iphoneX", "change"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceComp/index.wxml",
-    "noUseC": ["book-page", "timepick-container", "notice"]
+    "noUseC": ["book-page", "disabled", "num-txt", "haluo-select-box", "day", "timepick-container", "notice"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/priceComp/modules/noPrice/noPrice.wxml",
@@ -46,8 +72,10 @@
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/payConfirm/index.wxml",
-    "noUseC": ["display-flex", "phc", "number-box", "text-style-h", "cancel"]
+    "noUseC": ["display-flex", "phc", "number-box", "text-style-h", "active", "cancel"]
   },
+  {},
+
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/mileDeduction/mileDeduction.wxml",
     "noUseC": ["liChengAlert"]
@@ -57,23 +85,44 @@
     "noUseC": ["submit-disable"]
   },
   {
-    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/changePhone/index.wxml",
-    "noUseC": ["phc", "number-box", "text-style-h", "cancel"]
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/giftBag/giftBag.wxml",
+    "noUseC": ["summary-img-head", "origin-price", "text-center"]
   },
   {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/changePhone/index.wxml",
+    "noUseC": ["phc", "number-box", "text-style-h", "active", "cancel"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/sfcBook/components/bookNumber/index.wxml",
+    "noUseC": ["number-item-1", "number-item-7"]
+  },
+----------------------------------------------------------------
+  {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectTime/selectTime.wxml",
-    "noUseC": ["picker-indicator"]
+    "noUseC": ["picker-indicator", "vline"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/selectCar.wxml",
     "noUseC": [
+      "sk-container",
       "openImg",
+      "selectIcon",
       "peakInfo",
-      "line-box",
+      "tip-icon",
+      "tip-icon-go",
+      "span",
+      "historyBox",
+      "empty",
       "emptyImg",
+      "emptyText",
+      "rideInfo",
+      "rideInfoLine",
       "ellips",
+      "riderWrapper",
       "appointment-text",
       "appointmentSan",
+      "close-box",
+      "arrow",
       "routeWarp",
       "distanceTips",
       "routeleft",
@@ -81,6 +130,7 @@
       "cca",
       "li-box",
       "li-box1",
+      "androidFix",
       "li-box2",
       "right-arry",
       "li-switch",
@@ -94,16 +144,42 @@
       "plagueText",
       "plagueBto",
       "plagueOpocity",
+      "term-arr-icon",
       "scroll-wrapper-outer"
     ]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/template/payMent.wxml",
-    "noUseC": ["pay-ment-cls", "li-top-bord", "li-top", "li-body", "li-body-inner", "li-separate", "seperate-text"]
+    "noUseC": [
+      "pay-ment-cls",
+      "mark-icon",
+      "month-card",
+      "wxpay-button",
+      "li-top-bord",
+      "li-switch",
+      "li-top",
+      "li-body",
+      "disable",
+      "li-body-inner",
+      "li-separate",
+      "seperate-text"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/sfcEntry/sfcEntry.wxml",
+    "noUseC": ["sfcCarIcon"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/mileage/mileage.wxml",
+    "noUseC": ["image"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/components/foldedcar/FoldedPopup/FoldedPopup.wxml",
     "noUseC": ["bolder"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/selectCar/business/monthCard/monthCard.wxml",
+    "noUseC": ["x-symbol", "m-top", "label-line", "op0", "op1"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/locationPage/locationPage.wxml",
@@ -122,6 +198,7 @@
       "tabItem-light-bg",
       "queryPriceBox",
       "floor-area",
+      "recV2Mode2-map",
       "pt340",
       "pt356-iphonex",
       "pt375",
@@ -137,6 +214,11 @@
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/template/addressSelect.wxml",
     "noUseC": [
       "addressInput",
+      "c-input",
+      "timepick",
+      "light",
+      "input-icon",
+      "border-bottom",
       "input-content",
       "quick-selection",
       "selection-item",
@@ -144,12 +226,15 @@
       "rec-pots-tips",
       "ticketTips",
       "productnewtab",
-      "kuachengbg"
+      "kuachengbg",
+      "CAR_NOW",
+      "c3",
+      "RIDE_SHARING"
     ]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/menu/menu.wxml",
-    "noUseC": ["unstartOrderScroll"]
+    "noUseC": ["unstartOrderScroll", "ycico-person", "ycico-position"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/index/business/infoSelecter/infoSelecter.wxml",
@@ -159,18 +244,29 @@
       "details",
       "childs",
       "child-poi",
+      "station-name",
       "btn-close-export",
       "right-space",
       "vhidden",
-      "specific-export",
       "text-red",
       "dots",
-      "address-dots"
+      "address-dots",
+      "input-prefix-point",
+      "purple",
+      "tabItem",
+      "tabs-wrap",
+      "productTab",
+      "discount-tag",
+      "CAR_NOW",
+      "RIDE_SHARING",
+      "pickup-date-Time",
+      "quick-address-background"
     ]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/immediateCar/immediateCar.wxml",
     "noUseC": [
+      "pageMode2",
       "startSelectIcon",
       "main-scroll",
       "mainbox-bg",
@@ -183,22 +279,33 @@
       "car-nav",
       "nav-item",
       "nav-txt",
+      "light",
       "nav-imgTitle",
       "nav-title-flag",
       "navbar-container",
+      "drawer",
+      "business-area",
+      "hasctx",
       "scroll-view_H",
       "immediatebus",
       "immediatebuswidth",
       "immediatebusImage",
+      "detail-exports",
+      "recConfirm",
       "recPoiPicker",
       "pickerView",
       "picker-indicator",
       "picker-item",
-      "recPoiDot",
+      "recBtn",
+      "car-btn1",
       "recCancel",
       "bounce",
       "noBounce"
     ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/ycMap/index.wxml",
+    "noUseC": ["pending0", "pending-1"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/timepick/pickers/pickers.wxml",
@@ -210,14 +317,35 @@
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/sfcCoupon/sfcCoupon.wxml",
-    "noUseC": ["unavailable", "bg-col", "f15"]
+    "noUseC": [
+      "unavailable",
+      "bg-col",
+      "iphonex-fix",
+      "coupon-title",
+      "fed-navbar",
+      "coupon-top",
+      "paddingTop",
+      "amount-num",
+      "overdue-color",
+      "overdue-couponBg",
+      "couponBg",
+      "f15"
+    ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/scrollNumber2/scrollNumber2.wxml",
+    "noUseC": ["number-item-1", "number-item-7"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/safeComp/safeComp.wxml",
+    "noUseC": ["sfc"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/ruleTips/ruleTips.wxml",
     "noUseC": [
       "ee2a2a",
-      "ft28",
       "ft12",
+      "ft28",
       "padding-text",
       "gray-3",
       "gray-9",
@@ -230,16 +358,29 @@
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/recStartPoi/recStartPoi.wxml",
     "noUseC": [
+      "recConfirm",
       "recPoiPicker",
       "pickerView",
       "picker-indicator",
       "picker-item",
+      "pickerSelected",
       "poiMarker",
       "recPoiMarker",
       "reCircle",
-      "reCircleInner",
       "recMarkerZhu",
+      "l1",
+      "l2",
+      "m1",
+      "line",
+      "reCircleInner",
+      "pending2",
+      "pending",
+      "pending3",
+      "pending0",
       "recPoiMarkerArrow",
+      "recBtn",
+      "car-btn1",
+      "mapButton",
       "text-recdesc",
       "recCancel",
       "animated",
@@ -247,6 +388,10 @@
       "noBounce",
       "adjust"
     ]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/questions/questions.wxml",
+    "noUseC": ["triangle"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/productTypeChgDlg/index.wxml",
@@ -258,11 +403,15 @@
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/pageEmpty/pageEmpty.wxml",
-    "noUseC": ["btn-normal", "btn-bold", "btn-green-color", "btn-green-bg", "btn-primary", "c06C584"]
+    "noUseC": ["underline", "btn-normal", "btn-bold", "btn-green-color", "btn-green-bg", "btn-primary", "c06C584"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/orderPopup/orderPopup.wxml",
-    "noUseC": ["content-img"]
+    "noUseC": ["content-img", "type-1"]
+  },
+  {
+    "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/normalNumber/normalNumber.wxml",
+    "noUseC": ["number-item-1", "number-item-7"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/newCustomer/newCustomer.wxml",
@@ -286,7 +435,7 @@
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/corssCar/corssCar.wxml",
-    "noUseC": ["highline-nolist-wrapper"]
+    "noUseC": ["highline-nolist-wrapper", "green"]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/component/activityPopup/activityPopup.wxml",
@@ -311,16 +460,20 @@
       "header-city",
       "header-where",
       "placeholder",
+      "dest-part-title",
+      "item-icon",
+      "title-txt",
       "wrap-flex",
       "border-top05-gray",
       "address-textarea-placeholder",
       "b-result-item",
       "b-result-child",
+      "b-child",
       "b-result-address"
     ]
   },
   {
     "path": "/Users/bqc/projects/carProjects/tcel-main-lite/page/usecar/address/components/address-header2/address-header2.wxml",
-    "noUseC": ["search-clear", "placeholder-focus", "placeholder"]
+    "noUseC": ["search-clear", "placeholder-focus", "placeholder", "input-wrap-end", "input-wrap-start"]
   }
 ]
