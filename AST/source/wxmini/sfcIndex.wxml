@@ -1,0 +1,330 @@
+<customHeader 
+  back-icon="{{sfcNewHomeAB == 'A'? 'back-icon': ''}}"
+  sfcNewHomeAB='{{sfcNewHomeAB}}'
+  bgRadio="{{customHeaderRadio}}"
+  bind:emitPadding='emitPadding' 
+   />
+
+<view class="container {{sfcNewHomeAB}}"  wx:if="{{sfcNewHomeAB &&sfcNewHomeAB == 'A'}}">
+ 
+  <!-- 地图区域 TODO-->
+  <view class="map-box"  >
+    <!-- 模拟地图区域 -->
+    <YcMap  id="sfcMap" height="{{mapHeight}}"
+      info-simple-equal
+      map-wrap-class='map-container'  
+      center="{{center}}" centerInfo="{{centerInfo}}"
+      recpickup="{{recpickup}}" center="{{center}}"
+      city="{{startCityIdForMap}}"
+      checkPrivacy="{{true}}"
+      bind:centerChanged="centerChanged"
+      bind:tapCenterLabel="tapCenterLabel"/>
+  </view>
+  <view class="map-white" style="height:{{mapWhiteHeight}}">
+    
+  </view>
+  <view class="pannel-box" >
+    <!-- 安全中心 -->
+    <view class="safe-box pevtoff">
+      <safe-comp
+        id="safeComp"
+        pageType="sfcIndex"
+        productType="sfc"
+        bind:orderInfoShow="onOrderInfoShow"
+        isSafeShow="{{ true }}"
+        isOrderHide="{{true}}"
+        sfcNewHomeAB="{{sfcNewHomeAB}}"
+        bindtap="safeTap"
+      ></safe-comp>
+      <view class="bg1 widget df dfc dfm dfdc widget-positon pevton" catchtap="reLocation" mark:vf='rp'>
+      </view>
+		</view>
+
+    <!-- 操作区 -->
+    <view class="action {{sfcNewHomeAB == 'A' ? 'test-a' : ''}}" style="{{bgColor}}" id="action">
+      
+      <view class="announ-warp">
+        <!-- 公告 -->
+        <announcement 
+          pageType="sfcIndex" 
+          bind:onAnnounceBgc='onAnnounceBgc' 
+          productType="sfc" 
+          information="{{startCityInfo}}" 
+          needTranstion="{{false}}"
+          refId="{{refId}}"/>
+      </view>
+      <view class="main test-a">
+        <!-- 地址选择 -->
+        <view class="address">
+          <!-- <view class="up-style-a"></view> -->
+          <address
+            id="SfcAddress"
+            list="{{list}}"
+            returnByOrder="{{returnByOrder}}"
+            privacyAgree="{{privacyAgree}}"
+            changeStartAddress="{{changeStartAddress}}"
+            changePrivacyAgree="{{changePrivacyAgree}}"
+            defaultElement="{{defaultElement}}"
+            refId="{{refId}}"
+            acrossUseTime="{{acrossUseTime}}"
+            isAcrossEntry="{{isAcrossEntry}}"
+            clickRouteLineInfo="{{clickRouteLineInfo}}"
+            bind:onPostion="onPostion"
+            bind:onStartCity="onStartCity"
+            sfcNewHomeAB="{{sfcNewHomeAB}}"
+            mapCenterPoiInfo="{{mapCenterPoiInfo}}"
+            bind:onJumpPoiPage="onJumpPoiPage"
+            bind:emitMapCenterChange="setMapCenter"
+            startCityInfo="{{startCityInfo}}"
+            locationCity="{{locationCity}}"
+            createSourceFrom="{{createSourceFrom}}"
+            showCoverView="{{isShowSfcTip || !isIphone || isShowPopup || isShowPrivacy}}"
+            bind:showConfirmPop="showConfirmPop"
+            bind:changeQuickPoi="changeQuickPoi"
+            sPoi="{{sPoi}}"
+            ePoi="{{ePoi}}"
+            corssDate="{{corssDate}}"
+            crossFlag="{{crossFlag}}"
+            schemeId="{{schemeId}}"
+            flightCode="{{flightCode}}"
+            airportCode="{{airportCode}}"
+            airportTerminal="{{airportTerminal}}"
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 待出行订单提示 -->
+    <order bind:toIngOrder="toIngOrder" orderInfoShow="{{orderInfoShow}}" showCoverView="{{!isShowSfcTip && !showConfirmPoi && isIphone && !isShowPopup && !isShowPrivacy}}"></order>
+
+    <!-- 推荐线路 -->
+    <routeLine 
+      list="{{list}}"
+      startCityInfo="{{startCityInfo}}"
+      bind:onRouteClick="onRouteClick" showCoverView="{{!isShowSfcTip && !showConfirmPoi && isIphone && !isShowPopup && !isShowPrivacy}}"></routeLine>
+    <!-- 图片轮播banner运营位 -->
+    <sfcBanner list="{{bannerInfo}}" bind:jumpUrl="jumpUrl" showCoverView="{{!isShowSfcTip && !showConfirmPoi && isIphone && !isShowPopup && !isShowPrivacy}}"></sfcBanner>
+
+    <!-- 3步完成共享出行 -->
+    <steps list="{{guideInfo}}" startCity="{{startCityInfo.startCityName}}" showCoverView="{{!isShowSfcTip && !showConfirmPoi && isIphone && !isShowPopup && !isShowPrivacy}}"></steps>
+    <!-- 增信  -->
+    <view class="img-zengxin" wx:if="{{list.zengxinUrl}}" >
+      <image mode="widthFix" src="{{list.zengxinUrl}}">
+      </image>
+    </view>
+  
+  </view>  
+
+</view>
+<view style="{{contentStyle}}" wx:if="{{sfcNewHomeAB &&sfcNewHomeAB != 'A'}}">
+  <view class="header" catch:tap="topImgClick" >
+    <!-- <view style="padding-top: 100rpx"></view> -->
+    <image mode="widthFix" wx:if="{{list.topImgInfo}}" class="bg" src="{{list.topImgInfo.imgUrl}}" alt="" />
+
+    <view class="summary">
+      <view class="title"></view>
+      <view class="sub-title"></view>
+    </view>
+  </view>
+
+  <!-- 操作区 -->
+  <view class="action">
+    <view class="main">
+      <!-- 公告 -->
+      <view class="tips">
+        <swiper
+          wx:if="{{list.popList}}"
+          class="swiper-box"
+          vertical
+          circular
+          autoplay="{{list.popList.length >1}}"
+          easing-function="linear"
+        >
+          <swiper-item wx:for="{{list.popList}}" wx:key="*this" catchtouchmove="noop">
+            <view
+              class="tips-content swiper-no-swiping"
+              data-item="{{item}}"
+              data-jumpurl="{{isApp ? item.apphref : item.wxhref}}"
+              bind:tap="noticeClick"
+            >
+              <view class="le" data-title="{{item.title}}" data-jumpurl="{{isApp ? item.apphref : item.wxhref}}">
+                <image
+                  class="tips-icon flex-shrink"
+                  data-title="{{item.title}}"
+                  data-jumpurl="{{isApp ? item.apphref : item.wxhref}}"
+                  src="https://file.40017.cn/groundtrafficstage/usecar/sfcImg/trumpet@2x.png"
+                  alt=""
+                />
+                <view
+                  class="fs24 flex1 swiper-word-item"
+                  :data-title="item.title"
+                  data-jumpurl="{{isApp ? item.apphref : item.wxhref}}"
+                  >{{item.title}}</view
+                >
+              </view>
+              <image
+                wx:if="{{(isApp && item.apphref) || (!isApp && item.wxhref)}}"
+                class="arrow flex-shrink"
+                src="https://file.40017.cn/groundtrafficstage/usecar/sfcImg/arrow_white_1@2x.png"
+                alt=""
+              />
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+      <!-- 地址选择 -->
+      <view class="address">
+        <view class="up-style"></view>
+        <address
+          list="{{list}}"
+          returnByOrder="{{returnByOrder}}"
+          privacyAgree="{{privacyAgree}}"
+          changeStartAddress="{{changeStartAddress}}"
+          changePrivacyAgree="{{changePrivacyAgree}}"
+          defaultElement="{{defaultElement}}"
+          refId="{{refId}}"
+          acrossUseTime="{{acrossUseTime}}"
+          isAcrossEntry="{{isAcrossEntry}}"
+          bind:onPostion="onPostion"
+          locationCity="{{locationCity}}"
+          sPoi="{{sPoi}}"
+          ePoi="{{ePoi}}"
+          corssDate="{{corssDate}}"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 待出行订单提示 -->
+  <view wx:if="{{orderInfoShow}}" class="ing-orders row">
+    <view class="le">
+      <image src="https://file.40017.cn/groundtrafficstage/usecar/usecar/order/icon_order_1@3x.png" alt="" />
+      <rich-text nodes="{{orderInfoShow.title}}"></rich-text>
+    </view>
+    <view class="ri" bindtap="toIngOrder">
+      查看订单
+      <image src="https://file.40017.cn/groundtrafficstage/usecar/usecar/order/icon_order_arrow@3x.png" alt="" />
+    </view>
+  </view>
+
+  <mission short="{{false}}" pageDesc="顺风车首页" mission-wrapper="mission-wrapper" />
+
+  <!-- 3步完成共享出行 -->
+  <view class="steps">
+    <view class="steps-in">
+      <safe-comp
+        id="safeComp"
+        pageType="sfcIndex"
+        productType="sfc"
+        isShowRowStyle="{{true}}"
+        bind:orderInfoShow="onOrderInfoShow"
+        bindtap="safeTap"
+      ></safe-comp>
+      <!-- 乘客必读+出行保障 -->
+      <view class="read">
+        <view class="entry le" bindtap="toRules">
+          <view class="title">乘客必读</view>
+          <view class="sub-title row cen-start">
+            <view>取消规则、高速费、发票</view>
+            <image
+              class="arrow entry-arrow"
+              src="https://file.40017.cn/groundtrafficstage/usecar/sfcImg/arrow_2@2x.png"
+              alt=""
+            />
+          </view>
+        </view>
+        <view class="entry entry-right ri" bindtap="toIns">
+          <view class="title">出行保障</view>
+          <view class="sub-title row cen-start">
+            <view>免费赠送保险，出行无忧</view>
+            <image
+              class="arrow entry-arrow"
+              src="https://file.40017.cn/groundtrafficstage/usecar/sfcImg/arrow_3@2x.png"
+              alt=""
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 图片轮播banner运营位 -->
+  <view wx:if="{{list.advert && list.advert.length > 0}}" class="banner">
+    <swiper class="swiper-box" autoplay circular bindchange="onBannerChange">
+      <swiper-item wx:for="{{list.advert}}" wx:key="bgImg">
+        <view
+          class="img-fa"
+          style="background-image: url({{item.bgImg || 'https://file.40017.cn/locallife/img/default-banner.png'}})"
+          data-sort="{{item.sort}}"
+          data-item="{{item}}"
+          data-index="{{index}}"
+          bind:tap="bannerClick"
+        ></view>
+      </swiper-item>
+    </swiper>
+    <view wx:if="{{list.advert.length > 1}}" class="swiper-pagination" slot="pagination">
+      <view
+        wx:for="{{list.advert}}"
+        wx:key="index"
+        class="span swiper-pagination-bullet {{bannerIndex=== index ? 'active': ''}}"
+      >
+      </view>
+    </view>
+  </view>
+
+ <!--  <view>
+    <image class="step-img" mode="widthFix" src="{{list.middlePhoto || defultImg}}" alt="" />
+  </view> -->
+
+  <!-- 常见问题 -->
+  <view class="questions">
+    <view class="title-line">
+      <view class="title">常见问题</view>
+      <view class="more row cen-center" bindtap="more">
+        <view>更多</view>
+        <image
+          class="arrow que-arrow"
+          src="https://file.40017.cn/groundtrafficstage/usecar/sfcImg/arrow_1@2x.png"
+          alt=""
+        />
+      </view>
+    </view>
+    <view wx:if="{{list.questionList}}" class="list">
+      <view class="li" wx:for="{{list.questionList}}" wx:key="*this" bindtap="more"
+        ><image src="https://file.40017.cn/groundtrafficstage/usecar/sfcImg/Q@2x.png" alt="" />{{item}}</view
+      >
+    </view>
+  </view>
+
+  <view class="section-wrapper safe-bottom">
+    <image class="img-credit-enhanch" mode="widthFix" src="{{list.sfcIndexCreditImg || 'https://pic5.40017.cn/i/ori/1fvTXDOllfO.jpg'}}" alt="" />
+  </view>
+
+  <!-- <view style="height: 15px"></view> -->
+
+  <!-- 乘车须知浮层 -->
+  <!-- <sfc-tips show="{{showSFCRideNotice}}" tips="{{list.passengerNotice}}" showClause="{{false}}" bind:close="closeSFCRideNotice" clickClause="clickClause" /> -->
+
+  <!-- 风车招募车主 -->
+  <!-- <driver-recruit wx:if="!isShowLoading" :source="source" :city="recruitEntryCity" :refId="refId" /> -->
+
+</view>
+
+<!-- 活动弹窗 -->
+<activity-popup wx:if="{{!isShowSfcTip&&!isShowLimitCoupon}}" class="pa" pageSource="顺风车首页" pageProdId="{{productId}}" topHeight="{{topHeight}}"></activity-popup>
+
+<!-- 交叉引导提示 -->
+<sfcCrossTip 
+  isShowSfcTip="{{isLoaded&&isShowSfcTip}}" 
+  processInstructionImg="{{processInstructionImg}}" 
+  maxReduceCost="{{maxReduceCost}}"
+  bind:showSfcTip="showSfcTip"
+/>
+<!-- 红包提示 -->
+<!-- <limitCoupon isShowLimitCoupon="{{isLoaded&&isShowLimitCoupon}}" timeLimitCouponPops="{{timeLimitCouponPops}}"/> -->
+
+<!-- 隐私弹框 -->
+<author id="__PrivacyAuthorization"></author>
+
+<!-- <tips if="{{false}}"></tips> -->
+
