@@ -1,3 +1,4 @@
+import { FileType } from './docjs';
 /* 
     SRP原则是所有原则中简单也是难正确运用的原则之一
     。 要明确的是，并不是所有的职责都应该一一分离。
@@ -25,103 +26,125 @@
   */
 //
 // 把条件分支语句提炼成函数
-var getPrice = function(price) {
-	var date = new Date();
-	if (date.getMonth() >= 6 && date.getMonth() <= 9) {
-		// 夏天
-		return price * 0.8;
-	}
-	return price;
+/**
+ * @callback GetPrice
+ * @param {number} price
+ * @return {number}
+ */
+/**
+ * @type {GetPrice}
+ */
+var getPrice = function (price) {
+  var date = new Date();
+  if (date.getMonth() >= 6 && date.getMonth() <= 9) {
+    // 夏天
+    return price * 0.8;
+  }
+  return price;
 };
 // ====
-var isSummer = function() {
-	var date = new Date();
-	return date.getMonth() >= 6 && date.getMonth() <= 9;
+var isSummer = function () {
+  var date = new Date();
+  return date.getMonth() >= 6 && date.getMonth() <= 9;
 };
 
-var getPrice = function(price) {
-	if (isSummer()) {
-		// 夏天
-		return price * 0.8;
-	}
-	return price;
+var getPrice = function (price) {
+  if (isSummer()) {
+    // 夏天
+    return price * 0.8;
+  }
+  return price;
 };
 // 合理使用循环 在函数体内，
 // 如果有些代码实际上负责的是一些重复性的工作，那么合理利用循环不仅可以 完成同样的功能，
 // 还可以使代码量更少。
-var createXHR = function() {
-	var xhr;
-	try {
-		xhr = new ActiveXObject('MSXML2.XMLHttp.6.0');
-	} catch (e) {
-		try {
-			xhr = new ActiveXObject('MSXML2.XMLHttp.3.0');
-		} catch (e) {
-			xhr = new ActiveXObject('MSXML2.XMLHttp');
-		}
-	}
-	return xhr;
+var createXHR = function () {
+  var xhr;
+  try {
+    xhr = new ActiveXObject('MSXML2.XMLHttp.6.0');
+  } catch (e) {
+    try {
+      xhr = new ActiveXObject('MSXML2.XMLHttp.3.0');
+    } catch (e) {
+      xhr = new ActiveXObject('MSXML2.XMLHttp');
+    }
+  }
+  return xhr;
 };
 
 var xhr = createXHR();
 // =======
-var createXHR = function() {
-	var versions = [ 'MSXML2.XMLHttp.6.0ddd', 'MSXML2.XMLHttp.3.0', 'MSXML2.XMLHttp' ];
-	for (var i = 0, version; (version = versions[i++]); ) {
-		try {
-			return new ActiveXObject(version);
-		} catch (e) {}
-	}
+var createXHR = function () {
+  var versions = ['MSXML2.XMLHttp.6.0ddd', 'MSXML2.XMLHttp.3.0', 'MSXML2.XMLHttp'];
+  for (var i = 0, version; (version = versions[i++]); ) {
+    try {
+      return new ActiveXObject(version);
+    } catch (e) {}
+  }
 };
 
 var xhr = createXHR();
 // 提前让函数退出代替嵌套条件分支
-var del = function(obj) {
-	var ret;
-	if (!obj.isReadOnly) {
-		// 不为只读的才能被删除
-		if (obj.isFolder) {
-			// 如果是文件夹
-			ret = deleteFolder(obj);
-		} else if (obj.isFile) {
-			// 如果是文件
-			ret = deleteFile(obj);
-		}
-	}
-	return ret;
+/**
+ * @typedef {object} FileType
+ * @prop {boolean} isReadOnly
+ * @prop {boolean} [isFolder]
+ * @prop {boolean} [isFile]
+ */
+/**
+ * @callback DelFn
+ * @param {FileType} obj
+ * @returns {boolean}
+ */
+/**
+ * @type {DelFn}
+ */
+var del = function (obj) {
+  var ret;
+  if (!obj.isReadOnly) {
+    // 不为只读的才能被删除
+    if (obj.isFolder) {
+      // 如果是文件夹
+      ret = deleteFolder(obj);
+    } else if (obj.isFile) {
+      // 如果是文件
+      ret = deleteFile(obj);
+    }
+  }
+  return ret;
 };
 // =============
-var del = function(obj) {
-	if (obj.isReadOnly) {
-		// 反转 if 表达式
-		return;
-	}
-	if (obj.isFolder) {
-		return deleteFolder(obj);
-	}
-	if (obj.isFile) {
-		return deleteFile(obj);
-	}
+var del = function (obj) {
+  if (obj.isReadOnly) {
+    // 反转 if 表达式
+    return;
+  }
+  if (obj.isFolder) {
+    return deleteFolder(obj);
+  }
+  if (obj.isFile) {
+    return deleteFile(obj);
+  }
 };
 // 传递对象参数代替过长的参数列表
-var setUserInfo = function(id, name, address, sex, mobile, qq) {
-	console.log('id= ' + id);
-	console.log('name= ' + name);
-	console.log('address= ' + address);
-	console.log('sex= ' + sex);
-	console.log('mobile= ' + mobile);
-	console.log('qq= ' + qq);
+var setUserInfo = function (id, name, address, sex, mobile, qq) {
+  console.log('id= ' + id);
+  console.log('name= ' + name);
+  console.log('address= ' + address);
+  console.log('sex= ' + sex);
+  console.log('mobile= ' + mobile);
+  console.log('qq= ' + qq);
 };
 
 setUserInfo(1314, 'sven', 'shenzhen', 'male', '137********', 377876679);
 // ==========
-var setUserInfo = function(obj) {
-	console.log('id= ' + obj.id);
-	console.log('name= ' + obj.name);
-	console.log('address= ' + obj.address);
-	console.log('sex= ' + obj.sex);
-	console.log('mobile= ' + obj.mobile);
-	console.log('qq= ' + obj.qq);
+var setUserInfo = function (obj) {
+  console.log('id= ' + obj.id);
+  console.log('name= ' + obj.name);
+  console.log('address= ' + obj.address);
+  console.log('sex= ' + obj.sex);
+  console.log('mobile= ' + obj.mobile);
+  console.log('qq= ' + obj.qq);
 };
 
 setUserInfo({ id: 1314, name: 'sven', address: 'shenzhen', sex: 'male', mobile: '137********', qq: 377876679 });
